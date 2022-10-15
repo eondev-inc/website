@@ -2,27 +2,35 @@
   <div>
     <header class="top-0 w-full border-gray-400 shadow-md shadow-slate-300">
       <nav class="hidden max-w-screen-xl px-6 sm:px-8 lg:px-16 mx-auto grid grid-flow-col py-3 sm:py-4 lg:flex">
+        <!---->
         <div class="col-start-1 col-end-2 flex items-center">
           <img src="../../assets/img/logo.png" class="h-12 w-16" />
         </div>
         <div class="flex flex-wrap h-12 items-end justify-between">
           <ul class="lg:flex col-start-4 col-end-8 text-black-500  items-center">
             <a
-              class="px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative text-orange-500 animation-active ">About</a>
+              class="px-4 py-2 mx-2 cursor-pointer inline-block relative hover:py-1 hover:text-slateMedium-100 hover:border-b-2 hover:border-slateMedium-100">Home</a>
             <a
-              class="px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative text-black-500 hover:text-orange-500 ">Feature</a>
+              class="px-4 py-2 mx-2 cursor-pointer inline-block relative hover:py-1 text-black-500 hover:text-slateMedium-100 hover:border-b-2 hover:border-slateMedium-100">About</a>
             <a
-              class="px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative text-black-500 hover:text-orange-500 ">Pricing</a>
+              class="px-4 py-2 mx-2 cursor-pointer inline-block relative hover:py-1 text-black-500 hover:text-slateMedium-100 hover:border-b-2 hover:border-slateMedium-100">News</a>
             <a
-              class="px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative text-black-500 hover:text-orange-500 ">Testimonial</a>
+              class="px-4 py-2 mx-2 cursor-pointer inline-block relative hover:py-1 text-black-500 hover:text-slateMedium-100 hover:border-b-2 hover:border-slateMedium-100">Call to action</a>
           </ul>
+        </div>
+        <div class="font-medium flex justify-end items-center ml-0">
+          <button
+            class="font-medium tracking-wide py-2 px-5 sm:px-8 border border-lipsing-500 text-slateMedium-500 bg-white-500 outline-none rounded-l-full rounded-r-full capitalize hover:bg-slateMedium-500 hover:text-white transition-all hover:shadow-2xl">
+            <!-- -->
+            <font-awesome-icon icon="fa-solid fa-user-secret" />Github Repo
+          </button>
         </div>
       </nav>
       <nav class="fixed lg:hidden bottom-0 left-0 right-0 z-20 px-4 sm:px-8 shadow-t ">
         <div class="bg-white-500 sm:px-3">
           <ul class="flex w-full justify-between items-center text-black-500">
             <a
-              class="mx-1 sm:mx-2 px-3 sm:px-4 py-2 flex flex-col items-center text-xs border-t-2 transition-all   border-orange-500 text-orange-500"><svg
+              class="mx-1 sm:mx-2 px-3 sm:px-4 py-2 flex flex-col items-center text-xs border-t-2 transition-all   border-slateMedium-100 text-slateMedium-100"><svg
                 class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -70,10 +78,11 @@ import { defineComponent, ref, Ref } from 'vue'
 
 export default defineComponent({
   name: 'header-view',
-  setup () {
-    const showMenu: Ref<boolean> = ref(false)
+  setup() {
+    const isActiveMenu: Ref<boolean> = ref(true)
+
     return {
-      showMobileMenu: () => { showMenu.value = !showMenu.value }
+      setActiveMenu: () => { return isActiveMenu }
     }
   }
 })
