@@ -35,7 +35,7 @@
         </div>
       </nav>
       <!-- Mobile -->
-      <nav class="fixed md:hidden bottom-0 left-0 right-0 z-50 px-4 sm:px-8 shadow-t ">
+      <nav class="fixed md:hidden bottom-0 left-0 right-0 z-50 px-4 sm:px-8 shadow-t bg-white">
         <div class="bg-white-500 sm:px-3">
           <ul class="flex w-full justify-between items-center text-black-500">
             <a
