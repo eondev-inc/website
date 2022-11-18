@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="container">
+  <div class="container md:mx-auto">
     <div class="flex flex-col-reverse w-full h-100
       justify-around aling-items-center top-0
       md:flex-row md:mt-14"
