@@ -28,10 +28,15 @@
           </ul>
         </div>
         <div class="font-medium justify-end items-center my-auto">
-          <button
-            class="font-medium tracking-wide py-2 px-5 sm:px-8 border border-lipsing-500 text-slateMedium-500 bg-white-500 outline-none rounded-l-full rounded-r-full capitalize hover:bg-slateMedium-500 hover:text-white transition-all hover:shadow-2xl">
-            <font-awesome-icon icon="fa-brands fa-github" /> Github Repo
-          </button>
+          <a href="https://github.com/eondev-inc" target="_blank" rel="noopener noreferrer">
+            <div class="font-medium tracking-wide py-2 px-5 sm:px-8 border
+                        border-lipsing-500 text-slateMedium-500 bg-white-500
+                        outline-none rounded-l-full rounded-r-full capitalize
+                        hover:bg-slateMedium-500 hover:text-white md:transition-all
+                        hover:shadow-2xl">
+              <font-awesome-icon icon="fa-brands fa-github" /> Github Repo
+            </div>
+          </a>
         </div>
       </nav>
       <!-- Mobile -->

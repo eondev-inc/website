@@ -19,12 +19,15 @@
         </p>
         <div class="font-medium justify-center items-center mt-10 mx-auto">
           <button
-            class="font-medium tracking-wide py-2 px-5 sm:px-8 border border-lipsing-500 text-slateMedium-500 bg-white-500 outline-none rounded-l-full rounded-r-full capitalize hover:bg-slateMedium-500 hover:text-white transition-all hover:shadow-2xl">
+            class="font-medium tracking-wide py-2 px-5 sm:px-8 border
+          border-lipsing-500 text-slateMedium-500 bg-white-500
+            outline-none rounded-l-full rounded-r-full capitalize
+          hover:bg-slateMedium-500 hover:text-white transition-all md:hover:shadow-2xl">
             Saber más
           </button>
         </div>
       </div>
-      <div class="w-80 h-80 relative mt-6 mx-auto">
+      <div class="w-96 h-96 relative mt-6 mx-auto">
         <img src="../../assets/img/Coding.png" alt="coding" title="coding-me" />
       </div>
     </div>
