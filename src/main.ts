@@ -10,7 +10,7 @@ import {
   faGithub,
   faLinkedinIn
 } from '@fortawesome/free-brands-svg-icons'
-import { 
+import {
   faDatabase,
   faCode,
   faFileCode,
