@@ -7,12 +7,14 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+import HeaderView from '@/components/layouts/HeaderView.vue'
+import FooterView from '@/components/layouts/FooterView.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    HeaderView: () => import(/* webpackChunkName: "header" */'@/components/layouts/HeaderView.vue'),
-    FooterView: () => import(/* webpackChunkName: "footer" */'@/components/layouts/FooterView.vue')
+    HeaderView,
+    FooterView
   }
 })
 </script>

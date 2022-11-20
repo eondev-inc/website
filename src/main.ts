@@ -7,21 +7,22 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
-  faFacebook,
   faGithub,
-  faInstagram,
-  faInstagramSquare,
-  faTwitter
+  faLinkedinIn
 } from '@fortawesome/free-brands-svg-icons'
-import { faDatabase, faCode, faFileCode } from '@fortawesome/free-solid-svg-icons'
+import { 
+  faDatabase,
+  faCode,
+  faFileCode,
+  faBlog
+} from '@fortawesome/free-solid-svg-icons'
 
 library.add(faGithub)
-library.add(faFacebook)
-library.add(faTwitter)
-library.add(faInstagram)
+library.add(faLinkedinIn)
 library.add(faDatabase)
 library.add(faCode)
 library.add(faFileCode)
+library.add(faBlog)
 
 createApp(App)
   .component('font-awesome-icon', FontAwesomeIcon)

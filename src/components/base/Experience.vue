@@ -9,7 +9,7 @@
         <p class="text-justify leading-0 tracking-normal font-mono">Experiencia en desarrollo de
           aplicaciones en NodeJS haciendo uso de
           frameworks o librerias tales como <span class="font-semibold">express</span>,
-          <span class="font-semibold">NextJS</span>, <span class="font-semibold">Fastify</span>, entre otros.
+          <span class="font-semibold">NestJS</span>, <span class="font-semibold">Fastify</span>, entre otros.
         </p>
       </div>
     </div>
