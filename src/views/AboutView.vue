@@ -1,20 +1,17 @@
 <template lang="">
   <div>
-    <div class="flex flox-col justify-between w-1/2 mt-10">
-      <div class="font-sans font-bold text-2xl">
-        Estamos trabajando para ud
-      </div>
-      <div class="w-80 h-80">
-        <img src="../assets/img/construction.png" alt="under-construction" />
-      </div>
-    </div>
+    <under-construction-view />
   </div>
 </template>
 <script lang="ts">
+import UnderConstructionView from '@/components/errors/UnderConstructionView.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'about-me'
+  name: 'about-me',
+  components: {
+    UnderConstructionView
+  }
 })
 </script>
 <style lang="">
