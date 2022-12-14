@@ -5,14 +5,16 @@
         Blog y noticias destacadas
       </h1>
     </div>
-    <div class="flex flex-col px-2 md:flex-row">
+    <div class="flex px-2 w-full md:flex-col">
       <div
-        class="flex flex-col shadow-sm shadow-slate-600 h-[580px] w-full rounded-sm
+        class="flex shadow-sm shadow-slate-600 h-[580px] w-full rounded-sm
         transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-80 duration-300
         my-3 md:mx-8 md:h-[580px]"
         v-for="(blog, index) in blogEntries" :key="index"
       >
-      <img :src="getPic(blog.images.title)" alt="blog-title"/>
+      <div class="h-[320px] w-[320px]">
+        <img :src="getPic(blog.images.title)" alt="blog-title"/>
+      </div>
       <div class="h-10 w-[160px] rounded-full bg-lavender-500 -mt-5 ml-4 p-2">Fecha estimada</div>
       <div class="flex flex-col p-4 space-y-2">
         <span id="title" class="font-mono text-left text-slateMedium-300
