@@ -18,13 +18,13 @@
           NodeJS
         </p>
         <div class="font-medium justify-center items-center mt-10 mx-auto">
-          <button
+          <router-link to="/about"
             class="font-medium tracking-wide py-2 px-5 sm:px-8 border
           border-lipsing-500 text-slateMedium-500 bg-white-500
             outline-none rounded-l-full rounded-r-full capitalize
-          hover:bg-slateMedium-500 hover:text-white transition-all md:hover:shadow-2xl">
+          hover:bg-slateMedium-500 hover:text-white md:transition-all md:hover:shadow-2xl">
             Saber más
-          </button>
+          </router-link>
         </div>
       </div>
       <div class="w-96 h-96 relative mt-6 mx-auto">
@@ -35,6 +35,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+
 export default defineComponent({
   name: 'about-me'
 })
