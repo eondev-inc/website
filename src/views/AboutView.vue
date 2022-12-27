@@ -78,14 +78,12 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useRouter } from 'vue-router'
 import useAboutMe from '../composables/use-about.composable'
 
 export default defineComponent({
   name: 'about-me',
   setup() {
     const { aboutMeResume } = useAboutMe()
-    const router = useRouter()
     return {
       aboutMeResume,
       toOutside: (url: string) => {

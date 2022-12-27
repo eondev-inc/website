@@ -5,7 +5,7 @@
         Blog y noticias destacadas
       </h1>
     </div>
-    <div class="flex flex-col px-2 md:flex-row">
+    <div v-if="!soloView" class="flex flex-col px-2 md:flex-row">
       <div
         class="flex flex-col shadow-sm shadow-slate-600 h-[580px] w-full rounded-sm
         transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-80 duration-300
@@ -23,7 +23,7 @@
 
         <span id="goto" class="text-slateMedium-400 underline"><router-link :to="'blogs/'+blog.slug">Leer más</router-link></span>
       </div>
-    </div>
+      </div>
     </div>
   </div>
 </template>
@@ -33,12 +33,24 @@ import useBlogs from '@/composables/use-blogs.composable'
 
 export default defineComponent({
   name: 'our-blog',
+  props: {
+    soloView: {
+      type: Boolean,
+      required: false
+    }
+  },
   setup() {
     const { blogEntries } = useBlogs()
 
     return {
       blogEntries,
-      getPic: (pic: string) => require('../../assets/img/' + pic)
+      getPic: (pic: string) => {
+        if (process.env.NODE_ENV === 'production') {
+          return require('../../img/' + pic)
+        } else if (process.env.NODE_ENV !== 'production') {
+          return require('../../assets/img/' + pic)
+        }
+      }
     }
   }
 })
