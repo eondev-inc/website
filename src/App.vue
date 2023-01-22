@@ -1,7 +1,11 @@
 <template>
   <div>
     <header-view />
-    <router-view class="flex-grow" />
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
     <footer-view />
   </div>
 </template>
@@ -18,3 +22,14 @@ export default defineComponent({
   }
 })
 </script>
+<style>
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease-out;
+}
+</style>
