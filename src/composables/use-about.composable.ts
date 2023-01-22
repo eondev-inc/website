@@ -3,7 +3,7 @@ import { AboutMe } from '@/interfaces/about-me.interface'
 const useAboutMe = () => {
   const aboutMeResume: AboutMe[] = [
     {
-      title: 'Desarrollador Fullstack',
+      title: 'Desarrollador Fullstack - Imed SA',
       description: `Las principales funciones del cargo incluyen la mantención y
       el desarrollo de mejoras para el producto mimed.com, el cuál está construído
       con el stack NuxtJS, Vuejs y Tailwindcss para la capa de presentación. Para la capa
@@ -15,7 +15,7 @@ const useAboutMe = () => {
       fromTo: 'Sept. 2021 - Actualidad'
     },
     {
-      title: 'Desarrollador Fullstack',
+      title: 'Desarrollador Fullstack - Izit SpA',
       description: `Las principales tareas desempeñadas en el cargo se encuentra el desarrollo de servicios y diseñar arquitectura que soporta dichos servicios, principalmente utilizando tecnologías en la nube AWS.
       Desarrollo backend en Node.js, Java, PHP, MySQL, y servidores Apache2, manejo y
       control de versiones de software con GIT, investigación de nuevas tecnologías para el
@@ -24,7 +24,7 @@ const useAboutMe = () => {
       fromTo: 'Sept. 2019 - Ago. 2021'
     },
     {
-      title: 'Ingeniero de software',
+      title: 'Ingeniero de software - Tu Clase, tu país',
       description: `Desarrollador de aplicaciones Web, Móvil entre otras, desarrollo en 
       distintos lenguajes de programación FullStack JavaScript, Angular 2, Android, entre 
       otros, asimismo, encargado de mantenimiento de usuarios de la plataforma E-Learning Tuclase.cl 
@@ -34,7 +34,7 @@ const useAboutMe = () => {
       fromTo: 'Ago. 2017 - Ago. 2019'
     },
     {
-      title: 'Analista desarrollador',
+      title: 'Analista desarrollador - Staken SA',
       description: `Analista Desarrollador en el área de Proyectos de TI, desarrollo bajo esquema Web, Html, Js, Css3, PHP, así como, Nodejs, Express y MongoDB.
 
       Experiencia en arquitectura en la Nube, AWS y sus distintos servicios (EC2, RDS, CodeCommit, Cognito, ApiGateway, Lambda, entre otros).
@@ -42,7 +42,7 @@ const useAboutMe = () => {
       Desarrollo de sistemas administrativos y de gestión para clientes internos.
       
       Desarrollo de soluciones de software en ambiente móvil (Android).`,
-      url: 'https://customers.mystarken.cl',
+      url: 'https://starken.cl',
       fromTo: 'Dic. 2015 - Jul. 2017'
     }
   ]
