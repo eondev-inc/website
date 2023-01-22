@@ -1,20 +1,35 @@
 <template>
   <div>
     <header-view />
-    <router-view class="flex-grow" />
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
     <footer-view />
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+import HeaderView from '@/components/layouts/HeaderView.vue'
+import FooterView from '@/components/layouts/FooterView.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    HeaderView: () => import(/* webpackChunkName: "header" */'@/components/layouts/HeaderView.vue'),
-    FooterView: () => import(/* webpackChunkName: "footer" */'@/components/layouts/FooterView.vue')
+    HeaderView,
+    FooterView
   }
 })
 </script>
-<style lang="scss">
+<style>
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease-out;
+}
 </style>

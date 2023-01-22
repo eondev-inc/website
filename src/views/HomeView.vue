@@ -1,17 +1,19 @@
 <template>
   <div>
-    <header-view />
-    <footer-view />
+    <about-me />
+    <experience />
+    <our-blog />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import FooterView from '@/components/layouts/FooterView.vue'
-import HeaderView from '@/components/layouts/HeaderView.vue'
+import AboutMe from '../components/base/AboutMe.vue'
+import Experience from '../components/base/Experience.vue'
+import OurBlog from '../components/base/OurBlog.vue'
 
 export default defineComponent({
   name: 'HomeView',
-  components: { FooterView, HeaderView }
+  components: { AboutMe, Experience, OurBlog }
 })
 </script>
