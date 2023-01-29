@@ -1,16 +1,16 @@
 <template lang="">
     <div>
-      <under-construction-view />
+      <our-blog :articles-number="3"/>
     </div>
 </template>
 <script lang="ts">
-import UnderConstructionView from '@/components/errors/UnderConstructionView.vue'
+import OurBlog from '@/components/base/OurBlog.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'blog-view',
   components: {
-    UnderConstructionView
+    OurBlog
   }
 })
 </script>
