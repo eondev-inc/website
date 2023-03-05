@@ -1,16 +1,16 @@
 <template lang="">
   <div>
-    <under-construction-view />
+    <call-to-action-view />
   </div>
 </template>
 <script lang="ts">
-import UnderConstructionView from '@/components/errors/UnderConstructionView.vue'
+import CallToActionView from '@/components/base/CallToAction.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'blog-view',
   components: {
-    UnderConstructionView
+    CallToActionView
   }
 })
 </script>

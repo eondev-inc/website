@@ -1,10 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { Form, Field, ErrorMessage } from 'vee-validate'
-import { configure } from 'vee-validate'
-import { extend } from 'vee-validate'
-import { required } from 'vee-validate'
+import { Form, Field, ErrorMessage, configure } from 'vee-validate'
 import './assets/style.css'
 import 'animate.css'
 /* import the fontawesome core */
@@ -21,6 +18,8 @@ import {
   faFileCode,
   faBlog
 } from '@fortawesome/free-solid-svg-icons'
+import { createI18n } from 'vue-i18n'
+import messages from './locales/messages'
 
 library.add(faGithub)
 library.add(faLinkedinIn)
@@ -38,7 +37,12 @@ configure({
   }
 })
 
-extend('required', required)
+const i18n = createI18n({
+  legacy: false,
+  locale: 'en',
+  fallbackLocale: 'es',
+  messages
+})
 
 createApp(App)
   .component('font-awesome-icon', FontAwesomeIcon)
@@ -46,4 +50,5 @@ createApp(App)
   .component('Form', Form)
   .component('ErrorMessage', ErrorMessage)
   .use(router)
+  .use(i18n)
   .mount('#app')

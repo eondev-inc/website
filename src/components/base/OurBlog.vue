@@ -2,7 +2,7 @@
   <div class="container flex flex-col items-center p-2 mt-10 w-full md:justify-between mx-auto">
     <div class="mx-auto mb-4">
       <h1 class="text-2xl font-bold font-mono leading-0 tracking-normal">
-        Blog y noticias destacadas
+        {{ $t('news.title') }}
       </h1>
     </div>
     <div class="flex flex-col px-2 md:flex-row">

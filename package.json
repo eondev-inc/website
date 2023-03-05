@@ -13,10 +13,12 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^3.0.1",
     "animate.css": "^4.1.1",
+    "sweetalert2": "^11.7.2",
     "vee-validate": "^4.7.4",
     "vue": "^3.2.13",
     "vue-i18n": "9",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "yup": "^1.0.1"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",

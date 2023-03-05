@@ -6,16 +6,13 @@
     >
       <div class="about-me flex flex-col h-full w-[342px] mt-10 justify-center mx-auto">
         <h1 class="font-semibold leading-0 tracking-normal text-2xl">
-          Hola! Soy Yerffrey Romero
+          {{ $t('home.aboutMe.meTitle') }}
         </h1>
         <h3 class="font-semibold leading-0 tracking-tight text-xl">
-          Desarrollador Fullstack
+          {{ $t('home.aboutMe.meSubtitle') }}
         </h3>
         <p class="font-mono text-justify">
-          Ingeniero en Computación, con 7+ años de experiencia,
-          trabajando en empresas como Starken, Izit, <span class="font-bold">Tu Clase, tu país</span> e I-Med.
-          centrado en el desarrollo de aplicaciones Web con stack tecnológico
-          NodeJS
+          {{ $t('home.aboutMe.meDescription') }}
         </p>
       </div>
       <div class="w-96 h-96 relative mt-6 mx-auto">
@@ -67,7 +64,7 @@
                 focus:ring-0 active:bg-slateMedium-100 active:shadow-lg
                 transition duration-150 ease-in-out" data-mdb-ripple="true"
               >
-                Ver Proyecto
+                {{ $t('home.aboutMe.resume') }}
               </button>
             </div>
           </div>
