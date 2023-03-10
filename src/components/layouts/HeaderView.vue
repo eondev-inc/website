@@ -64,16 +64,10 @@
             </div>
           </a>
         </div>
-        <div class="relative">
-          <button class="flex items-center space-x-1 text-gray-800 hover:text-gray-600 focus:outline-none">
-            <span>{{ $t('header.selectLanguage') }}</span>
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
-              <path d="M10 12L6 8h8l-4-4-4 4z" />
-            </svg>
-          </button>
-          <div class="absolute right-0 w-32 py-2 mt-1 bg-white rounded-md shadow-lg">
-            <select v-model="$i18n.locale">
-              <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
+        <div class="flex justify-center relative mr-0">
+          <div class="mb-3 xl:w-96">
+            <select data-te-select-init v-model="$i18n.locale">
+              <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale.toUpperCase() }}</option>
             </select>
           </div>
         </div>

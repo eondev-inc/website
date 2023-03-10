@@ -2,7 +2,7 @@ const messages = {
   es: {
     header: {
       headerHome: 'Inicio',
-      headerAbout: 'Acerca de',
+      headerAbout: 'Acerca',
       headerNews: 'Noticias',
       headerCTA: 'Contacto',
       selectLanguage: 'Idioma'

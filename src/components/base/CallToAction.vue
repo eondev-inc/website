@@ -79,7 +79,7 @@ export default defineComponent({
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Your work has been saved',
+          title: 'Thanks for your message!',
           showConfirmButton: false,
           timer: 1500
         })
