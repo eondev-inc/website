@@ -2,7 +2,7 @@
   <div class="container flex flex-col items-center p-2 mt-10 w-full md:justify-between mx-auto">
     <div class="mx-auto mb-4">
       <h1 class="text-2xl font-bold font-mono leading-0 tracking-normal">
-        Blog y noticias destacadas
+        {{ $t('news.title') }}
       </h1>
     </div>
     <div class="flex flex-col px-2 md:flex-row">
@@ -19,7 +19,7 @@
         text-xl leading-0 tracking-normal" v-html="blog.title.rendered"></span>
 
         <span id="title" class="font-sans text-left text-black
-        text-base leading-0 tracking-normal" v-html="blog.excerpt.rendered"></span>
+        text-base leading-0 tracking-normal" v-html="truncate(blog.excerpt.rendered, 200)"></span>
 
         <span id="goto" class="text-slateMedium-400 underline"><a :href="blog.link" target="_blank">Leer más</a></span>
       </div>
@@ -49,7 +49,12 @@ export default defineComponent({
     })
 
     return {
-      blogPost
+      blogPost,
+      truncate: (str: string, length: number) => {
+        return str.length > length
+          ? str.substr(0, length) + ' [...]'
+          : str
+      }
     }
   }
 })
