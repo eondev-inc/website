@@ -9,7 +9,7 @@
           {{ $t('home.aboutMe.meTitle') }}
         </h1>
         <h3 class="font-semibold leading-0 tracking-tight text-xl">
-          {{ $t('home.aboutMe.meSubtitle') }}
+          {{ $t('home.aboutMe.meSubs') }}
         </h3>
         <p class="font-mono text-justify">
           {{ $t('home.aboutMe.meDescription') }}
@@ -102,7 +102,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed, onMounted } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import useAboutMe from '../composables/use-about.composable'
 

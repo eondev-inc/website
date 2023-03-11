@@ -65,10 +65,52 @@
           </a>
         </div>
         <div class="flex justify-center relative mr-0">
-          <div class="mb-3 xl:w-96">
-            <select data-te-select-init v-model="$i18n.locale">
-              <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale.toUpperCase() }}</option>
-            </select>
+          <button id="states-button" data-dropdown-toggle="dropdown-states"
+          class="font-medium tracking-wide py-2 px-5 sm:px-8 border
+              border-lipsing-500 text-slateMedium-500 bg-white-500
+              outline-none rounded-l-full rounded-r-full capitalize
+              hover:bg-slateMedium-500 hover:text-white md:transition-all
+              hover:shadow-2xl" type="button"
+          >
+            Language
+          </button>
+          <div id="dropdown-states" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="states-button">
+              <li>
+                <button type="button"
+                  class="inline-flex w-full px-4 py-2 text-sm
+                text-gray-700 hover:bg-gray-100 dark:text-gray-400
+                dark:hover:bg-gray-600 dark:hover:text-white"
+                @click="changeLanguage('en')"
+                >
+                  <div class="inline-flex items-center">
+                    <img
+                      src="../../assets/img/united-kingdom-flag-icon.svg"
+                      alt="United Kingdom"
+                      class="w-4 h-4"
+                    />
+                      &nbsp; English
+                  </div>
+                </button>
+              </li>
+              <li>
+                <button type="button"
+                  class="inline-flex w-full px-4 py-2 text-sm
+                  text-gray-700 hover:bg-gray-100 dark:text-gray-400
+                  dark:hover:bg-gray-600 dark:hover:text-white"
+                  @click="changeLanguage('es')"
+                >
+                  <div class="inline-flex items-center">
+                    <img
+                      src="../../assets/img/spain-flag-icon.png"
+                      alt="Spain"
+                      class="w-4 h-4"
+                    />
+                    &nbsp; Spanish
+                  </div>
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>
@@ -138,16 +180,23 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, Ref } from 'vue'
+import { defineComponent, ref, Ref, onMounted } from 'vue'
+import { initFlowbite } from 'flowbite'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'header-view',
   setup() {
     const isActiveMenu: Ref<string> = ref('')
+    const { locale } = useI18n()
+    onMounted(() => {
+      initFlowbite()
+    })
 
     return {
       isActiveMenu,
-      setActiveMenu: (name: string) => { isActiveMenu.value = name }
+      setActiveMenu: (name: string) => { isActiveMenu.value = name },
+      changeLanguage: (lang: string) => { locale.value = lang }
     }
   }
 })

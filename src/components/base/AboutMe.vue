@@ -9,7 +9,7 @@
           {{ $t('home.aboutMe.meTitle') }}
         </h1>
         <h3 class="font-semibold leading-0 tracking-tight text-xl">
-          {{ $t('home.aboutMe.meSubTitle') }}
+          {{ $t('home.aboutMe.meSubs') }}
         </h3>
         <p class="font-mono text-justify">
           {{ $t('home.aboutMe.meDescription') }}
