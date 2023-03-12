@@ -9,9 +9,9 @@
         <div
           class="row-span-2 sm:col-span-4 col-start-1 col-end-4 sm:col-end-5 flex flex-col items-start">
           <img src="../../assets/img/logo_v3.png" width="100" height="80" />
-          <p class="mb-4"><strong class="font-medium">Eondev Inc</strong> Es una iniciativa personal con el
-            proposito de crear una marca que permita impulsar el desarrollo de aplicaciones web enfocadas
-            en las necesidades de los usuarios</p>
+          <p class="mb-4"><strong class="font-medium">Eondev Inc</strong>
+            {{ $t('footer.mainMessage') }}
+          </p>
           <div class="flex w-full mt-2 mb-8 -mx-2">
             <div class="mx-2 bg-white-500 rounded-full items-center justify-center flex p-2 shadow-md cursor-pointer">
               <a href="https://steemit.com/@seventrust" target="_blank" rel="noopener noreferrer">
