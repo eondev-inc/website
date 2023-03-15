@@ -1,9 +1,6 @@
-<template lang="">
+<template>
   <div class="container md:mx-auto">
-    <div class="flex flex-col-reverse w-full h-100
-      justify-around aling-items-center top-0
-      md:flex-row-reverse md:mt-14"
-    >
+    <div class="flex flex-col-reverse w-full h-100 justify-around aling-items-center top-0 md:flex-row-reverse md:mt-14">
       <div class="about-me flex flex-col h-full w-[342px] mt-10 justify-center mx-auto">
         <h1 class="font-semibold leading-0 tracking-normal text-2xl">
           {{ $t('home.aboutMe.meTitle') }}
@@ -20,7 +17,7 @@
       </div>
     </div>
     <div class="mt-11 flex">
-      <h3 class="text-2xl font-bold mb-6 text-gray-700 mr-4 hidden md:flex">Experiencia profesional</h3>
+      <h3 class="text-2xl font-bold mb-6 text-gray-700 mr-4 hidden md:flex">{{$t('home.aboutMe.meFirts')}}</h3>
       <ol class="border-l-2 border-slateMedium-200 ml-4">
         <li v-for="(about, index) in localizedAboutMe[0]" :key="index">
           <div class="md:flex flex-start mr-4">
@@ -107,10 +104,9 @@ import { useI18n } from 'vue-i18n'
 import useAboutMe from '../composables/use-about.composable'
 
 export default defineComponent({
-  name: 'about-me',
+  name: 'AboutMe',
   setup() {
     const { aboutMeResume } = useAboutMe()
-
     const { locale } = useI18n()
     const currentLocale = computed(() => locale.value)
 
@@ -119,6 +115,7 @@ export default defineComponent({
         return about[currentLocale.value]
       })
     })
+
     return {
       localizedAboutMe,
       toOutside: (url: string) => {
@@ -128,5 +125,6 @@ export default defineComponent({
   }
 })
 </script>
+
 <style lang="">
 </style>

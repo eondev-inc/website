@@ -1,13 +1,8 @@
 <template>
   <div>
     <div class="bg-white-300 pt-44 pb-24">
-      <div
-        class="max-w-screen-xl w-full mx-auto px-6 sm:px-8
-        lg:px-16 grid grid-rows-6 sm:grid-rows-1 grid-flow-row
-        sm:grid-flow-col grid-cols-3 sm:grid-cols-12 gap-4
-        border-t-[1px] border-slate-300">
-        <div
-          class="row-span-2 sm:col-span-4 col-start-1 col-end-4 sm:col-end-5 flex flex-col items-start">
+      <div class="max-w-screen-xl w-full mx-auto px-6 sm:px-8 lg:px-16 grid grid-rows-6 sm:grid-rows-1 grid-flow-row sm:grid-flow-col grid-cols-3 sm:grid-cols-12 gap-4 border-t-[1px] border-slate-300">
+        <div class="row-span-2 sm:col-span-4 col-start-1 col-end-4 sm:col-end-5 flex flex-col items-start">
           <img src="../../assets/img/logo_v3.png" width="100" height="80" />
           <p class="mb-4"><strong class="font-medium">Eondev Inc</strong>
             {{ $t('footer.mainMessage') }}
@@ -30,8 +25,8 @@
             </div>
           </div>
           <p class="text-gray-400">©
-            <!-- --> {{ new Date().getFullYear() }}
-            <!-- --> - Eondev
+            {{ new Date().getFullYear() }}
+            - Eondev
           </p>
         </div>
       </div>
@@ -42,7 +37,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'footer-view'
+  name: 'FooterView'
 })
 </script>
 <style lang="">

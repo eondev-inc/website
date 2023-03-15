@@ -4,14 +4,9 @@ import router from './router'
 import { Form, Field, ErrorMessage, configure } from 'vee-validate'
 import './assets/style.css'
 import 'animate.css'
-/* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
-/* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import {
-  faGithub,
-  faLinkedinIn
-} from '@fortawesome/free-brands-svg-icons'
+import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import {
   faDatabase,
   faCode,
@@ -21,12 +16,16 @@ import {
 import { createI18n } from 'vue-i18n'
 import messages from './locales/messages'
 
-library.add(faGithub)
-library.add(faLinkedinIn)
-library.add(faDatabase)
-library.add(faCode)
-library.add(faFileCode)
-library.add(faBlog)
+const fontAwesomeIcons = [
+  faGithub,
+  faLinkedinIn,
+  faDatabase,
+  faCode,
+  faFileCode,
+  faBlog
+]
+
+library.add(...fontAwesomeIcons)
 
 configure({
   generateMessage: ({ field, rule }) => {
