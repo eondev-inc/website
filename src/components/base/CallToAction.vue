@@ -13,7 +13,10 @@
             :type="field.type"
             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
-          <ErrorMessage :name="field.name" class="text-red-500" />
+          <ErrorMessage
+            :name="field.name"
+            class="text-red-500"
+          />
         </div>
       </template>
       <div class="flex items-center justify-center">
@@ -48,23 +51,33 @@ export default defineComponent({
   },
   setup() {
     const { handleSubmit, errors } = useForm()
-    const fields = [
+    const fields: any[] = [
       {
         name: 'name',
-        rules: yup.string().min(3).required(),
+        rules: yup
+          .string()
+          .min(3)
+          .required(),
         type: 'text'
       },
       {
         name: 'email',
-        rules: yup.string().email().required(),
+        rules: yup
+          .string()
+          .email()
+          .required(),
         type: 'email'
       },
       {
         name: 'message',
-        rules: yup.string().min(10).required(),
+        rules: yup
+          .string()
+          .min(10)
+          .required(),
         type: 'textarea'
       }
     ]
+
     const loading = ref(false)
 
     const dispatchSwal = (scope: string) => {
@@ -74,7 +87,10 @@ export default defineComponent({
         showConfirmButton: false,
         timer: 1500,
         icon,
-        title: scope === 'success' ? 'Thanks for your message!' : 'Something went wrong'
+        title:
+          scope === 'success'
+            ? 'Thanks for your message!'
+            : 'Something went wrong'
       }
       Swal.fire(swalOptions)
     }
@@ -83,12 +99,15 @@ export default defineComponent({
       try {
         loading.value = true
 
-        const response = await fetch('https://run.mocky.io/v3/2eb0428f-0525-4779-98a0-23993cb7ebfe', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+        const response = await fetch(
+          'https://run.mocky.io/v3/2eb0428f-0525-4779-98a0-23993cb7ebfe',
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
           }
-        })
+        )
 
         if (response.status === 200) dispatchSwal('success')
       } catch (error) {

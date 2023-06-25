@@ -8,7 +8,7 @@ import CallToActionView from '@/components/base/CallToAction.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'blog-view',
+  name: 'BlogView',
   components: {
     CallToActionView
   }

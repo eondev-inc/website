@@ -21,7 +21,11 @@
         </div>
       </div>
       <div class="relative w-96 h-96 mt-6">
-        <img src="../../assets/img/Coding.png" :alt="$t('home.aboutMe.meAltImage')" title="coding-me" />
+        <img
+          src="../../assets/img/Coding.png"
+          :alt="$t('home.aboutMe.meAltImage')"
+          title="coding-me"
+        >
       </div>
     </div>
   </div>
@@ -31,6 +35,6 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'about-me'
+  name: 'AboutMe'
 })
 </script>
