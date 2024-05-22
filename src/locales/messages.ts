@@ -12,6 +12,7 @@ const messages = {
     },
     home: {
       aboutMe: {
+        meFirts: 'Experiencia laboral',
         meTitle: 'Hola! Soy yerffrey Romero',
         meSubs: 'Desarrollador Fullstack',
         meDescription: 'Ingeniero en Computación, con 7+ años de experiencia, trabajando en empresas como Starken, Izit, Tu Clase, tu país e I-Med. centrado en el desarrollo de aplicaciones Web con stack tecnológico NodeJS',
@@ -58,6 +59,7 @@ const messages = {
     },
     home: {
       aboutMe: {
+        meFirts: 'Professional experience',
         meTitle: 'Hi! I am Yerffrey Romero',
         meSubs: 'Fullstack Developer',
         meDescription: 'Computer Engineer, with 7+ years of experience, working in companies such as Starken, Izit, Tu Clase, tu país and I-Med. Focused on the development of Web applications with NodeJS technology stack.',

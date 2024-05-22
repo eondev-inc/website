@@ -14,7 +14,7 @@ module.exports = {
           300: '#e5e8fe',
           400: '#e9ebfe',
           500: '#eceefe',
-          600: '#eff1ff',
+          600: '#eff1ff'
         },
         snowish: {
           100: '#b1cbfa',
@@ -41,7 +41,7 @@ module.exports = {
           600: '#bcb8f5'
         }
       }
-    },
+    }
   },
   plugins: [
     require('flowbite/plugin')
