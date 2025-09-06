@@ -49,27 +49,21 @@ const messages = {
       },
       webdevelopment: {
         title: 'Desarrollo Web',
-        description: 'Experiencia en uso de librerias y/o framework para desarrollo de aplicaciones web, uso de Angular, Vuejs (v3) y también uso de framework fullstack NuxtJS (v3), entre otros.'
+        description: 'Experiencia en uso de librerias y/o frameworks para el desarrollo de aplicaciones web, uso de Angular, Vuejs (v3) y ademas de utilizacion de framework fullstack NuxtJS (v3), entre otros.'
       }
     },
     news: {
-      title: 'Noticias'
+      title: 'Blog y noticias destacadas'
     },
     callToAction: {
-      title: 'Trabajemos Juntos',
-      subtitle: '¿Tienes un proyecto en mente? Me encantaría escuchar tus ideas y ayudarte a convertirlas en realidad.',
+      title: 'Contacto',
       name: 'Nombre',
-      namePlaceholder: 'Tu nombre completo',
-      email: 'Email',
-      emailPlaceholder: 'tu@email.com',
+      email: 'Correo electrónico',
       message: 'Mensaje',
-      messagePlaceholder: 'Cuéntame sobre tu proyecto o idea...',
-      send: 'Enviar Mensaje',
-      sending: 'Enviando...'
+      send: 'Enviar'
     }
   },
   en: {
-    // Nuevas claves para el hero moderno
     header: {
       headerHome: 'Home',
       headerAbout: 'About',
@@ -82,7 +76,7 @@ const messages = {
     },
     home: {
       aboutMe: {
-        // Legacy keys for compatibility
+        // Textos antiguos mantenidos para compatibilidad
         meFirts: 'Professional experience',
         meTitle: 'Hi! I am Yerffrey Romero',
         meSubs: 'Fullstack Developer',
@@ -90,18 +84,18 @@ const messages = {
         meButton: 'Learn more',
         meAltImage: 'coding-me',
         meSeeMore: 'See more',
-        // Modern hero keys
-        availability: 'Available for hire',
+        // Nuevos textos para el hero moderno
+        availability: 'Available for projects',
         greeting: 'Hi, I\'m',
         name: 'Yerffrey Romero',
         title: 'Full Stack Developer',
-        description: 'Computer Engineer with 7+ years of experience creating robust web applications. Specialized in modern technologies and scalable solutions.',
-        yearsExp: 'Years Experience',
-        projects: 'Projects Completed',
+        description: 'Computer Engineer with over 7 years of experience creating modern and scalable web applications. Specialized in JavaScript/TypeScript ecosystem, focused on delivering technological solutions that generate real value for users.',
+        yearsExp: 'Years of experience',
+        projects: 'Completed projects',
         technologies: 'Technologies',
-        techStack: 'Tech Stack',
-        cta: 'View My Work',
-        contact: 'Get In Touch',
+        techStack: 'Main tech stack',
+        cta: 'View my work',
+        contact: 'Let\'s talk',
         followMe: 'Follow me on',
         imageAlt: 'Yerffrey Romero coding',
         status: 'Active',
@@ -123,19 +117,14 @@ const messages = {
       }
     },
     news: {
-      title: 'News'
+      title: 'Blog and Featured News'
     },
     callToAction: {
-      title: 'Let\'s Work Together',
-      subtitle: 'Have a project in mind? I\'d love to hear your ideas and help you turn them into reality.',
+      title: 'Contact',
       name: 'Name',
-      namePlaceholder: 'Your full name',
       email: 'Email',
-      emailPlaceholder: 'your@email.com',
       message: 'Message',
-      messagePlaceholder: 'Tell me about your project or idea...',
-      send: 'Send Message',
-      sending: 'Sending...'
+      send: 'Submit'
     }
   }
 }
