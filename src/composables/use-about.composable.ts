@@ -12,7 +12,7 @@ const useAboutMe = () => {
           técnica del producto. Identifiqué y resolví problemas técnicos y trabajé con 
           otros líderes técnicos y equipos de la empresa para asegurar la calidad y 
           eficiencia del desarrollo del producto.`,
-          url: 'https://escritoriomedico.cl',
+          url: 'https://escritoriomedico.i-med.cl/',
           fromTo: 'Febrero. 2023 - Actualidad'
         },
         {
@@ -32,7 +32,7 @@ const useAboutMe = () => {
           Desarrollo backend en Node.js, Java, PHP, MySQL, y servidores Apache2, manejo y
           control de versiones de software con GIT, investigación de nuevas tecnologías para el
           desarrollo de aplicaciones del lado del servidor y servicios internos de soporte.`,
-          url: 'https://izitapp.com',
+          url: 'https://web.archive.org/web/20200919024522/https://www.izitapp.com/',
           fromTo: 'Sept. 2019 - Ago. 2021'
         },
         {
@@ -75,7 +75,7 @@ const useAboutMe = () => {
           title: 'Fullstack Developer - Izit SpA',
           description: `The main tasks carried out in the position include the development of services and designing architecture that supports these services, mainly using AWS cloud technologies.
           Backend development in Node.js, Java, PHP, MySQL, and Apache2 servers, software version management with GIT, research of new technologies for server-side application development, and internal support services.`,
-          url: 'https://izitapp.com',
+          url: 'https://web.archive.org/web/20200919024522/https://www.izitapp.com/',
           fromTo: 'Sept. 2019 - Aug. 2021'
         },
         {

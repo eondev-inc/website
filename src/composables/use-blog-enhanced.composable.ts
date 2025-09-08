@@ -183,7 +183,7 @@ export function useBlogEnhanced(initialItemsPerPage = 12): UseBlogEnhanced {
       const startTime = performance.now()
       const response = await Promise.race([
         retrievePost(Math.max(itemsPerPage.value, 12)),
-        new Promise((_, reject) =>
+        new Promise((_resolve, reject) =>
           setTimeout(() => reject(new Error('Timeout')), 10000)
         )
       ]) as Response

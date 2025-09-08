@@ -16,12 +16,12 @@
           <!-- Logo y marca -->
           <div class="flex items-center space-x-3">
             <img
-              src="../../assets/img/logo_v3.png"
+              src="../../assets/img/footer.jpeg"
               alt="EonDev Logo"
               class="h-10 w-auto"
             >
             <div class="flex flex-col">
-              <span class="text-xl font-bold text-white">EonDev</span>
+              <span class="text-xl font-bold text-white">Y|R</span>
               <span class="text-sm text-neutral-400">Portfolio</span>
             </div>
           </div>

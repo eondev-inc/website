@@ -47,14 +47,45 @@
           :key="category.id"
           @click="selectedCategory = selectedCategory === category.id ? null : category.id"
           :class="[
-            'px-4 py-2 rounded-full text-sm font-medium transition-all duration-300',
+            'px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 category-tag',
             selectedCategory === category.id
-              ? 'bg-primary-600 text-white shadow-soft'
+              ? 'text-white shadow-soft'
               : 'bg-white text-neutral-700 border border-neutral-200 hover:bg-primary-50 hover:border-primary-300'
           ]"
+          :style="selectedCategory === category.id ? `background-color: ${category.color}` : ''"
+          :aria-label="`Filtrar por ${category.name}, ${category.count} artículos`"
         >
-          {{ category.name }}
-          <span class="ml-2 text-xs opacity-75">({{ category.count }})</span>
+          <span class="flex items-center space-x-2">
+            <span
+              :class="[
+                'w-2 h-2 rounded-full',
+                selectedCategory !== category.id ? 'opacity-60' : ''
+              ]"
+              :style="`background-color: ${category.color}`"
+            />
+            <span>{{ category.name }}</span>
+            <span
+              :class="[
+                'text-xs px-1.5 py-0.5 rounded-full',
+                selectedCategory === category.id
+                  ? 'bg-white/20 text-white'
+                  : 'bg-neutral-100 text-neutral-500'
+              ]"
+            >
+              {{ category.count }}
+            </span>
+          </span>
+        </button>
+
+        <!-- Botón para limpiar filtros -->
+        <button
+          v-if="selectedCategory !== null"
+          @click="selectedCategory = null"
+          class="px-3 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-neutral-100 text-neutral-600 hover:bg-neutral-200 flex items-center space-x-1"
+          aria-label="Limpiar filtros de categoría"
+        >
+          <i class="fas fa-times text-xs"></i>
+          <span>Limpiar</span>
         </button>
       </div>
 
@@ -83,7 +114,7 @@
                 viewMode === 'grid' ? 'bg-white shadow-sm text-primary-600' : 'text-neutral-500 hover:text-neutral-700'
               ]"
             >
-              <i class="fas fa-th-large"></i>
+              <i class="fa fa-th-large"></i>
             </button>
             <button
               @click="viewMode = 'list'"
@@ -92,7 +123,7 @@
                 viewMode === 'list' ? 'bg-white shadow-sm text-primary-600' : 'text-neutral-500 hover:text-neutral-700'
               ]"
             >
-              <i class="fas fa-list"></i>
+              <i class="fa fa-list"></i>
             </button>
           </div>
         </div>
@@ -101,11 +132,48 @@
 
     <!-- Loading state -->
     <div v-if="isLoading" class="flex justify-center items-center py-20">
-      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600" />
+      <div class="text-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4" />
+        <p class="text-neutral-600">
+          {{ isRetrying ? 'Reintentando cargar artículos...' : 'Cargando artículos...' }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Error state -->
+    <div v-else-if="error && !isLoading" class="text-center py-20">
+      <div class="mb-6">
+        <i class="fas fa-exclamation-triangle text-4xl text-amber-500 mb-4"></i>
+        <h3 class="text-xl font-semibold text-neutral-700 mb-2">
+          Error al cargar los artículos
+        </h3>
+        <p class="text-neutral-500 mb-1">
+          {{ error.message }}
+        </p>
+        <p class="text-sm text-neutral-400">
+          Tipo: {{ error.type }} | {{ formatDate(new Date(error.timestamp).toISOString()) }}
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <button
+          @click="retryLoad"
+          :disabled="isRetrying"
+          class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center space-x-2 mx-auto"
+        >
+          <i v-if="isRetrying" class="fas fa-spinner fa-spin"></i>
+          <i v-else class="fas fa-redo"></i>
+          <span>{{ isRetrying ? 'Reintentando...' : 'Reintentar' }}</span>
+        </button>
+
+        <p class="text-sm text-neutral-500">
+          Si el problema persiste, intenta recargar la página
+        </p>
+      </div>
     </div>
 
     <!-- No results -->
-    <div v-else-if="filteredPosts.length === 0 && !isLoading" class="text-center py-20">
+    <div v-else-if="filteredPosts.length === 0 && !isLoading && !error" class="text-center py-20">
       <div class="mb-4">
         <i class="fas fa-search text-4xl text-neutral-400"></i>
       </div>
@@ -130,7 +198,7 @@
         :key="blog.id"
         :ref="`blogCard-${blog.id}`"
         :class="[
-          'group bg-white rounded-3xl shadow-soft hover:shadow-glow transition-all duration-500 hover:-translate-y-2 overflow-hidden animate-slide-up',
+          'group bg-white rounded-3xl shadow-soft transition-all duration-300 overflow-hidden animate-slide-up',
           viewMode === 'list' ? 'flex flex-col md:flex-row max-w-4xl mx-auto' : ''
         ]"
         :style="`animation-delay: ${index * 0.1}s`"
@@ -167,31 +235,34 @@
           <div class="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-neutral-700 shadow-soft">
             {{ formatDate(blog.date) }}
           </div>
-
-          <!-- Favorite button -->
-          <button
-            @click="toggleFavorite(blog.id)"
-            :class="[
-              'absolute top-4 right-4 w-8 h-8 rounded-full backdrop-blur-sm transition-all duration-300 flex items-center justify-center',
-              favorites.includes(blog.id)
-                ? 'bg-red-500 text-white shadow-lg'
-                : 'bg-white/90 text-neutral-600 hover:bg-red-50 hover:text-red-500'
-            ]"
-          >
-            <i :class="['fas', favorites.includes(blog.id) ? 'fa-heart' : 'fa-heart']"></i>
-          </button>
         </div>
 
         <!-- Content -->
         <div :class="['p-6 space-y-4', viewMode === 'list' ? 'flex-1' : '']">
           <!-- Category tags -->
-          <div v-if="blog.categories" class="flex flex-wrap gap-2">
+          <div v-if="blog.categories && blog.categories.length > 0" class="flex flex-wrap gap-2">
             <span
-              v-for="categoryId in blog.categories.slice(0, 2)"
+              v-for="categoryId in blog.categories.slice(0, 3)"
               :key="categoryId"
-              class="px-2 py-1 bg-primary-100 text-primary-700 text-xs rounded-full font-medium"
+              class="inline-flex items-center space-x-1 px-2 py-1 text-xs rounded-full font-medium transition-colors duration-200"
+              :style="`
+                background-color: ${categories.find(c => c.id === categoryId)?.color || '#3b82f6'}15;
+                color: ${categories.find(c => c.id === categoryId)?.color || '#3b82f6'};
+                border: 1px solid ${categories.find(c => c.id === categoryId)?.color || '#3b82f6'}30;
+              `"
             >
-              {{ getCategoryName(categoryId) }}
+              <span
+                class="w-1.5 h-1.5 rounded-full"
+                :style="`background-color: ${categories.find(c => c.id === categoryId)?.color || '#3b82f6'}`"
+              />
+              <span>{{ getCategoryName(categoryId) }}</span>
+            </span>
+
+            <span
+              v-if="blog.categories.length > 3"
+              class="px-2 py-1 bg-neutral-100 text-neutral-500 text-xs rounded-full font-medium"
+            >
+              +{{ blog.categories.length - 3 }}
             </span>
           </div>
 
@@ -213,40 +284,75 @@
             v-html="cleanHtml(truncate(blog.excerpt.rendered, viewMode === 'list' ? 250 : 150))"
           />
 
-          <!-- Actions -->
-          <div class="pt-4 flex items-center justify-between">
-            <div class="flex items-center space-x-4">
-              <a
-                :href="blog.link"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center space-x-2 text-primary-600 hover:text-primary-700 font-medium text-sm transition-colors duration-200 group/link"
-              >
-                <span>Leer artículo</span>
-                <svg
-                  class="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
+          <!-- Meta information -->
+          <div class="flex items-center justify-between pt-2 border-t border-neutral-100">
+            <div class="flex items-center space-x-4 text-xs text-neutral-500">
+              <span class="flex items-center space-x-1">
+                <i class="fas fa-clock"></i>
+                <span>{{ estimateReadingTime(blog.content?.rendered || blog.excerpt.rendered) }} min</span>
+              </span>
 
-              <button
-                @click="shareArticle(blog)"
-                class="inline-flex items-center space-x-1 text-neutral-500 hover:text-accent-600 text-sm transition-colors duration-200"
+              <span class="flex items-center space-x-1">
+                <i class="fas fa-calendar-alt"></i>
+                <time :datetime="blog.date">{{ formatDate(blog.date) }}</time>
+              </span>
+
+              <span
+                v-if="blog._cached"
+                class="flex items-center space-x-1 text-green-600"
+                title="Cargado desde caché"
               >
-                <i class="fas fa-share-alt"></i>
-                <span>Compartir</span>
+                <i class="fas fa-bolt text-xs"></i>
+                <span>Rápido</span>
+              </span>
+            </div>
+
+            <div class="flex items-center space-x-2">
+              <!-- Favorite button (moved from image overlay) -->
+              <button
+                @click="toggleFavorite(blog.id)"
+                :class="[
+                  'w-7 h-7 rounded-full transition-all duration-300 flex items-center justify-center text-xs favorite-heart',
+                  favorites.includes(blog.id)
+                    ? 'bg-red-500 text-white shadow-soft active'
+                    : 'bg-neutral-100 text-neutral-500 hover:bg-red-50 hover:text-red-500'
+                ]"
+                :aria-label="favorites.includes(blog.id) ? 'Quitar de favoritos' : 'Agregar a favoritos'"
+              >
+                <i :class="['fas fa-heart']"></i>
               </button>
             </div>
+          </div>
 
-            <!-- Reading time estimate -->
-            <div class="text-xs text-neutral-400 flex items-center space-x-1">
-              <i class="fas fa-clock"></i>
-              <span>{{ estimateReadingTime(blog.content?.rendered || blog.excerpt.rendered) }} min</span>
-            </div>
+          <!-- Actions -->
+          <div class="pt-2 flex items-center justify-between">
+            <a
+              :href="blog.link"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center space-x-2 text-primary-600 hover:text-primary-700 font-medium text-sm transition-colors duration-200 group/link"
+              :aria-label="`Leer artículo: ${cleanHtml(blog.title.rendered)}`"
+            >
+              <span>Leer artículo</span>
+              <svg
+                class="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+
+            <button
+              @click="shareArticle(blog)"
+              class="inline-flex items-center space-x-1 text-neutral-500 hover:text-accent-600 text-sm transition-colors duration-200"
+              :aria-label="`Compartir artículo: ${cleanHtml(blog.title.rendered)}`"
+            >
+              <i class="fas fa-share-alt"></i>
+              <span>Compartir</span>
+            </button>
           </div>
         </div>
 
@@ -311,28 +417,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, computed, watch } from 'vue'
-import useBlogs from '@/composables/use-blogs.composable'
+import { defineComponent, onMounted, computed } from 'vue'
+import { useBlogEnhanced } from '@/composables/use-blog-enhanced.composable'
 
 interface Props {
   articlesNumber: number
-}
-
-interface BlogPost {
-  id: number
-  title: { rendered: string }
-  excerpt: { rendered: string }
-  content?: { rendered: string }
-  link: string
-  date: string
-  jetpack_featured_media_url?: string
-  categories?: number[]
-}
-
-interface Category {
-  id: number
-  name: string
-  count: number
 }
 
 export default defineComponent({
@@ -340,75 +429,19 @@ export default defineComponent({
   props: {
     articlesNumber: {
       type: Number,
-      default: 12 // Aumentamos por defecto para mejor experiencia
+      default: 6
     }
   },
   setup(props: Props) {
-    const { retrievePost } = useBlogs()
+    // Usar el composable avanzado con las props iniciales
+    const blogEnhanced = useBlogEnhanced(props.articlesNumber)
 
-    // Estado principal
-    const blogPost = ref<BlogPost[]>([])
-    const isLoading = ref(true)
-    const favorites = ref<number[]>([])
-
-    // Filtros y búsqueda
-    const searchQuery = ref('')
-    const selectedCategory = ref<number | null>(null)
-    const viewMode = ref<'grid' | 'list'>('grid')
-
-    // Paginación
-    const currentPage = ref(1)
-    const itemsPerPage = ref(props.articlesNumber)
-
-    // Categorías simuladas (en una app real vendrían de la API)
-    const categories = ref<Category[]>([
-      { id: 1, name: 'Desarrollo Web', count: 8 },
-      { id: 2, name: 'JavaScript', count: 12 },
-      { id: 3, name: 'Vue.js', count: 6 },
-      { id: 4, name: 'TypeScript', count: 4 },
-      { id: 5, name: 'UI/UX', count: 3 },
-      { id: 6, name: 'Herramientas', count: 5 }
-    ])
-
-    // Timer para debounce de búsqueda
-    let searchTimeout: ReturnType<typeof setTimeout>
-
-    // Computed properties
-    const filteredPosts = computed(() => {
-      let filtered = [...blogPost.value]
-
-      // Filtro por búsqueda
-      if (searchQuery.value.trim()) {
-        const query = searchQuery.value.toLowerCase()
-        filtered = filtered.filter(post =>
-          post.title.rendered.toLowerCase().includes(query) ||
-          cleanHtml(post.excerpt.rendered).toLowerCase().includes(query)
-        )
-      }
-
-      // Filtro por categoría
-      if (selectedCategory.value) {
-        filtered = filtered.filter(post =>
-          post.categories?.includes(selectedCategory.value!)
-        )
-      }
-
-      return filtered
-    })
-
-    const paginatedPosts = computed(() => {
-      const start = (currentPage.value - 1) * itemsPerPage.value
-      const end = start + itemsPerPage.value
-      return filteredPosts.value.slice(start, end)
-    })
-
-    const totalPages = computed(() =>
-      Math.ceil(filteredPosts.value.length / itemsPerPage.value)
-    )
+    // Computed para compatibilidad con la plantilla existente
+    const blogPost = computed(() => blogEnhanced.posts.value)
 
     const visiblePages = computed(() => {
-      const total = totalPages.value
-      const current = currentPage.value
+      const total = blogEnhanced.totalPages.value
+      const current = blogEnhanced.currentPage.value
       const delta = 2
       const pages: (number | string)[] = []
 
@@ -447,176 +480,59 @@ export default defineComponent({
       return pages
     })
 
-    // Watchers
-    watch([searchQuery, selectedCategory, itemsPerPage], () => {
-      currentPage.value = 1 // Reset page when filters change
-    })
-
-    watch(itemsPerPage, () => {
-      // Cargar más posts si es necesario
-      if (itemsPerPage.value > blogPost.value.length) {
-        loadMorePosts()
-      }
-    })
-
-    // Methods
-    const loadInitialPosts = async () => {
-      try {
-        isLoading.value = true
-        const res = await retrievePost(itemsPerPage.value)
-        const posts = await res.json()
-
-        // Simular categorías para cada post
-        blogPost.value = posts.map((post: BlogPost, index: number) => ({
-          ...post,
-          categories: generateRandomCategories()
-        }))
-
-        // Cargar favoritos desde localStorage
-        const savedFavorites = localStorage.getItem('blog-favorites')
-        if (savedFavorites) {
-          favorites.value = JSON.parse(savedFavorites)
-        }
-      } catch (error) {
-        console.error('Error cargando posts:', error)
-      } finally {
-        isLoading.value = false
-      }
-    }
-
-    const loadMorePosts = async () => {
-      // Implementar carga de más posts si es necesario
-      // Por ahora usamos los posts existentes
-    }
-
-    const generateRandomCategories = () => {
-      const numCategories = Math.floor(Math.random() * 3) + 1
-      const availableCategories = categories.value.map((c: Category) => c.id)
-      const selected: number[] = []
-
-      for (let i = 0; i < numCategories; i++) {
-        const randomIndex = Math.floor(Math.random() * availableCategories.length)
-        const categoryId = availableCategories.splice(randomIndex, 1)[0]
-        if (categoryId) selected.push(categoryId)
-      }
-
-      return selected
-    }
-
-    const getCategoryName = (categoryId: number) => {
-      return categories.value.find((c: Category) => c.id === categoryId)?.name || 'Sin categoría'
-    }
-
+    // Method compatible con el template existente
     const debouncedSearch = () => {
-      clearTimeout(searchTimeout)
-      searchTimeout = setTimeout(() => {
-        // La búsqueda se ejecuta automáticamente por el computed
-      }, 300)
+      // Ya manejado internamente por useBlogEnhanced con debounce automático
     }
 
-    const clearSearch = () => {
-      searchQuery.value = ''
-    }
-
-    const toggleFavorite = (postId: number) => {
-      const index = favorites.value.indexOf(postId)
-      if (index > -1) {
-        favorites.value.splice(index, 1)
-      } else {
-        favorites.value.push(postId)
-      }
-
-      // Guardar en localStorage
-      localStorage.setItem('blog-favorites', JSON.stringify(favorites.value))
-    }
-
-    const shareArticle = async (post: BlogPost) => {
-      const shareData = {
-        title: cleanHtml(post.title.rendered),
-        text: cleanHtml(post.excerpt.rendered).substring(0, 100) + '...',
-        url: post.link
-      }
-
-      try {
-        if (navigator.share) {
-          await navigator.share(shareData)
-        } else {
-          // Fallback: copiar URL al clipboard
-          await navigator.clipboard.writeText(post.link)
-          // Aquí podrías mostrar una notificación de éxito
-          console.log('URL copiada al portapapeles')
-        }
-      } catch (error) {
-        console.error('Error compartiendo:', error)
-      }
-    }
-
-    const estimateReadingTime = (content: string) => {
-      const wordsPerMinute = 200
-      const cleanContent = cleanHtml(content)
-      const wordCount = cleanContent.split(/\s+/).length
-      return Math.max(1, Math.ceil(wordCount / wordsPerMinute))
-    }
-
-    // Helper functions
-    const truncate = (str: string, length: number) => {
-      return str.length > length
-        ? str.substring(0, length) + '...'
-        : str
-    }
-
-    const cleanHtml = (html: string) => {
-      return html.replace(/<[^>]*>/g, '')
-    }
-
-    const formatDate = (dateString: string) => {
-      const date = new Date(dateString)
-      return date.toLocaleDateString('es-ES', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      })
-    }
-
-    // Lifecycle
-    onMounted(() => {
-      loadInitialPosts()
+    // Lifecycle - cargar posts iniciales
+    onMounted(async () => {
+      await blogEnhanced.loadPosts()
     })
 
     return {
-      // Estado
-      blogPost,
-      isLoading,
-      favorites,
+      // Estados del composable avanzado
+      blogPost, // Computed para compatibilidad
+      posts: blogEnhanced.posts,
+      isLoading: blogEnhanced.isLoading,
+      error: blogEnhanced.error,
+      isRetrying: blogEnhanced.isRetrying,
 
-      // Filtros
-      searchQuery,
-      selectedCategory,
-      viewMode,
-      categories,
+      // Filtros y búsqueda
+      searchQuery: blogEnhanced.searchQuery,
+      selectedCategory: blogEnhanced.selectedCategory,
+      viewMode: blogEnhanced.viewMode,
+      categories: blogEnhanced.categories,
 
       // Paginación
-      currentPage,
-      itemsPerPage,
-      totalPages,
+      currentPage: blogEnhanced.currentPage,
+      itemsPerPage: blogEnhanced.itemsPerPage,
+      totalPages: blogEnhanced.totalPages,
       visiblePages,
 
       // Computed
-      filteredPosts,
-      paginatedPosts,
+      filteredPosts: blogEnhanced.filteredPosts,
+      paginatedPosts: blogEnhanced.paginatedPosts,
+
+      // Funcionalidades
+      favorites: blogEnhanced.favorites,
 
       // Methods
       debouncedSearch,
-      clearSearch,
-      toggleFavorite,
-      shareArticle,
-      getCategoryName,
-      estimateReadingTime,
+      clearSearch: blogEnhanced.clearSearch,
+      toggleFavorite: blogEnhanced.toggleFavorite,
+      shareArticle: blogEnhanced.shareArticle,
+      getCategoryName: blogEnhanced.getCategoryName,
+      estimateReadingTime: blogEnhanced.estimateReadingTime,
 
       // Helpers
-      truncate,
-      cleanHtml,
-      formatDate
+      truncate: blogEnhanced.truncate,
+      cleanHtml: blogEnhanced.cleanHtml,
+      formatDate: blogEnhanced.formatDate,
+
+      // Estados avanzados para manejo de errores
+      retryLoad: blogEnhanced.retryLoad,
+      lastUpdate: blogEnhanced.lastUpdate
     }
   }
 })

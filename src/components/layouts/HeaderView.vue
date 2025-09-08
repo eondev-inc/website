@@ -19,13 +19,13 @@
           >
             <div class="relative">
               <img
-                src="../../assets/img/logo_v3.png"
+                src="../../assets/img/logo.png"
                 alt="EonDev Logo"
                 class="h-8 w-auto"
               >
             </div>
             <div class="hidden sm:flex flex-col">
-              <span class="text-lg font-bold text-neutral-800 leading-tight">EonDev</span>
+              <span class="text-lg font-bold text-neutral-800 leading-tight">Y|R</span>
               <span class="text-xs text-neutral-500 -mt-1">Portfolio</span>
             </div>
           </router-link>
