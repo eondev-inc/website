@@ -1,73 +1,187 @@
 <template>
   <div>
-    <header class="top-0 w-full border-gray-400 shadow-md shadow-slate-300">
-      <nav class="hidden max-w-screen-xl px-6 sm:px-8 lg:px-16 mx-auto md:grid md:grid-flow-col py-3 sm:py-4 lg:flex justify-between">
-        <div class="col-start-1 col-end-2 flex items-center h-12 overflow-hidden">
-          <img src="../../assets/img/logo_v3.png">
-        </div>
-        <ul class="lg:flex col-start-4 col-end-8 text-black-500 items-center">
+    <!-- Header elegante y minimalista -->
+    <header
+      :class="[
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+        isScrolled
+          ? 'bg-white/95 backdrop-blur-xl border-b border-neutral-100 shadow-sm'
+          : 'bg-white/50 backdrop-blur-sm'
+      ]"
+    >
+      <nav class="max-w-6xl mx-auto px-6 lg:px-8">
+        <div class="flex items-center justify-between h-18">
+          <!-- Logo elegante y simple -->
           <router-link
-            v-for="item in navItems"
-            :key="item.name"
-            :to="item.to"
-            :class="[
-              isActiveMenu === item.name
-                ? 'text-slateMedium-100 border-b-2 border-slateMedium-100'
-                : '',
-            ]"
-            class="px-4 py-2 mx-2 cursor-pointer inline-block
-            relative hover:py-1 hover:text-slateMedium-100
-            hover:border-b-2 hover:border-slateMedium-100"
-            @click="setActiveMenu(item.name)"
+            to="/"
+            class="flex items-center space-x-3 group transition-all duration-300 hover:scale-105"
+            @click="setActiveMenu('home')"
           >
-            {{ $t(item.i18nKey) }}
-          </router-link>
-        </ul>
-        <div class="font-medium justify-end items-center my-auto">
-          <a
-            href="https://github.com/eondev-inc"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div
-              class="font-medium tracking-wide py-2 px-5 sm:px-8 border
-              border-lipsing-500 text-slateMedium-500 bg-white-500
-              outline-none rounded-l-full rounded-r-full capitalize
-              hover:bg-slateMedium-500 hover:text-white md:transition-all
-              hover:shadow-2xl"
-            >
-              <font-awesome-icon icon="fa-brands fa-github" /> Github Repo
+            <div class="relative">
+              <img
+                src="../../assets/img/logo_v1.png"
+                alt="EonDev Logo"
+                class="h-18 w-auto"
+              >
             </div>
-          </a>
+            <div class="hidden sm:flex flex-col">
+              <span class="text-lg font-bold text-neutral-800 leading-tight">Y|R</span>
+              <span class="text-xs text-neutral-500 -mt-1">Portfolio</span>
+            </div>
+          </router-link>
+
+          <!-- Navegación central elegante -->
+          <div class="hidden lg:flex items-center">
+            <div class="flex items-center bg-neutral-50/80 rounded-full p-1 border border-neutral-200/50">
+              <router-link
+                v-for="item in navItems"
+                :key="item.name"
+                :to="item.to"
+                :class="[
+                  'relative px-6 py-2 text-sm font-medium rounded-full transition-all duration-300',
+                  isActiveMenu === item.name || $route.name === item.name
+                    ? 'bg-white text-primary-700 shadow-soft'
+                    : 'text-neutral-600 hover:text-neutral-800 hover:bg-white/50'
+                ]"
+                @click="setActiveMenu(item.name)"
+              >
+                {{ $t(item.i18nKey) }}
+              </router-link>
+            </div>
+          </div>
+
+          <!-- Área derecha con CTA y controles -->
+          <div class="flex items-center space-x-3">
+            <!-- GitHub link elegante -->
+            <a
+              href="https://github.com/eondev-inc"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hidden sm:flex items-center space-x-2 px-4 py-2 bg-neutral-900 text-white text-sm font-medium rounded-full hover:bg-primary-700 transition-all duration-300 hover:shadow-soft hover:scale-105"
+            >
+              <font-awesome-icon
+                icon="fa-brands fa-github"
+                class="w-4 h-4"
+              />
+              <span class="hidden md:inline">GitHub</span>
+            </a>
+
+            <!-- Language Selector minimalista -->
+            <div class="relative">
+              <language-selector
+                @changeLanguage="changeLanguage"
+              />
+            </div>
+
+            <!-- Mobile menu button elegante -->
+            <button
+              @click="toggleMobileNav"
+              class="lg:hidden relative w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center text-neutral-700 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200"
+            >
+              <div class="w-4 h-4 flex flex-col justify-center items-center space-y-1">
+                <span
+                  :class="[
+                    'block h-0.5 w-4 bg-current transition-all duration-300 rounded-full',
+                    isMobileNavOpen ? 'rotate-45 translate-y-1.5' : ''
+                  ]"
+                />
+                <span
+                  :class="[
+                    'block h-0.5 w-4 bg-current transition-all duration-300 rounded-full',
+                    isMobileNavOpen ? 'opacity-0' : 'opacity-100'
+                  ]"
+                />
+                <span
+                  :class="[
+                    'block h-0.5 w-4 bg-current transition-all duration-300 rounded-full',
+                    isMobileNavOpen ? '-rotate-45 -translate-y-1.5' : ''
+                  ]"
+                />
+              </div>
+            </button>
+          </div>
         </div>
-        <language-selector @changeLanguage="changeLanguage" />
       </nav>
-      <mobile-nav
-        :nav-items="navItems"
-        :is-active-menu="isActiveMenu"
-        @setActiveMenu="setActiveMenu"
-      />
+
+      <!-- Mobile Navigation elegante -->
+      <div
+        :class="[
+          'lg:hidden transition-all duration-300 overflow-hidden',
+          isMobileNavOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+        ]"
+      >
+        <div class="bg-white/98 backdrop-blur-xl border-t border-neutral-100">
+          <div class="max-w-6xl mx-auto px-6 py-8">
+            <div class="space-y-2">
+              <router-link
+                v-for="item in navItems"
+                :key="item.name"
+                :to="item.to"
+                :class="[
+                  'block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200',
+                  isActiveMenu === item.name || $route.name === item.name
+                    ? 'text-primary-700 bg-primary-50'
+                    : 'text-neutral-700 hover:text-neutral-900 hover:bg-neutral-50'
+                ]"
+                @click="setActiveMenu(item.name); isMobileNavOpen = false"
+              >
+                {{ $t(item.i18nKey) }}
+              </router-link>
+
+              <!-- Separador sutil -->
+              <div class="my-4 h-px bg-neutral-200" />
+
+              <!-- GitHub link para mobile -->
+              <a
+                href="https://github.com/eondev-inc"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center space-x-3 px-4 py-3 bg-neutral-900 text-white rounded-lg hover:bg-primary-700 transition-all duration-300"
+              >
+                <font-awesome-icon icon="fa-brands fa-github" class="w-5 h-5" />
+                <span>Ver en GitHub</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
+
+    <!-- Spacer ajustado -->
+    <div class="h-18" />
   </div>
 </template>
+
 <script lang="ts">
-import { defineComponent, ref, Ref, onMounted } from 'vue'
+import { defineComponent, ref, Ref, onMounted, onUnmounted } from 'vue'
 import { initFlowbite } from 'flowbite'
 import { useI18n } from 'vue-i18n'
 import LanguageSelector from './LanguageSelector.vue'
-import MobileNav from './MobileNav.vue'
 
 export default defineComponent({
   name: 'HeaderView',
   components: {
-    LanguageSelector,
-    MobileNav
+    LanguageSelector
   },
   setup() {
     const isActiveMenu: Ref<string> = ref('')
+    const isScrolled: Ref<boolean> = ref(false)
+    const isMobileNavOpen: Ref<boolean> = ref(false)
     const { locale } = useI18n()
+
+    // Scroll effect para glassmorphism
+    const handleScroll = () => {
+      isScrolled.value = window.scrollY > 20
+    }
+
     onMounted(() => {
       initFlowbite()
+      window.addEventListener('scroll', handleScroll)
+      handleScroll() // Check initial scroll position
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('scroll', handleScroll)
     })
 
     const navItems = [
@@ -80,11 +194,56 @@ export default defineComponent({
     return {
       navItems,
       isActiveMenu,
-      setActiveMenu: (name: string) => { isActiveMenu.value = name },
-      changeLanguage: (lang: string) => { locale.value = lang }
+      isScrolled,
+      isMobileNavOpen,
+      setActiveMenu: (name: string) => {
+        isActiveMenu.value = name
+      },
+      changeLanguage: (lang: string) => {
+        locale.value = lang
+      },
+      toggleMobileNav: () => {
+        isMobileNavOpen.value = !isMobileNavOpen.value
+      }
     }
   }
 })
 </script>
-<style lang="">
+
+<style scoped>
+/* Estilos elegantes y minimalistas */
+.h-18 {
+  height: 4.5rem;
+}
+
+/* Mejorar backdrop blur */
+.backdrop-blur-sm {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.backdrop-blur-xl {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* Transiciones suaves */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Shadow effects */
+.shadow-soft {
+  box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
+}
+
+/* Hover effects para mobile nav */
+.max-h-0 {
+  max-height: 0;
+}
+
+.max-h-80 {
+  max-height: 20rem;
+}
 </style>

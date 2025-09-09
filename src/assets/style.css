@@ -1,3 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Variables CSS para el sistema de diseño */
+:root {
+  /* Paleta de colores principales */
+  --color-primary: theme('colors.primary.500');
+  --color-secondary: theme('colors.secondary.500');
+  --color-accent: theme('colors.accent.500');
+  
+  /* Espaciado */
+  --spacing-xs: theme('spacing.2');
+  --spacing-sm: theme('spacing.4');
+  --spacing-md: theme('spacing.6');
+  --spacing-lg: theme('spacing.8');
+  --spacing-xl: theme('spacing.12');
+  
+  /* Tipografía */
+  --font-primary: theme('fontFamily.sans');
+  --font-display: theme('fontFamily.display');
+  --font-mono: theme('fontFamily.mono');
+  
+  /* Bordes */
+  --border-radius-sm: theme('borderRadius.md');
+  --border-radius-md: theme('borderRadius.lg');
+  --border-radius-lg: theme('borderRadius.xl');
+  
+  /* Sombras */
+  --shadow-soft: theme('boxShadow.soft');
+  --shadow-medium: theme('boxShadow.medium');
+  --shadow-large: theme('boxShadow.large');
+  
+  /* Transiciones */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* Estilos base mejorados */
+@layer base {
+  * {
+    @apply border-neutral-200;
+  }
+  
+  html {
+    @apply scroll-smooth antialiased;
+  }
+  
+  body {
+    @apply bg-neutral-50 text-neutral-900 font-sans leading-relaxed;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Mejora de la legibilidad */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold tracking-tight;
+    text-rendering: optimizeLegibility;
+  }
+  
+  h1 {
+    @apply text-4xl lg:text-5xl leading-tight;
+  }
+  
+  h2 {
+    @apply text-3xl lg:text-4xl leading-tight;
+  }
+  
+  h3 {
+    @apply text-2xl lg:text-3xl leading-snug;
+  }
+  
+  h4 {
+    @apply text-xl lg:text-2xl leading-snug;
+  }
+  
+  h5 {
+    @apply text-lg lg:text-xl leading-snug;
+  }
+  
+  h6 {
+    @apply text-base lg:text-lg leading-normal;
+  }
+  
+  p {
+    @apply text-neutral-700 leading-relaxed;
+  }
+  
+  a {
+    @apply text-primary-600 hover:text-primary-700 transition-colors duration-200;
+  }
+  
+  /* Formularios mejorados */
+  input, textarea, select {
+    @apply border-neutral-300 rounded-lg shadow-sm focus:border-primary-500 focus:ring-primary-500 focus:ring-1 transition-colors duration-200;
+  }
+  
+  /* Botones base */
+  button {
+    @apply font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+}
+
+/* Componentes personalizados */
+@layer components {
+  /* Glassmorphism effect */
+  .glass {
+    @apply backdrop-blur-md bg-white/10 border border-white/20 shadow-large;
+  }
+  
+  .glass-dark {
+    @apply backdrop-blur-md bg-neutral-900/10 border border-neutral-900/20 shadow-large;
+  }
+  
+  /* Gradientes de texto inspirados en la imagen Coding.png */
+  .text-gradient {
+    @apply bg-gradient-to-r from-secondary-500 to-primary-400 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-hero {
+    @apply bg-gradient-to-br from-secondary-500 to-primary-400 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-subtle {
+    @apply bg-gradient-to-r from-secondary-500 to-primary-400 bg-clip-text text-transparent;
+  }
+  
+  /* Botones modernos con colores refinados */
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-600 to-primary-700 text-white hover:from-primary-700 hover:to-primary-800 focus:ring-primary-500 px-6 py-3 rounded-xl font-semibold shadow-medium hover:shadow-large transform hover:-translate-y-0.5 transition-all duration-300;
+  }
+  
+  .btn-secondary {
+    @apply bg-gradient-to-r from-secondary-500 to-secondary-600 text-white hover:from-secondary-600 hover:to-secondary-700 focus:ring-secondary-500 px-6 py-3 rounded-xl font-semibold shadow-medium hover:shadow-large transform hover:-translate-y-0.5 transition-all duration-300;
+  }
+  
+  .btn-accent {
+    @apply bg-gradient-to-r from-accent-500 to-accent-600 text-white hover:from-accent-600 hover:to-accent-700 focus:ring-accent-500 px-6 py-3 rounded-xl font-semibold shadow-medium hover:shadow-large transform hover:-translate-y-0.5 transition-all duration-300;
+  }
+  
+  .btn-outline {
+    @apply bg-transparent text-primary-700 border border-primary-300 hover:bg-primary-50 hover:border-primary-400 focus:ring-primary-500 px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent text-neutral-600 hover:bg-neutral-100 hover:text-neutral-800 focus:ring-neutral-500 px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+  }
+  
+  /* Cards modernas */
+  .card {
+    @apply bg-white rounded-2xl shadow-soft border border-neutral-200/50 overflow-hidden hover:shadow-medium transition-all duration-300;
+  }
+  
+  .card-hover {
+    @apply transform hover:-translate-y-1 hover:shadow-large transition-all duration-300;
+  }
+  
+  .card-glass {
+    @apply glass rounded-2xl p-6 hover:bg-white/20 transition-all duration-300;
+  }
+  
+  /* Secciones */
+  .section {
+    @apply py-16 lg:py-24;
+  }
+  
+  .section-hero {
+    @apply min-h-screen flex items-center justify-center relative overflow-hidden;
+  }
+  
+  /* Contenedores */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Estados de loading */
+  .skeleton {
+    @apply animate-pulse bg-neutral-200 rounded;
+  }
+  
+  .shimmer {
+    @apply relative overflow-hidden;
+  }
+  
+  .shimmer::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/60 to-transparent;
+  }
+  
+  /* Efectos de hover modernos */
+  .hover-lift {
+    @apply transform transition-all duration-300 hover:-translate-y-2 hover:shadow-large;
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-glow;
+  }
+  
+  /* Líneas decorativas */
+  .divider {
+    @apply w-full h-px bg-gradient-to-r from-transparent via-neutral-300 to-transparent;
+  }
+  
+  .divider-glow {
+    @apply w-full h-px bg-gradient-to-r from-transparent via-secondary-400 to-transparent opacity-60;
+  }
+}
+
+/* Utilidades personalizadas */
+@layer utilities {
+  /* Animaciones de entrada */
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+  
+  .animate-slide-down {
+    animation: slideDown 0.5s ease-out forwards;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+  
+  /* Estados iniciales para animaciones */
+  .opacity-0-initial {
+    opacity: 0;
+  }
+  
+  .translate-y-4-initial {
+    transform: translateY(1rem);
+  }
+  
+  .scale-95-initial {
+    transform: scale(0.95);
+  }
+  
+  /* Gradientes de fondo usando la combinación preferida */
+  .bg-gradient-primary {
+    @apply bg-gradient-to-br from-secondary-500/80 to-primary-400/90;
+  }
+  
+  .bg-gradient-secondary {
+    @apply bg-gradient-to-br from-secondary-500/80 to-primary-400/90;
+  }
+  
+  .bg-gradient-accent {
+    @apply bg-gradient-to-br from-secondary-500/80 to-primary-400/90;
+  }
+  
+  .bg-gradient-hero {
+    @apply bg-gradient-to-br from-neutral-50 via-secondary-50/20 to-primary-50/20;
+  }
+  
+  .bg-gradient-mesh {
+    background: linear-gradient(135deg, 
+      rgba(217, 70, 239, 0.05) 0%,
+      rgba(45, 212, 191, 0.08) 25%,
+      rgba(217, 70, 239, 0.05) 50%,
+      rgba(45, 212, 191, 0.08) 75%,
+      rgba(217, 70, 239, 0.05) 100%
+    );
+  }
+  
+  .bg-gradient-subtle {
+    @apply bg-gradient-to-br from-neutral-50 to-neutral-100/50;
+  }
+  
+  .bg-gradient-card {
+    @apply bg-gradient-to-br from-white via-secondary-50/10 to-primary-50/10;
+  }
+  
+  /* Scrollbar personalizada */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.neutral.400') theme('colors.neutral.100');
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: theme('colors.neutral.100');
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: theme('colors.neutral.400');
+    border-radius: 20px;
+  }
+}
