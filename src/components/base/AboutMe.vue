@@ -43,11 +43,11 @@
           <!-- Estadísticas destacadas -->
           <div class="grid grid-cols-3 gap-6 mb-8 animate-slide-up" style="animation-delay: 0.6s;">
             <div class="text-center">
-              <div class="text-3xl font-display font-bold text-primary-600 mb-1">7+</div>
+              <div class="text-3xl font-display font-bold text-primary-600 mb-1">9+</div>
               <div class="text-sm text-neutral-500 font-medium">{{ $t('home.aboutMe.yearsExp') }}</div>
             </div>
             <div class="text-center">
-              <div class="text-3xl font-display font-bold text-secondary-600 mb-1">50+</div>
+              <div class="text-3xl font-display font-bold text-secondary-600 mb-1">10+</div>
               <div class="text-sm text-neutral-500 font-medium">{{ $t('home.aboutMe.projects') }}</div>
             </div>
             <div class="text-center">
