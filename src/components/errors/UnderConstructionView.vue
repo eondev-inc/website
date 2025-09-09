@@ -5,7 +5,10 @@
         Estamos trabajando para Usted
       </div>
       <div class="w-80 h-80 items-center mx-auto mt-10">
-        <img src="../../assets/img/construction.png" alt="under-construction" />
+        <img
+          src="../../assets/img/construction.png"
+          alt="under-construction"
+        >
       </div>
     </div>
   </div>
@@ -14,7 +17,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'under-construction'
+  name: 'UnderConstruction'
 })
 </script>
 <style lang="">

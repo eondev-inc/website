@@ -4,29 +4,74 @@ import router from './router'
 import { Form, Field, ErrorMessage, configure } from 'vee-validate'
 import './assets/style.css'
 import 'animate.css'
-/* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
-/* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import {
-  faGithub,
-  faLinkedinIn
-} from '@fortawesome/free-brands-svg-icons'
+import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import {
   faDatabase,
   faCode,
   faFileCode,
-  faBlog
+  faBlog,
+  faSearch,
+  faTimes,
+  faThLarge,
+  faList,
+  faExclamationTriangle,
+  faSpinner,
+  faRedo,
+  faNewspaper,
+  faClock,
+  faCalendarAlt,
+  faBolt,
+  faShareAlt,
+  faChevronLeft,
+  faChevronRight,
+  faHeart,
+  faHome,
+  faSyncAlt,
+  faLightbulb,
+  faUser,
+  faEnvelope,
+  faCommentAlt,
+  faPaperPlane,
+  faChevronDown
 } from '@fortawesome/free-solid-svg-icons'
 import { createI18n } from 'vue-i18n'
 import messages from './locales/messages'
 
-library.add(faGithub)
-library.add(faLinkedinIn)
-library.add(faDatabase)
-library.add(faCode)
-library.add(faFileCode)
-library.add(faBlog)
+const fontAwesomeIcons = [
+  faGithub,
+  faLinkedinIn,
+  faDatabase,
+  faCode,
+  faFileCode,
+  faBlog,
+  faSearch,
+  faTimes,
+  faThLarge,
+  faList,
+  faExclamationTriangle,
+  faSpinner,
+  faRedo,
+  faNewspaper,
+  faClock,
+  faCalendarAlt,
+  faBolt,
+  faShareAlt,
+  faChevronLeft,
+  faChevronRight,
+  faHeart,
+  faHome,
+  faSyncAlt,
+  faLightbulb,
+  faUser,
+  faEnvelope,
+  faCommentAlt,
+  faPaperPlane,
+  faChevronDown
+]
+
+library.add(...fontAwesomeIcons)
 
 configure({
   generateMessage: ({ field, rule }) => {
@@ -39,8 +84,8 @@ configure({
 
 const i18n = createI18n({
   legacy: false,
-  locale: 'en',
-  fallbackLocale: 'es',
+  locale: 'es',
+  fallbackLocale: 'en',
   messages
 })
 
