@@ -153,7 +153,7 @@ const messages = {
         greeting: "Hi, I'm",
         name: 'Yerffrey Romero',
         title: 'Full Stack Developer',
-        description: 'Computer Engineer with + years of experience creating robust web applications. Specialized in modern technologies and scalable solutions.',
+        description: 'Computer Engineer with 9+ years of experience creating robust web applications. Specialized in modern technologies and scalable solutions.',
         yearsExp: 'Years Experience',
         projects: 'Projects Completed',
         technologies: 'Technologies',
