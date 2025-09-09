@@ -21,7 +21,7 @@
       </div>
 
       <div class="bg-white/80 backdrop-blur-lg rounded-3xl border border-white/40 shadow-2xl shadow-primary-500/10 p-8 md:p-12 animate-slide-up">
-        <Form class="space-y-8"  @submit="onSubmit">
+        <Form class="space-y-8" @submit="onSubmit">
           <div class="grid md:grid-cols-2 gap-6">
             <div class="space-y-6">
               <!-- Campo Nombre -->
@@ -164,24 +164,24 @@ export default defineComponent({
         name: 'name',
         rules: yup
           .string()
-          .min(3, 'El nombre debe tener al menos 3 caracteres')
-          .required('El nombre es obligatorio'),
+          .min(3, t('callToAction.validation.nameMinLength'))
+          .required(t('callToAction.validation.nameRequired')),
         type: 'text'
       },
       {
         name: 'email',
         rules: yup
           .string()
-          .email('Debe ser un email válido')
-          .required('El email es obligatorio'),
+          .email(t('callToAction.validation.emailInvalid'))
+          .required(t('callToAction.validation.emailRequired')),
         type: 'email'
       },
       {
         name: 'message',
         rules: yup
           .string()
-          .min(10, 'El mensaje debe tener al menos 10 caracteres')
-          .required('El mensaje es obligatorio'),
+          .min(10, t('callToAction.validation.messageMinLength'))
+          .required(t('callToAction.validation.messageRequired')),
         type: 'textarea'
       }
     ]
@@ -197,19 +197,19 @@ export default defineComponent({
 
       if (scope === 'success') {
         icon = 'success'
-        title = '¡Cliente de correo abierto!'
-        defaultText = 'Tu mensaje está listo para enviar'
+        title = t('callToAction.notifications.emailOpenedTitle')
+        defaultText = t('callToAction.notifications.emailOpenedText')
         background = '#f0fdf4'
         color = '#065f46'
       } else if (scope === 'error') {
         icon = 'error'
-        title = 'Error'
-        defaultText = 'Hubo un problema'
+        title = t('callToAction.notifications.errorTitle')
+        defaultText = t('callToAction.notifications.errorText')
         background = '#fef2f2'
         color = '#991b1b'
       } else {
-        title = 'Abriendo cliente de correo...'
-        defaultText = 'Se abrirá tu aplicación de correo predeterminada'
+        title = t('callToAction.notifications.openingEmailTitle')
+        defaultText = t('callToAction.notifications.openingEmailText')
       }
 
       const swalOptions = {
@@ -237,30 +237,34 @@ export default defineComponent({
         const subject = encodeURIComponent(`${t('callToAction.emailSubject')} - ${values.name}`)
 
         // Construir el cuerpo del correo
+        const emailContactInfo = t('callToAction.emailContactInfo')
+        const emailMessageLabel = t('callToAction.emailMessage')
+        const emailFooter = t('callToAction.emailFooter')
+
         const body = encodeURIComponent(`
-Hola,
+          Hola,
 
-Mi nombre es ${values.name} y me gustaría contactarte.
+          Mi nombre es ${values.name} y me gustaría contactarte.
 
-${t('callToAction.emailContactInfo')}:
-- Nombre: ${values.name}
-- Email: ${values.email}
+          ${emailContactInfo}:
+          - Nombre: ${values.name}
+          - Email: ${values.email}
 
-${t('callToAction.emailMessage')}:
-${values.message}
+          ${emailMessageLabel}:
+          ${values.message}
 
----
-${t('callToAction.emailFooter')}
+          ---
+          ${emailFooter}
         `.trim())
 
         // Construir la URL de mailto
         const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${body}&cc=${values.email}`
 
-        // Mostrar mensaje informativo
-        dispatchSwal('info', 'Abriendo tu cliente de correo...')
-
         // Abrir el cliente de correo
         window.location.href = mailtoUrl
+
+        // Mostrar mensaje informativo
+        dispatchSwal('info')
 
         // Después de un breve delay, mostrar mensaje de éxito y limpiar formulario
         setTimeout(() => {
@@ -270,7 +274,7 @@ ${t('callToAction.emailFooter')}
         }, 1500)
       } catch (error) {
         console.error('Error abriendo cliente de correo:', error)
-        dispatchSwal('error', 'No se pudo abrir el cliente de correo. Por favor, contacta directamente a hola@eondev.site')
+        dispatchSwal('error', t('callToAction.notifications.emailErrorText'))
       } finally {
         setTimeout(() => {
           loading.value = false

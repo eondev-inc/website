@@ -21,6 +21,7 @@ const messages = {
     },
     home: {
       aboutMe: {
+        // Textos antiguos mantenidos para compatibilidad
         meFirts: 'Experiencia laboral',
         meTitle: 'Hola! Soy yerffrey Romero',
         meSubs: 'Desarrollador Fullstack',
@@ -28,6 +29,7 @@ const messages = {
         meButton: 'Saber m\u00e1s',
         meAltImage: 'coding-me',
         meSeeMore: 'Ver m\u00e1s',
+        // Nuevos textos para el hero moderno
         availability: 'Disponible para proyectos',
         greeting: 'Hola, soy',
         name: 'Yerffrey Romero',
@@ -92,7 +94,7 @@ const messages = {
       name: 'Nombre',
       namePlaceholder: 'Tu nombre completo',
       email: 'Email',
-      emailPlaceholder: 'Ingresa tu email',
+      emailPlaceholder: 'tu@email.com',
       message: 'Mensaje',
       messagePlaceholder: 'Cu\u00e9ntame sobre tu proyecto o idea...',
       send: 'Enviar Mensaje',
@@ -100,24 +102,7 @@ const messages = {
       emailSubject: 'Contacto desde Portfolio',
       emailContactInfo: 'Informaci\u00f3n de contacto',
       emailMessage: 'Mensaje',
-      emailFooter: 'Este mensaje fue enviado desde tu portfolio web.',
-      validation: {
-        nameMinLength: 'El nombre debe tener al menos 3 caracteres',
-        nameRequired: 'El nombre es obligatorio',
-        emailInvalid: 'Debe ser un email v\u00e1lido',
-        emailRequired: 'El email es obligatorio',
-        messageMinLength: 'El mensaje debe tener al menos 10 caracteres',
-        messageRequired: 'El mensaje es obligatorio'
-      },
-      notifications: {
-        emailOpenedTitle: '\u00a1Cliente de correo abierto!',
-        emailOpenedText: 'Tu mensaje est\u00e1 listo para enviar',
-        openingEmailTitle: 'Abriendo cliente de correo...',
-        openingEmailText: 'Se abrir\u00e1 tu aplicaci\u00f3n de correo predeterminada',
-        errorTitle: 'Error',
-        errorText: 'Hubo un problema',
-        emailErrorText: 'No se pudo abrir el cliente de correo. Por favor, contacta directamente a hola@eondev.site'
-      }
+      emailFooter: 'Este mensaje fue enviado desde tu portfolio web.'
     }
   },
   en: {
@@ -142,18 +127,20 @@ const messages = {
     },
     home: {
       aboutMe: {
+        // Legacy keys for compatibility
         meFirts: 'Professional experience',
         meTitle: 'Hi! I am Yerffrey Romero',
         meSubs: 'Fullstack Developer',
-        meDescription: 'Computer Engineer, with 9+ years of experience, working in companies such as Starken, Izit, Tu Clase, tu país and I-Med. Focused on the development of Web applications with NodeJS technology stack.',
+        meDescription: 'Computer Engineer, with 7+ years of experience, working in companies such as Starken, Izit, Tu Clase, tu pa\u00eds and I-Med. Focused on the development of Web applications with NodeJS technology stack.',
         meButton: 'Learn more',
         meAltImage: 'coding-me',
         meSeeMore: 'See more',
+        // Modern hero keys
         availability: 'Available for hire',
         greeting: "Hi, I'm",
         name: 'Yerffrey Romero',
         title: 'Full Stack Developer',
-        description: 'Computer Engineer with + years of experience creating robust web applications. Specialized in modern technologies and scalable solutions.',
+        description: 'Computer Engineer with 7+ years of experience creating robust web applications. Specialized in modern technologies and scalable solutions.',
         yearsExp: 'Years Experience',
         projects: 'Projects Completed',
         technologies: 'Technologies',
@@ -213,7 +200,7 @@ const messages = {
       name: 'Name',
       namePlaceholder: 'Your full name',
       email: 'Email',
-      emailPlaceholder: 'Your email',
+      emailPlaceholder: 'your@email.com',
       message: 'Message',
       messagePlaceholder: 'Tell me about your project or idea...',
       send: 'Send Message',
@@ -221,24 +208,7 @@ const messages = {
       emailSubject: 'Contact from Portfolio',
       emailContactInfo: 'Contact information',
       emailMessage: 'Message',
-      emailFooter: 'This message was sent from your web portfolio.',
-      validation: {
-        nameMinLength: 'Name must be at least 3 characters',
-        nameRequired: 'Name is required',
-        emailInvalid: 'Must be a valid email',
-        emailRequired: 'Email is required',
-        messageMinLength: 'Message must be at least 10 characters',
-        messageRequired: 'Message is required'
-      },
-      notifications: {
-        emailOpenedTitle: 'Email client opened!',
-        emailOpenedText: 'Your message is ready to send',
-        openingEmailTitle: 'Opening email client...',
-        openingEmailText: 'Your default email application will open',
-        errorTitle: 'Error',
-        errorText: 'There was a problem',
-        emailErrorText: 'Could not open email client. Please contact directly at hola@eondev.site'
-      }
+      emailFooter: 'This message was sent from your web portfolio.'
     }
   }
 }
