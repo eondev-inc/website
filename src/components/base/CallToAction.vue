@@ -260,12 +260,11 @@ export default defineComponent({
         // Construir la URL de mailto
         const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${body}&cc=${values.email}`
 
-        // Abrir el cliente de correo
-        window.location.href = mailtoUrl
-
         // Mostrar mensaje informativo
         dispatchSwal('info')
 
+        // Abrir el cliente de correo
+        window.location.href = mailtoUrl
         // Después de un breve delay, mostrar mensaje de éxito y limpiar formulario
         setTimeout(() => {
           dispatchSwal('success')
