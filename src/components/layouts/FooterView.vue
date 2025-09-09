@@ -16,9 +16,9 @@
           <!-- Logo y marca -->
           <div class="flex items-center space-x-3">
             <img
-              src="../../assets/img/footer.jpeg"
+              src="../../assets/img/logo_v1.png"
               alt="EonDev Logo"
-              class="h-10 w-auto"
+              class="h-11 w-auto bg-white p-2 rounded-lg"
             >
             <div class="flex flex-col">
               <span class="text-xl font-bold text-white">Y|R</span>

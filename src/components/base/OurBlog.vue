@@ -418,7 +418,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, computed } from 'vue'
-import { useBlogEnhanced } from '@/composables/use-blog-enhanced.composable'
+import useBlogEnhanced from '@/composables/use-blog-enhanced.composable'
 
 interface Props {
   articlesNumber: number
@@ -433,8 +433,11 @@ export default defineComponent({
     }
   },
   setup(props: Props) {
-    // Usar el composable avanzado con las props iniciales
-    const blogEnhanced = useBlogEnhanced(props.articlesNumber)
+    // Usar el composable avanzado
+    const blogEnhanced = useBlogEnhanced()
+
+    // Configurar el número de artículos basado en las props
+    blogEnhanced.itemsPerPage.value = props.articlesNumber
 
     // Computed para compatibilidad con la plantilla existente
     const blogPost = computed(() => blogEnhanced.posts.value)

@@ -3,6 +3,7 @@
 - Provide explanations and teach about changes during coding.
 - Always ask for confirmation before proceeding with edits.
 - Respond always in Spanish.
+- Follow the strict rules of .eslintrc.json and .prettierrc.json.
 
 ## Large File & Complex Change Protocol
 

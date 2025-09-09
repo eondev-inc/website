@@ -19,9 +19,9 @@
           >
             <div class="relative">
               <img
-                src="../../assets/img/logo.png"
+                src="../../assets/img/logo_v1.png"
                 alt="EonDev Logo"
-                class="h-8 w-auto"
+                class="h-18 w-auto"
               >
             </div>
             <div class="hidden sm:flex flex-col">

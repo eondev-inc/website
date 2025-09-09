@@ -3,127 +3,336 @@
  * Composable avanzado para el manejo del blog con optimizaciones de rendimiento,
  * lazy loading, cache inteligente y manejo de errores robusto.
  *
- * @author Yerffrey Romero.
+ * @author Yerffrey Romero
  * @version 2.0
  * @since 2025-09-05
  */
 
-import { ref, computed, watch, onMounted, onUnmounted, readonly, type Ref } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import useBlogs from '@/composables/use-blogs.composable'
 
-interface BlogPost {
-  id: number
-  title: { rendered: string }
-  excerpt: { rendered: string }
-  content?: { rendered: string }
-  link: string
-  date: string
-  jetpack_featured_media_url?: string
-  categories?: number[]
-  _cached?: boolean
-  _loadTime?: number
-}
+// === IMPORTAR INTERFACES ===
+import type {
+  BlogPost,
+  Category,
+  BlogError,
+  TechCrunchCategory,
+  PostCacheEntry,
+  CategoryCacheEntry,
+  ShareData,
+  CategoryPattern,
+  HtmlEntities,
+  CategoryCounts,
+  ErrorWithStatus,
+  ViewMode,
+  CategoryColorMap,
+  UseBlogEnhanced
+} from '@/interfaces/blog.interface'
 
-interface Category {
-  id: number
-  name: string
-  count: number
-  color?: string
-}
+// === CONSTANTES Y CONFIGURACIÓN ===
 
-interface BlogError {
-  type: 'network' | 'parse' | 'timeout' | 'unknown'
-  message: string
-  code?: number
-  timestamp: number
-}
+const CACHE_DURATION = 30 * 60 * 1000 // 30 minutos
+const ITEMS_PER_PAGE = 6
+const READING_WPM = 200 // Palabras por minuto promedio
 
-interface UseBlogEnhanced {
-  // Estado principal
-  posts: Readonly<Ref<BlogPost[]>>
-  isLoading: Readonly<Ref<boolean>>
-  error: Readonly<Ref<BlogError | null>>
+// === UTILIDADES DE CACHE ===
 
-  // Filtros y búsqueda
-  searchQuery: Ref<string>
-  selectedCategory: Ref<number | null>
-  viewMode: Ref<'grid' | 'list'>
+/**
+ * Obtiene datos del cache si están vigentes
+ * @param key Clave del cache
+ * @returns Datos del cache o null si no son válidos
+ */
+const getCacheData = <T>(key: string): T | null => {
+  try {
+    const cached = localStorage.getItem(key)
+    if (!cached) return null
 
-  // Paginación
-  currentPage: Ref<number>
-  itemsPerPage: Ref<number>
-  totalPages: Readonly<Ref<number>>
+    const { data, timestamp } = JSON.parse(cached)
+    if (Date.now() - timestamp > CACHE_DURATION) {
+      localStorage.removeItem(key)
+      return null
+    }
 
-  // Computed
-  filteredPosts: Readonly<Ref<BlogPost[]>>
-  paginatedPosts: Readonly<Ref<BlogPost[]>>
-  categories: Readonly<Ref<Category[]>>
-
-  // Funcionalidades
-  favorites: Ref<number[]>
-
-  // Métodos
-  loadPosts: () => Promise<void>
-  retryLoad: () => Promise<void>
-  toggleFavorite: (postId: number) => void
-  shareArticle: (post: BlogPost) => Promise<void>
-  clearSearch: () => void
-  getCategoryName: (categoryId: number) => string
-  estimateReadingTime: (content: string) => number
-
-  // Utilidades
-  formatDate: (dateString: string) => string
-  cleanHtml: (html: string) => string
-  truncate: (str: string, length: number) => string
-
-  // Estados avanzados
-  isRetrying: Readonly<Ref<boolean>>
-  lastUpdate: Readonly<Ref<Date | null>>
-  cacheExpiry: Readonly<Ref<number>>
+    return data
+  } catch {
+    return null
+  }
 }
 
 /**
- * Hook personalizado para manejo avanzado del blog
- * @param initialItemsPerPage - Número inicial de items por página
- * @returns Interface completa del blog con funcionalidades avanzadas
+ * Guarda datos en el cache
+ * @param key Clave del cache
+ * @param data Datos a guardar
  */
-export function useBlogEnhanced(initialItemsPerPage = 12): UseBlogEnhanced {
-  const { retrievePost } = useBlogs()
+const setCacheData = <T>(key: string, data: T): void => {
+  try {
+    localStorage.setItem(key, JSON.stringify({
+      data,
+      timestamp: Date.now()
+    }))
+  } catch (err) {
+    console.warn('Error guardando en cache:', err)
+  }
+}
 
-  // Estados principales
+// === UTILIDADES DE TEXTO ===
+
+/**
+ * Mapa de entidades HTML
+ */
+const htmlEntities: HtmlEntities = {
+  '&amp;': '&',
+  '&lt;': '<',
+  '&gt;': '>',
+  '&quot;': '"',
+  '&#39;': "'",
+  '&nbsp;': ' ',
+  '&copy;': '©',
+  '&reg;': '®',
+  '&trade;': '™',
+  '&hellip;': '…',
+  '&mdash;': '—',
+  '&ndash;': '–',
+  '&lsquo;': "'",
+  '&rsquo;': "'",
+  '&ldquo;': '"',
+  '&rdquo;': '"'
+}
+
+/**
+ * Decodifica entidades HTML
+ * @param text Texto con entidades HTML
+ * @returns Texto limpio
+ */
+const decodeHtmlEntities = (text: string): string => {
+  let decoded = text
+  for (const [entity, char] of Object.entries(htmlEntities)) {
+    decoded = decoded.replace(new RegExp(entity, 'g'), char)
+  }
+  return decoded
+}
+
+/**
+ * Limpia HTML y decodifica entidades
+ * @param html HTML a limpiar
+ * @returns Texto limpio
+ */
+const cleanHtml = (html: string): string => {
+  const cleaned = html.replace(/<[^>]*>/g, '')
+  return decodeHtmlEntities(cleaned)
+}
+
+/**
+ * Trunca texto a una longitud específica
+ * @param str Texto a truncar
+ * @param length Longitud máxima
+ * @returns Texto truncado
+ */
+const truncate = (str: string, length: number): string => {
+  if (str.length <= length) return str
+  return str.slice(0, length).trim() + '...'
+}
+
+/**
+ * Estima el tiempo de lectura en minutos
+ * @param content Contenido del artículo
+ * @returns Tiempo estimado en minutos
+ */
+const estimateReadingTime = (content: string): number => {
+  const cleanContent = cleanHtml(content)
+  const wordCount = cleanContent.split(/\s+/).length
+  return Math.ceil(wordCount / READING_WPM)
+}
+
+/**
+ * Formatea una fecha para mostrar
+ * @param dateString Fecha en formato ISO
+ * @returns Fecha formateada
+ */
+const formatDate = (dateString: string): string => {
+  try {
+    return new Date(dateString).toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  } catch {
+    return 'Fecha inválida'
+  }
+}
+
+// === CONFIGURACIÓN DE CATEGORÍAS ===
+
+/**
+ * Patrones para categorización automática
+ */
+const categoryPatterns: CategoryPattern[] = [
+  {
+    keywords: ['ai', 'artificial intelligence', 'machine learning', 'ml', 'deep learning', 'neural', 'chatgpt', 'gpt'],
+    categoryNames: ['Inteligencia Artificial', 'IA', 'Machine Learning', 'AI']
+  },
+  {
+    keywords: ['startup', 'funding', 'investment', 'venture', 'vc', 'seed', 'series'],
+    categoryNames: ['Startups', 'Funding', 'Investment', 'Venture Capital']
+  },
+  {
+    keywords: ['crypto', 'bitcoin', 'blockchain', 'ethereum', 'nft', 'defi', 'web3'],
+    categoryNames: ['Crypto', 'Blockchain', 'Bitcoin', 'Web3', 'DeFi']
+  },
+  {
+    keywords: ['mobile', 'app', 'ios', 'android', 'smartphone', 'tablet'],
+    categoryNames: ['Mobile', 'Apps', 'iOS', 'Android', 'Smartphone']
+  },
+  {
+    keywords: ['security', 'privacy', 'hack', 'breach', 'cybersecurity', 'malware'],
+    categoryNames: ['Security', 'Privacy', 'Cybersecurity', 'Hacking']
+  },
+  {
+    keywords: ['social media', 'facebook', 'twitter', 'instagram', 'tiktok', 'youtube'],
+    categoryNames: ['Social Media', 'Social Networks', 'Social', 'Facebook', 'Twitter']
+  }
+]
+
+/**
+ * Colores para categorías
+ */
+const categoryColors: CategoryColorMap = {
+  Tecnología: '#3b82f6',
+  Startups: '#10b981',
+  'Inteligencia Artificial': '#8b5cf6',
+  IA: '#8b5cf6',
+  'Machine Learning': '#a855f7',
+  AI: '#8b5cf6',
+  Funding: '#f59e0b',
+  Investment: '#f59e0b',
+  'Venture Capital': '#d97706',
+  Crypto: '#f97316',
+  Blockchain: '#ea580c',
+  Bitcoin: '#dc2626',
+  Web3: '#c2410c',
+  DeFi: '#b91c1c',
+  Mobile: '#06b6d4',
+  Apps: '#0891b2',
+  iOS: '#0e7490',
+  Android: '#155e75',
+  Security: '#dc2626',
+  Privacy: '#b91c1c',
+  Cybersecurity: '#991b1b',
+  'Social Media': '#ec4899',
+  'Social Networks': '#db2777',
+  Social: '#be185d'
+}
+
+/**
+ * Composable principal para el manejo avanzado del blog
+ */
+export default function useBlogEnhanced(): UseBlogEnhanced {
+  // === ESTADO PRINCIPAL ===
   const posts = ref<BlogPost[]>([])
   const isLoading = ref(false)
   const isRetrying = ref(false)
   const error = ref<BlogError | null>(null)
   const lastUpdate = ref<Date | null>(null)
-  const cacheExpiry = ref(5 * 60 * 1000) // 5 minutos
 
-  // Filtros y búsqueda
+  // === FILTROS Y BÚSQUEDA ===
   const searchQuery = ref('')
   const selectedCategory = ref<number | null>(null)
-  const viewMode = ref<'grid' | 'list'>('grid')
+  const viewMode = ref<ViewMode>('grid')
 
-  // Paginación
+  // === PAGINACIÓN ===
   const currentPage = ref(1)
-  const itemsPerPage = ref(initialItemsPerPage)
+  const itemsPerPage = ref(ITEMS_PER_PAGE)
 
-  // Favoritos
+  // === CATEGORÍAS Y FUNCIONALIDADES ===
+  const categories = ref<Category[]>([])
   const favorites = ref<number[]>([])
 
-  // Cache para optimización
-  const postCache = new Map<string, { data: BlogPost[], timestamp: number }>()
+  // === CACHE Y ESTADO ===
+  const cacheExpiry = ref(CACHE_DURATION)
 
-  // Categorías con colores personalizados
-  const categories = ref<Category[]>([
-    { id: 1, name: 'Desarrollo Web', count: 8, color: '#3b82f6' },
-    { id: 2, name: 'JavaScript', count: 12, color: '#f59e0b' },
-    { id: 3, name: 'Vue.js', count: 6, color: '#10b981' },
-    { id: 4, name: 'TypeScript', count: 4, color: '#3b82f6' },
-    { id: 5, name: 'UI/UX', count: 3, color: '#8b5cf6' },
-    { id: 6, name: 'Herramientas', count: 5, color: '#ef4444' },
-    { id: 7, name: 'Performance', count: 4, color: '#f97316' },
-    { id: 8, name: 'Testing', count: 3, color: '#06b6d4' }
-  ])
+  // === COMPOSABLE BASE ===
+  const { retrievePost } = useBlogs()
+
+  // === CACHE ===
+  const postCache = new Map<string, PostCacheEntry>()
+
+  // Cache para categorías
+  const categoriesCache = ref<CategoryCacheEntry | null>(null)
+
+  /**
+   * Decodifica entidades HTML como &amp;, &lt;, &gt;, etc.
+   * @param text - Texto con entidades HTML
+   * @returns Texto decodificado
+   */
+  const decodeHtmlEntities = (text: string): string => {
+    const htmlEntities: HtmlEntities = {
+      '&amp;': '&',
+      '&lt;': '<',
+      '&gt;': '>',
+      '&quot;': '"',
+      '&#039;': "'",
+      '&nbsp;': ' ',
+      '&copy;': '©',
+      '&reg;': '®',
+      '&trade;': '™'
+    }
+
+    return text.replace(/&[#\w]+;/g, (entity) => {
+      return htmlEntities[entity] || entity
+    })
+  }
+
+  /**
+   * Carga las categorías desde la API de TechCrunch
+   */
+  const loadCategories = async (): Promise<void> => {
+    const CACHE_DURATION = 30 * 60 * 1000 // 30 minutos
+
+    // Verificar cache
+    if (categoriesCache.value &&
+        (Date.now() - categoriesCache.value.timestamp) < CACHE_DURATION) {
+      categories.value = categoriesCache.value.data
+      return
+    }
+
+    try {
+      const response = await fetch('https://techcrunch.com/wp-json/wp/v2/categories?per_page=100')
+
+      if (!response.ok) {
+        throw new Error(`Error al cargar categorías: ${response.status}`)
+      }
+
+      const techCrunchCategories: TechCrunchCategory[] = await response.json()
+
+      // Transformar las categorías de TechCrunch al formato local
+      const transformedCategories: Category[] = techCrunchCategories
+        .filter(cat => cat.count > 0) // Solo categorías con artículos
+        .map(cat => ({
+          id: cat.id,
+          name: decodeHtmlEntities(cat.name), // Decodificar entidades HTML
+          count: cat.count,
+          color: categoryColors[cat.slug] || '#6b7280' // Color por defecto
+        }))
+        .sort((a, b) => b.count - a.count) // Ordenar por cantidad de artículos
+        .slice(0, 20) // Limitar a las 20 más populares
+
+      categories.value = transformedCategories
+
+      // Actualizar cache
+      categoriesCache.value = {
+        data: transformedCategories,
+        timestamp: Date.now()
+      }
+    } catch (err) {
+      console.error('Error cargando categorías:', err)
+      // Fallback con categorías predeterminadas
+      categories.value = [
+        { id: 1, name: 'Tecnología', count: 10, color: '#3b82f6' },
+        { id: 2, name: 'Startups', count: 8, color: '#10b981' },
+        { id: 3, name: 'Inteligencia Artificial', count: 6, color: '#8b5cf6' }
+      ]
+    }
+  }
 
   // Debounce timer
   let searchTimeout: ReturnType<typeof setTimeout>
@@ -180,6 +389,11 @@ export function useBlogEnhanced(initialItemsPerPage = 12): UseBlogEnhanced {
       isLoading.value = true
       error.value = null
 
+      // Cargar categorías en paralelo si no están cargadas
+      if (categories.value.length === 0) {
+        await loadCategories()
+      }
+
       const startTime = performance.now()
       const response = await Promise.race([
         retrievePost(Math.max(itemsPerPage.value, 12)),
@@ -214,15 +428,16 @@ export function useBlogEnhanced(initialItemsPerPage = 12): UseBlogEnhanced {
 
       // Actualizar contadores de categorías
       updateCategoryCounts(enrichedPosts)
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const errorWithStatus = err as ErrorWithStatus
       const blogError: BlogError = {
         type: err instanceof TypeError
           ? 'network'
-          : err?.message === 'Timeout'
+          : errorWithStatus?.message === 'Timeout'
             ? 'timeout'
-            : err?.message?.includes('HTTP') ? 'network' : 'unknown',
-        message: err?.message || 'Error desconocido al cargar posts',
-        code: err?.status || undefined,
+            : errorWithStatus?.message?.includes('HTTP') ? 'network' : 'unknown',
+        message: errorWithStatus?.message || 'Error desconocido al cargar posts',
+        code: errorWithStatus?.status || undefined,
         timestamp: Date.now()
       }
 
@@ -244,32 +459,117 @@ export function useBlogEnhanced(initialItemsPerPage = 12): UseBlogEnhanced {
 
   /**
    * Genera categorías inteligentes basadas en el contenido del post
+   * Usa los IDs reales de las categorías de TechCrunch cargadas
    */
   const generateSmartCategories = (post: BlogPost): number[] => {
+    // Si las categorías no están cargadas aún, retornar array vacío
+    if (categories.value.length === 0) {
+      return []
+    }
+
     const content = (post.title.rendered + ' ' + post.excerpt.rendered).toLowerCase()
     const assignedCategories: number[] = []
 
-    // Análisis de contenido para asignación inteligente
-    const patterns: { [key: number]: string[] } = {
-      1: ['web', 'html', 'css', 'frontend', 'desarrollo'],
-      2: ['javascript', 'js', 'ecmascript', 'node'],
-      3: ['vue', 'vuejs', 'composition', 'reactive'],
-      4: ['typescript', 'ts', 'types', 'interface'],
-      5: ['design', 'ux', 'ui', 'usuario', 'interfaz'],
-      6: ['tool', 'herramienta', 'vscode', 'git'],
-      7: ['performance', 'optimizacion', 'speed', 'fast'],
-      8: ['test', 'testing', 'jest', 'cypress']
+    // Crear mapeo dinámico basado en las categorías cargadas de TechCrunch
+    const getCategoryIdByName = (searchNames: string[]): number | null => {
+      for (const searchName of searchNames) {
+        const category = categories.value.find(cat =>
+          cat.name.toLowerCase().includes(searchName.toLowerCase()) ||
+          searchName.toLowerCase().includes(cat.name.toLowerCase())
+        )
+        if (category) return category.id
+      }
+      return null
     }
 
-    Object.entries(patterns).forEach(([categoryId, keywords]) => {
-      if (keywords.some(keyword => content.includes(keyword))) {
-        assignedCategories.push(parseInt(categoryId))
+    // Patrones de contenido con nombres de categorías de TechCrunch
+    const contentPatterns: CategoryPattern[] = [
+      {
+        keywords: ['artificial intelligence', 'ai', 'machine learning', 'neural', 'deep learning', 'chatgpt', 'openai'],
+        categoryNames: ['AI', 'Artificial Intelligence']
+      },
+      {
+        keywords: ['startup', 'entrepreneur', 'funding', 'investment', 'seed', 'series'],
+        categoryNames: ['Startups', 'Venture', 'Fundraising']
+      },
+      {
+        keywords: ['crypto', 'bitcoin', 'ethereum', 'blockchain', 'cryptocurrency', 'web3', 'nft'],
+        categoryNames: ['Crypto', 'Cryptocurrency']
+      },
+      {
+        keywords: ['fintech', 'financial', 'banking', 'payment', 'finance', 'money'],
+        categoryNames: ['Fintech']
+      },
+      {
+        keywords: ['hardware', 'device', 'chip', 'processor', 'semiconductor', 'electronics'],
+        categoryNames: ['Hardware', 'Gadgets']
+      },
+      {
+        keywords: ['app', 'mobile', 'ios', 'android', 'application', 'software'],
+        categoryNames: ['Apps']
+      },
+      {
+        keywords: ['social media', 'facebook', 'twitter', 'instagram', 'tiktok', 'social'],
+        categoryNames: ['Social']
+      },
+      {
+        keywords: ['gaming', 'game', 'esports', 'console', 'playstation', 'xbox'],
+        categoryNames: ['Gaming']
+      },
+      {
+        keywords: ['enterprise', 'business', 'saas', 'b2b', 'corporate', 'company'],
+        categoryNames: ['Enterprise']
+      },
+      {
+        keywords: ['media', 'entertainment', 'streaming', 'content', 'video', 'music'],
+        categoryNames: ['Media & Entertainment']
+      },
+      {
+        keywords: ['climate', 'environment', 'green', 'renewable', 'sustainable', 'carbon'],
+        categoryNames: ['Climate']
+      },
+      {
+        keywords: ['biotech', 'health', 'medical', 'pharma', 'healthcare', 'biology'],
+        categoryNames: ['Biotech & Health']
+      },
+      {
+        keywords: ['robotics', 'robot', 'automation', 'autonomous', 'drone'],
+        categoryNames: ['Robotics']
+      },
+      {
+        keywords: ['privacy', 'security', 'cybersecurity', 'data protection', 'encryption'],
+        categoryNames: ['Privacy', 'Security']
+      },
+      {
+        keywords: ['government', 'policy', 'regulation', 'law', 'legal', 'politics'],
+        categoryNames: ['Government & Policy']
+      },
+      {
+        keywords: ['commerce', 'ecommerce', 'retail', 'shopping', 'marketplace', 'store'],
+        categoryNames: ['Commerce']
+      }
+    ]
+
+    // Buscar coincidencias en el contenido
+    contentPatterns.forEach(pattern => {
+      const hasKeyword = pattern.keywords.some(keyword => content.includes(keyword))
+      if (hasKeyword) {
+        const categoryId = getCategoryIdByName(pattern.categoryNames)
+        if (categoryId && !assignedCategories.includes(categoryId)) {
+          assignedCategories.push(categoryId)
+        }
       }
     })
 
-    // Asegurar al menos una categoría
+    // Si no se encontraron categorías específicas, asignar una genérica
     if (assignedCategories.length === 0) {
-      assignedCategories.push(1) // Desarrollo Web por defecto
+      // Buscar la primera categoría disponible como fallback
+      const fallbackCategory = categories.value.find(cat =>
+        ['Startups', 'Enterprise', 'Apps'].some(name => cat.name.includes(name))
+      )
+      if (fallbackCategory) {
+        assignedCategories.push(fallbackCategory.id)
+      }
     }
 
     return assignedCategories.slice(0, 3) // Máximo 3 categorías
@@ -278,8 +578,8 @@ export function useBlogEnhanced(initialItemsPerPage = 12): UseBlogEnhanced {
   /**
    * Actualiza los contadores de categorías
    */
-  const updateCategoryCounts = (posts: BlogPost[]) => {
-    const counts: { [key: number]: number } = {}
+  const updateCategoryCounts = (posts: BlogPost[]): void => {
+    const counts: CategoryCounts = {}
 
     posts.forEach(post => {
       post.categories?.forEach(categoryId => {
@@ -316,7 +616,7 @@ export function useBlogEnhanced(initialItemsPerPage = 12): UseBlogEnhanced {
    * Compartir artículo con API nativa y fallbacks
    */
   const shareArticle = async (post: BlogPost): Promise<void> => {
-    const shareData = {
+    const shareData: ShareData = {
       title: cleanHtml(post.title.rendered),
       text: cleanHtml(post.excerpt.rendered).substring(0, 100) + '...',
       url: post.link
@@ -379,10 +679,12 @@ export function useBlogEnhanced(initialItemsPerPage = 12): UseBlogEnhanced {
   }
 
   /**
-   * Limpiar HTML
+   * Limpiar HTML y decodificar entidades
    */
   const cleanHtml = (html: string): string => {
-    return html.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, ' ').trim()
+    // Primero remover tags HTML, luego decodificar entidades HTML
+    const withoutTags = html.replace(/<[^>]*>/g, '')
+    return decodeHtmlEntities(withoutTags).trim()
   }
 
   /**
@@ -405,8 +707,8 @@ export function useBlogEnhanced(initialItemsPerPage = 12): UseBlogEnhanced {
     }, 300)
   })
 
-  // Cargar favoritos desde localStorage
-  onMounted(() => {
+  // Cargar favoritos desde localStorage y categorías
+  onMounted(async () => {
     try {
       const savedFavorites = localStorage.getItem('blog-favorites')
       if (savedFavorites) {
@@ -415,6 +717,9 @@ export function useBlogEnhanced(initialItemsPerPage = 12): UseBlogEnhanced {
     } catch (err) {
       console.warn('No se pudieron cargar los favoritos:', err)
     }
+
+    // Cargar categorías automáticamente
+    await loadCategories()
   })
 
   // Cleanup
@@ -448,6 +753,7 @@ export function useBlogEnhanced(initialItemsPerPage = 12): UseBlogEnhanced {
 
     // Métodos
     loadPosts,
+    loadCategories,
     retryLoad,
     toggleFavorite,
     shareArticle,
@@ -458,6 +764,7 @@ export function useBlogEnhanced(initialItemsPerPage = 12): UseBlogEnhanced {
     // Utilidades
     formatDate,
     cleanHtml,
+    decodeHtmlEntities,
     truncate,
 
     // Estados avanzados
@@ -466,5 +773,3 @@ export function useBlogEnhanced(initialItemsPerPage = 12): UseBlogEnhanced {
     cacheExpiry
   }
 }
-
-export default useBlogEnhanced
