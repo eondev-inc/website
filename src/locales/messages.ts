@@ -10,39 +10,37 @@ const messages = {
     },
     footer: {
       mainMessage: 'Es una iniciativa personal con el proposito de crear una marca que permita impulsar el desarrollo de aplicaciones web enfocadas en las necesidades de los usuarios',
-      followMe: 'Sígueme en',
-      navigation: 'Navegación',
-      technologies: 'Tecnologías',
+      followMe: 'S\u00edgueme en',
+      navigation: 'Navegaci\u00f3n',
+      technologies: 'Tecnolog\u00edas',
       contact: 'Contacto',
-      projectInMind: '¿Tienes un proyecto en mente?',
+      projectInMind: '\u00bfTienes un proyecto en mente?',
       letsChat: 'Conversemos',
       allRightsReserved: 'Todos los derechos reservados',
       availableForProjects: 'Disponible para proyectos'
     },
     home: {
       aboutMe: {
-        // Textos antiguos mantenidos para compatibilidad
         meFirts: 'Experiencia laboral',
         meTitle: 'Hola! Soy yerffrey Romero',
         meSubs: 'Desarrollador Fullstack',
-        meDescription: 'Ingeniero en Computación, con 7+ años de experiencia, trabajando en empresas como Starken, Izit, Tu Clase, tu país e I-Med. centrado en el desarrollo de aplicaciones Web con stack tecnológico NodeJS',
-        meButton: 'Saber más',
+        meDescription: 'Ingeniero en Computaci\u00f3n, con 7+ a\u00f1os de experiencia, trabajando en empresas como Starken, Izit, Tu Clase, tu pa\u00eds e I-Med. centrado en el desarrollo de aplicaciones Web con stack tecnol\u00f3gico NodeJS',
+        meButton: 'Saber m\u00e1s',
         meAltImage: 'coding-me',
-        meSeeMore: 'Ver más',
-        // Nuevos textos para el hero moderno
+        meSeeMore: 'Ver m\u00e1s',
         availability: 'Disponible para proyectos',
         greeting: 'Hola, soy',
         name: 'Yerffrey Romero',
         title: 'Desarrollador Full Stack',
-        description: 'Ingeniero en Computación con más de 7 años de experiencia creando aplicaciones web modernas y escalables. Especializado en el ecosistema JavaScript/TypeScript, enfocado en brindar soluciones tecnológicas que generen valor real a los usuarios.',
-        yearsExp: 'Años de experiencia',
+        description: 'Ingeniero en Computaci\u00f3n con m\u00e1s de 7 a\u00f1os de experiencia creando aplicaciones web modernas y escalables. Especializado en el ecosistema JavaScript/TypeScript, enfocado en brindar soluciones tecnol\u00f3gicas que generen valor real a los usuarios.',
+        yearsExp: 'A\u00f1os de experiencia',
         projects: 'Proyectos completados',
-        technologies: 'Tecnologías',
-        techStack: 'Stack tecnológico principal',
+        technologies: 'Tecnolog\u00edas',
+        techStack: 'Stack tecnol\u00f3gico principal',
         cta: 'Ver mi trabajo',
         contact: 'Conversemos',
-        followMe: 'Sígueme en',
-        imageAlt: 'Yerffrey Romero desarrollando código',
+        followMe: 'S\u00edgueme en',
+        imageAlt: 'Yerffrey Romero desarrollando c\u00f3digo',
         status: 'Activo',
         statusDetail: 'Trabajando en nuevos proyectos'
       }
@@ -58,7 +56,7 @@ const messages = {
       },
       webdevelopment: {
         title: 'Desarrollo Web',
-        description: 'Experiencia en uso de librerias y/o framework para desarrollo de aplicaciones web, uso de Angular, Vuejs (v3) y también uso de framework fullstack NuxtJS (v3), entre otros.'
+        description: 'Experiencia en uso de librerias y/o framework para desarrollo de aplicaciones web, uso de Angular, Vuejs (v3) y tambi\u00e9n uso de framework fullstack NuxtJS (v3), entre otros.'
       }
     },
     news: {
@@ -66,47 +64,63 @@ const messages = {
     },
     blog: {
       title: 'Noticias',
-      subtitle: 'Artículos y reflexiones sobre desarrollo web, tecnología y mejores prácticas',
-      searchPlaceholder: 'Buscar artículos...',
-      loadingArticles: 'Cargando artículos...',
-      retryingArticles: 'Reintentando cargar artículos...',
-      errorLoadingArticles: 'Error al cargar los artículos',
-      noArticlesFound: 'No se encontraron artículos',
-      articlesInterest: '¿Te interesan más artículos sobre desarrollo web?',
-      viewAllArticles: 'Ver todos los artículos',
+      subtitle: 'Art\u00edculos y reflexiones sobre desarrollo web, tecnolog\u00eda y mejores pr\u00e1cticas',
+      searchPlaceholder: 'Buscar art\u00edculos...',
+      loadingArticles: 'Cargando art\u00edculos...',
+      retryingArticles: 'Reintentando cargar art\u00edculos...',
+      errorLoadingArticles: 'Error al cargar los art\u00edculos',
+      noArticlesFound: 'No se encontraron art\u00edculos',
+      articlesInterest: '\u00bfTe interesan m\u00e1s art\u00edculos sobre desarrollo web?',
+      viewAllArticles: 'Ver todos los art\u00edculos',
       filterBy: 'Filtrar por',
-      articles: 'artículos',
+      articles: 'art\u00edculos',
       articlesCount: {
-        3: '3 artículos',
-        6: '6 artículos',
-        9: '9 artículos',
-        12: '12 artículos'
+        3: '3 art\u00edculos',
+        6: '6 art\u00edculos',
+        9: '9 art\u00edculos',
+        12: '12 art\u00edculos'
       }
     },
     experience: {
-      title: 'Experiencia Técnica',
-      subtitle: 'Tecnologías y herramientas con las que he trabajado para crear soluciones escalables',
-      learnMore: '¿Quieres saber más sobre mi experiencia técnica?'
+      title: 'Experiencia T\u00e9cnica',
+      subtitle: 'Tecnolog\u00edas y herramientas con las que he trabajado para crear soluciones escalables',
+      learnMore: '\u00bfQuieres saber m\u00e1s sobre mi experiencia t\u00e9cnica?'
     },
     callToAction: {
       title: 'Trabajemos Juntos',
-      subtitle: '¿Tienes un proyecto en mente? Me encantaría escuchar tus ideas y ayudarte a convertirlas en realidad.',
+      subtitle: '\u00bfTienes un proyecto en mente? Me encantar\u00eda escuchar tus ideas y ayudarte a convertirlas en realidad.',
       name: 'Nombre',
       namePlaceholder: 'Tu nombre completo',
       email: 'Email',
-      emailPlaceholder: 'tu@email.com',
+      emailPlaceholder: 'Ingresa tu email',
       message: 'Mensaje',
-      messagePlaceholder: 'Cuéntame sobre tu proyecto o idea...',
+      messagePlaceholder: 'Cu\u00e9ntame sobre tu proyecto o idea...',
       send: 'Enviar Mensaje',
       sending: 'Enviando...',
       emailSubject: 'Contacto desde Portfolio',
-      emailContactInfo: 'Información de contacto',
+      emailContactInfo: 'Informaci\u00f3n de contacto',
       emailMessage: 'Mensaje',
-      emailFooter: 'Este mensaje fue enviado desde tu portfolio web.'
+      emailFooter: 'Este mensaje fue enviado desde tu portfolio web.',
+      validation: {
+        nameMinLength: 'El nombre debe tener al menos 3 caracteres',
+        nameRequired: 'El nombre es obligatorio',
+        emailInvalid: 'Debe ser un email v\u00e1lido',
+        emailRequired: 'El email es obligatorio',
+        messageMinLength: 'El mensaje debe tener al menos 10 caracteres',
+        messageRequired: 'El mensaje es obligatorio'
+      },
+      notifications: {
+        emailOpenedTitle: '\u00a1Cliente de correo abierto!',
+        emailOpenedText: 'Tu mensaje est\u00e1 listo para enviar',
+        openingEmailTitle: 'Abriendo cliente de correo...',
+        openingEmailText: 'Se abrir\u00e1 tu aplicaci\u00f3n de correo predeterminada',
+        errorTitle: 'Error',
+        errorText: 'Hubo un problema',
+        emailErrorText: 'No se pudo abrir el cliente de correo. Por favor, contacta directamente a hola@eondev.site'
+      }
     }
   },
   en: {
-    // Nuevas claves para el hero moderno
     header: {
       headerHome: 'Home',
       headerAbout: 'About',
@@ -122,26 +136,24 @@ const messages = {
       technologies: 'Technologies',
       contact: 'Contact',
       projectInMind: 'Have a project in mind?',
-      letsChat: 'Let\'s talk',
+      letsChat: "Let's talk",
       allRightsReserved: 'All rights reserved',
       availableForProjects: 'Available for projects'
     },
     home: {
       aboutMe: {
-        // Legacy keys for compatibility
         meFirts: 'Professional experience',
         meTitle: 'Hi! I am Yerffrey Romero',
         meSubs: 'Fullstack Developer',
-        meDescription: 'Computer Engineer, with 7+ years of experience, working in companies such as Starken, Izit, Tu Clase, tu país and I-Med. Focused on the development of Web applications with NodeJS technology stack.',
+        meDescription: 'Computer Engineer, with 9+ years of experience, working in companies such as Starken, Izit, Tu Clase, tu país and I-Med. Focused on the development of Web applications with NodeJS technology stack.',
         meButton: 'Learn more',
         meAltImage: 'coding-me',
         meSeeMore: 'See more',
-        // Modern hero keys
         availability: 'Available for hire',
-        greeting: 'Hi, I\'m',
+        greeting: "Hi, I'm",
         name: 'Yerffrey Romero',
         title: 'Full Stack Developer',
-        description: 'Computer Engineer with 7+ years of experience creating robust web applications. Specialized in modern technologies and scalable solutions.',
+        description: 'Computer Engineer with 9+ years of experience creating robust web applications. Specialized in modern technologies and scalable solutions.',
         yearsExp: 'Years Experience',
         projects: 'Projects Completed',
         technologies: 'Technologies',
@@ -192,16 +204,16 @@ const messages = {
     },
     experience: {
       title: 'Technical Experience',
-      subtitle: 'Technologies and tools I\'ve worked with to create scalable solutions',
+      subtitle: "Technologies and tools I've worked with to create scalable solutions",
       learnMore: 'Want to know more about my technical experience?'
     },
     callToAction: {
-      title: 'Let\'s Work Together',
-      subtitle: 'Have a project in mind? I\'d love to hear your ideas and help you turn them into reality.',
+      title: "Let's Work Together",
+      subtitle: "Have a project in mind? I'd love to hear your ideas and help you turn them into reality.",
       name: 'Name',
       namePlaceholder: 'Your full name',
       email: 'Email',
-      emailPlaceholder: 'your@email.com',
+      emailPlaceholder: 'Your email',
       message: 'Message',
       messagePlaceholder: 'Tell me about your project or idea...',
       send: 'Send Message',
@@ -209,7 +221,24 @@ const messages = {
       emailSubject: 'Contact from Portfolio',
       emailContactInfo: 'Contact information',
       emailMessage: 'Message',
-      emailFooter: 'This message was sent from your web portfolio.'
+      emailFooter: 'This message was sent from your web portfolio.',
+      validation: {
+        nameMinLength: 'Name must be at least 3 characters',
+        nameRequired: 'Name is required',
+        emailInvalid: 'Must be a valid email',
+        emailRequired: 'Email is required',
+        messageMinLength: 'Message must be at least 10 characters',
+        messageRequired: 'Message is required'
+      },
+      notifications: {
+        emailOpenedTitle: 'Email client opened!',
+        emailOpenedText: 'Your message is ready to send',
+        openingEmailTitle: 'Opening email client...',
+        openingEmailText: 'Your default email application will open',
+        errorTitle: 'Error',
+        errorText: 'There was a problem',
+        emailErrorText: 'Could not open email client. Please contact directly at hola@eondev.site'
+      }
     }
   }
 }
