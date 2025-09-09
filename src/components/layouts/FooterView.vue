@@ -33,7 +33,7 @@
 
           <!-- Social links modernos -->
           <div class="flex items-center space-x-4">
-            <span class="text-sm text-neutral-400 font-medium">Sígueme en</span>
+            <span class="text-sm text-neutral-400 font-medium">{{ $t('footer.followMe') }}</span>
             <div class="flex space-x-3">
               <a
                 v-for="social in socialLinks"
@@ -58,7 +58,7 @@
         <div class="lg:col-span-4 grid grid-cols-2 gap-8">
           <!-- Navegación -->
           <div class="space-y-4">
-            <h3 class="text-white font-semibold text-lg">Navegación</h3>
+            <h3 class="text-white font-semibold text-lg">{{ $t('footer.navigation') }}</h3>
             <ul class="space-y-3">
               <li v-for="item in navItems" :key="item.name">
                 <router-link
@@ -73,7 +73,7 @@
 
           <!-- Tecnologías -->
           <div class="space-y-4">
-            <h3 class="text-white font-semibold text-lg">Tecnologías</h3>
+            <h3 class="text-white font-semibold text-lg">{{ $t('footer.technologies') }}</h3>
             <ul class="space-y-3">
               <li v-for="tech in technologies" :key="tech">
                 <span class="text-neutral-300 text-sm">{{ tech }}</span>
@@ -84,16 +84,16 @@
 
         <!-- Contact info -->
         <div class="lg:col-span-3 space-y-4">
-          <h3 class="text-white font-semibold text-lg">Contacto</h3>
+          <h3 class="text-white font-semibold text-lg">{{ $t('footer.contact') }}</h3>
           <div class="space-y-3">
             <p class="text-neutral-300 text-sm">
-              ¿Tienes un proyecto en mente?
+              {{ $t('footer.projectInMind') }}
             </p>
             <router-link
               to="/contact"
               class="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-secondary-600 to-primary-400 text-white rounded-xl hover:from-secondary-700 hover:to-primary-500 transition-all duration-300 shadow-soft hover:shadow-glow hover:-translate-y-0.5 text-sm font-medium"
             >
-              <span>Conversemos</span>
+              <span>{{ $t('footer.letsChat') }}</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -109,14 +109,14 @@
           <!-- Copyright -->
           <div class="flex items-center space-x-4">
             <p class="text-neutral-400 text-sm">
-              © {{ new Date().getFullYear() }} EonDev. Todos los derechos reservados.
+              © {{ new Date().getFullYear() }} EonDev. {{ $t('footer.allRightsReserved') }}.
             </p>
           </div>
 
           <!-- Status indicator -->
           <div class="flex items-center space-x-2">
             <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span class="text-neutral-400 text-sm">Disponible para proyectos</span>
+            <span class="text-neutral-400 text-sm">{{ $t('footer.availableForProjects') }}</span>
           </div>
         </div>
       </div>

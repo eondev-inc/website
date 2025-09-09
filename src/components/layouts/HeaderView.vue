@@ -139,7 +139,7 @@
                 class="flex items-center space-x-3 px-4 py-3 bg-neutral-900 text-white rounded-lg hover:bg-primary-700 transition-all duration-300"
               >
                 <font-awesome-icon icon="fa-brands fa-github" class="w-5 h-5" />
-                <span>Ver en GitHub</span>
+                <span>{{ $t('header.viewOnGithub') }}</span>
               </a>
             </div>
           </div>

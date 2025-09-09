@@ -8,7 +8,7 @@
         {{ $t('news.title') }}
       </h2>
       <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
-        Artículos y reflexiones sobre desarrollo web, tecnología y mejores prácticas
+        {{ $t('blog.subtitle') }}
       </p>
       <div class="w-24 h-1 bg-gradient-to-r from-secondary-500 to-primary-400 mx-auto mt-6 rounded-full" />
     </div>
@@ -20,12 +20,12 @@
       <div class="max-w-md mx-auto">
         <div class="relative">
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <i class="fas fa-search text-neutral-400"></i>
+            <font-awesome-icon icon="search" class="text-neutral-400" />
           </div>
           <input
             v-model="searchQuery"
             type="text"
-            placeholder="Buscar artículos..."
+            :placeholder="$t('blog.searchPlaceholder')"
             class="w-full pl-10 pr-4 py-3 bg-white border-2 border-neutral-200 rounded-xl focus:border-primary-400 focus:ring-4 focus:ring-primary-100 transition-all duration-300 placeholder-neutral-400"
             @input="debouncedSearch"
           >
@@ -34,7 +34,7 @@
               @click="clearSearch"
               class="text-neutral-400 hover:text-neutral-600 transition-colors"
             >
-              <i class="fas fa-times"></i>
+              <font-awesome-icon icon="times" />
             </button>
           </div>
         </div>
@@ -84,7 +84,7 @@
           class="px-3 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-neutral-100 text-neutral-600 hover:bg-neutral-200 flex items-center space-x-1"
           aria-label="Limpiar filtros de categoría"
         >
-          <i class="fas fa-times text-xs"></i>
+          <font-awesome-icon icon="times" class="text-xs" />
           <span>Limpiar</span>
         </button>
       </div>
@@ -97,10 +97,10 @@
             v-model="itemsPerPage"
             class="px-3 py-2 bg-white border border-neutral-200 rounded-lg focus:border-primary-400 focus:ring-2 focus:ring-primary-100 text-sm"
           >
-            <option value="3">3 artículos</option>
-            <option value="6">6 artículos</option>
-            <option value="9">9 artículos</option>
-            <option value="12">12 artículos</option>
+            <option value="3">{{ $t('blog.articlesCount.3') }}</option>
+            <option value="6">{{ $t('blog.articlesCount.6') }}</option>
+            <option value="9">{{ $t('blog.articlesCount.9') }}</option>
+            <option value="12">{{ $t('blog.articlesCount.12') }}</option>
           </select>
         </div>
 
@@ -114,7 +114,7 @@
                 viewMode === 'grid' ? 'bg-white shadow-sm text-primary-600' : 'text-neutral-500 hover:text-neutral-700'
               ]"
             >
-              <i class="fa fa-th-large"></i>
+              <font-awesome-icon icon="th-large" />
             </button>
             <button
               @click="viewMode = 'list'"
@@ -123,7 +123,7 @@
                 viewMode === 'list' ? 'bg-white shadow-sm text-primary-600' : 'text-neutral-500 hover:text-neutral-700'
               ]"
             >
-              <i class="fa fa-list"></i>
+              <font-awesome-icon icon="list" />
             </button>
           </div>
         </div>
@@ -135,7 +135,7 @@
       <div class="text-center">
         <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4" />
         <p class="text-neutral-600">
-          {{ isRetrying ? 'Reintentando cargar artículos...' : 'Cargando artículos...' }}
+          {{ isRetrying ? $t('blog.retryingArticles') : $t('blog.loadingArticles') }}
         </p>
       </div>
     </div>
@@ -143,9 +143,9 @@
     <!-- Error state -->
     <div v-else-if="error && !isLoading" class="text-center py-20">
       <div class="mb-6">
-        <i class="fas fa-exclamation-triangle text-4xl text-amber-500 mb-4"></i>
+        <font-awesome-icon icon="exclamation-triangle" class="text-4xl text-amber-500 mb-4" />
         <h3 class="text-xl font-semibold text-neutral-700 mb-2">
-          Error al cargar los artículos
+          {{ $t('blog.errorLoadingArticles') }}
         </h3>
         <p class="text-neutral-500 mb-1">
           {{ error.message }}
@@ -161,8 +161,8 @@
           :disabled="isRetrying"
           class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center space-x-2 mx-auto"
         >
-          <i v-if="isRetrying" class="fas fa-spinner fa-spin"></i>
-          <i v-else class="fas fa-redo"></i>
+          <font-awesome-icon v-if="isRetrying" icon="spinner" spin />
+          <font-awesome-icon v-else icon="redo" />
           <span>{{ isRetrying ? 'Reintentando...' : 'Reintentar' }}</span>
         </button>
 
@@ -175,9 +175,9 @@
     <!-- No results -->
     <div v-else-if="filteredPosts.length === 0 && !isLoading && !error" class="text-center py-20">
       <div class="mb-4">
-        <i class="fas fa-search text-4xl text-neutral-400"></i>
+        <font-awesome-icon icon="search" class="text-4xl text-neutral-400" />
       </div>
-      <h3 class="text-xl font-semibold text-neutral-700 mb-2">No se encontraron artículos</h3>
+      <h3 class="text-xl font-semibold text-neutral-700 mb-2">{{ $t('blog.noArticlesFound') }}</h3>
       <p class="text-neutral-500">
         Intenta con otros términos de búsqueda o selecciona una categoría diferente
       </p>
@@ -225,7 +225,7 @@
               viewMode === 'list' ? 'w-full h-full' : 'w-full h-48'
             ]"
           >
-            <i class="fas fa-newspaper text-4xl text-neutral-400"></i>
+            <font-awesome-icon icon="newspaper" class="text-4xl text-neutral-400" />
           </div>
 
           <!-- Overlay gradient -->
@@ -288,12 +288,12 @@
           <div class="flex items-center justify-between pt-2 border-t border-neutral-100">
             <div class="flex items-center space-x-4 text-xs text-neutral-500">
               <span class="flex items-center space-x-1">
-                <i class="fas fa-clock"></i>
+                <font-awesome-icon icon="clock" />
                 <span>{{ estimateReadingTime(blog.content?.rendered || blog.excerpt.rendered) }} min</span>
               </span>
 
               <span class="flex items-center space-x-1">
-                <i class="fas fa-calendar-alt"></i>
+                <font-awesome-icon icon="calendar-alt" />
                 <time :datetime="blog.date">{{ formatDate(blog.date) }}</time>
               </span>
 
@@ -302,7 +302,7 @@
                 class="flex items-center space-x-1 text-green-600"
                 title="Cargado desde caché"
               >
-                <i class="fas fa-bolt text-xs"></i>
+                <font-awesome-icon icon="bolt" class="text-xs" />
                 <span>Rápido</span>
               </span>
             </div>
@@ -319,7 +319,7 @@
                 ]"
                 :aria-label="favorites.includes(blog.id) ? 'Quitar de favoritos' : 'Agregar a favoritos'"
               >
-                <i :class="['fas fa-heart']"></i>
+                <font-awesome-icon icon="heart" />
               </button>
             </div>
           </div>
@@ -350,7 +350,7 @@
               class="inline-flex items-center space-x-1 text-neutral-500 hover:text-accent-600 text-sm transition-colors duration-200"
               :aria-label="`Compartir artículo: ${cleanHtml(blog.title.rendered)}`"
             >
-              <i class="fas fa-share-alt"></i>
+              <font-awesome-icon icon="share-alt" />
               <span>Compartir</span>
             </button>
           </div>
@@ -368,7 +368,7 @@
         :disabled="currentPage === 1"
         class="px-4 py-2 rounded-lg bg-white border border-neutral-200 text-neutral-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-50 transition-colors"
       >
-        <i class="fas fa-chevron-left"></i>
+        <font-awesome-icon icon="chevron-left" aria-hidden="true" />
       </button>
 
       <template v-for="page in visiblePages" :key="page">
@@ -392,14 +392,14 @@
         :disabled="currentPage === totalPages"
         class="px-4 py-2 rounded-lg bg-white border border-neutral-200 text-neutral-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-50 transition-colors"
       >
-        <i class="fas fa-chevron-right"></i>
+        <font-awesome-icon icon="chevron-right" aria-hidden="true" />
       </button>
     </div>
 
     <!-- Call to action -->
     <div class="text-center mt-16 animate-fade-in-up" style="animation-delay: 0.8s;">
       <p class="text-neutral-600 mb-6">
-        ¿Te interesan más artículos sobre desarrollo web?
+        {{ $t('blog.articlesInterest') }}
       </p>
       <a
         href="https://steemit.com/@seventrust"
@@ -407,7 +407,7 @@
         rel="noopener noreferrer"
         class="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-secondary-600 to-primary-400 text-white rounded-xl hover:from-secondary-700 hover:to-primary-500 transition-all duration-300 shadow-soft hover:shadow-glow hover:-translate-y-0.5"
       >
-        <span>Ver todos los artículos</span>
+        <span>{{ $t('blog.viewAllArticles') }}</span>
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
         </svg>

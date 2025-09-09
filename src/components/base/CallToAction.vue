@@ -21,13 +21,13 @@
       </div>
 
       <div class="bg-white/80 backdrop-blur-lg rounded-3xl border border-white/40 shadow-2xl shadow-primary-500/10 p-8 md:p-12 animate-slide-up">
-        <Form @submit="onSubmit" class="space-y-8">
+        <Form class="space-y-8"  @submit="onSubmit">
           <div class="grid md:grid-cols-2 gap-6">
             <div class="space-y-6">
               <!-- Campo Nombre -->
               <div class="group">
                 <label for="name" class="block text-sm font-semibold text-gray-700 mb-2 transition-colors group-focus-within:text-secondary-600">
-                  <i class="fas fa-user text-secondary-500 mr-2"></i>
+                  <font-awesome-icon icon="user" class="text-secondary-500 mr-2" />
                   {{ $t('callToAction.name') }}
                 </label>
                 <div class="relative">
@@ -43,7 +43,7 @@
                 </div>
                 <ErrorMessage name="name" class="text-red-500 text-sm mt-1 flex items-center">
                   <template #default="{ message }">
-                    <i class="fas fa-exclamation-triangle mr-1"></i>
+                    <font-awesome-icon icon="exclamation-triangle" class="mr-1" />
                     {{ message }}
                   </template>
                 </ErrorMessage>
@@ -52,7 +52,7 @@
               <!-- Campo Email -->
               <div class="group">
                 <label for="email" class="block text-sm font-semibold text-gray-700 mb-2 transition-colors group-focus-within:text-secondary-600">
-                  <i class="fas fa-envelope text-secondary-500 mr-2"></i>
+                  <font-awesome-icon icon="envelope" class="text-secondary-500 mr-2" />
                   {{ $t('callToAction.email') }}
                 </label>
                 <div class="relative">
@@ -68,7 +68,7 @@
                 </div>
                 <ErrorMessage name="email" class="text-red-500 text-sm mt-1 flex items-center">
                   <template #default="{ message }">
-                    <i class="fas fa-exclamation-triangle mr-1"></i>
+                    <font-awesome-icon icon="exclamation-triangle" class="mr-1" />
                     {{ message }}
                   </template>
                 </ErrorMessage>
@@ -79,7 +79,7 @@
               <!-- Campo Mensaje -->
               <div class="group">
                 <label for="message" class="block text-sm font-semibold text-gray-700 mb-2 transition-colors group-focus-within:text-secondary-600">
-                  <i class="fas fa-comment-alt text-secondary-500 mr-2"></i>
+                  <font-awesome-icon icon="comment-alt" class="text-secondary-500 mr-2" />
                   {{ $t('callToAction.message') }}
                 </label>
                 <div class="relative">
@@ -96,7 +96,7 @@
                 </div>
                 <ErrorMessage name="message" class="text-red-500 text-sm mt-1 flex items-center">
                   <template #default="{ message }">
-                    <i class="fas fa-exclamation-triangle mr-1"></i>
+                    <font-awesome-icon icon="exclamation-triangle" class="mr-1" />
                     {{ message }}
                   </template>
                 </ErrorMessage>
@@ -114,11 +114,11 @@
               <div class="absolute inset-0 bg-gradient-to-r from-secondary-700 to-primary-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <span class="relative flex items-center">
                 <template v-if="loading">
-                  <i class="fas fa-spinner fa-spin mr-2"></i>
+                  <font-awesome-icon icon="spinner" spin class="mr-2" />
                   {{ $t('callToAction.sending') }}
                 </template>
                 <template v-else>
-                  <i class="fas fa-paper-plane mr-2 transform group-hover:translate-x-1 transition-transform duration-300"></i>
+                  <font-awesome-icon icon="paper-plane" class="mr-2 transform group-hover:translate-x-1 transition-transform duration-300" />
                   {{ $t('callToAction.send') }}
                 </template>
               </span>
@@ -133,16 +133,20 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { Field, Form, ErrorMessage, useForm } from 'vee-validate'
+import { useI18n } from 'vue-i18n'
 import * as yup from 'yup'
-// eslint-disable-next-line import/no-duplicates
-import { SweetAlertIcon, SweetAlertOptions } from 'sweetalert2'
-// eslint-disable-next-line import/no-duplicates
 import Swal from 'sweetalert2'
 
 interface FormField {
   name: string
   rules: yup.StringSchema
   type: string
+}
+
+interface FormValues {
+  name: string
+  email: string
+  message: string
 }
 
 export default defineComponent({
@@ -153,7 +157,7 @@ export default defineComponent({
     ErrorMessage
   },
   setup() {
-    const { handleSubmit, errors } = useForm()
+    const { t } = useI18n()
 
     const fields: FormField[] = [
       {
@@ -184,63 +188,98 @@ export default defineComponent({
 
     const loading = ref(false)
 
-    const dispatchSwal = (scope: string) => {
-      const icon: SweetAlertIcon = scope === 'success' ? 'success' : 'error'
-      const swalOptions: SweetAlertOptions = {
-        position: 'top-end',
+    const dispatchSwal = (scope: string, message?: string) => {
+      let icon: 'success' | 'info' | 'error' = 'info'
+      let title = ''
+      let defaultText = ''
+      let background = '#eff6ff'
+      let color = '#1e40af'
+
+      if (scope === 'success') {
+        icon = 'success'
+        title = '¡Cliente de correo abierto!'
+        defaultText = 'Tu mensaje está listo para enviar'
+        background = '#f0fdf4'
+        color = '#065f46'
+      } else if (scope === 'error') {
+        icon = 'error'
+        title = 'Error'
+        defaultText = 'Hubo un problema'
+        background = '#fef2f2'
+        color = '#991b1b'
+      } else {
+        title = 'Abriendo cliente de correo...'
+        defaultText = 'Se abrirá tu aplicación de correo predeterminada'
+      }
+
+      const swalOptions = {
+        position: 'top-end' as const,
         showConfirmButton: false,
-        timer: 2000,
+        timer: 3000,
         icon,
-        title: scope === 'success'
-          ? '¡Mensaje enviado correctamente!'
-          : 'Algo salió mal',
-        text: scope === 'success'
-          ? 'Te contactaremos pronto'
-          : 'Por favor, inténtalo de nuevo',
+        title,
+        text: message || defaultText,
         toast: true,
-        background: scope === 'success' ? '#f0fdf4' : '#fef2f2',
-        color: scope === 'success' ? '#065f46' : '#991b1b'
+        background,
+        color
       }
       Swal.fire(swalOptions)
     }
 
-    const onSubmit = handleSubmit(async (values: any) => {
+    const onSubmit = async (values: any) => {
       try {
         loading.value = true
 
-        // Simular envío de formulario
-        const response = await fetch(
-          'https://run.mocky.io/v3/2eb0428f-0525-4779-98a0-23993cb7ebfe',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(values)
-          }
-        )
+        // Configuración del destinatario
+        const recipientEmail = 'hola@eondev.site' // Cambiar por tu email
 
-        if (response.status === 200) {
+        // Construir el asunto del correo
+        const subject = encodeURIComponent(`${t('callToAction.emailSubject')} - ${values.name}`)
+
+        // Construir el cuerpo del correo
+        const body = encodeURIComponent(`
+Hola,
+
+Mi nombre es ${values.name} y me gustaría contactarte.
+
+${t('callToAction.emailContactInfo')}:
+- Nombre: ${values.name}
+- Email: ${values.email}
+
+${t('callToAction.emailMessage')}:
+${values.message}
+
+---
+${t('callToAction.emailFooter')}
+        `.trim())
+
+        // Construir la URL de mailto
+        const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${body}&cc=${values.email}`
+
+        // Mostrar mensaje informativo
+        dispatchSwal('info', 'Abriendo tu cliente de correo...')
+
+        // Abrir el cliente de correo
+        window.location.href = mailtoUrl
+
+        // Después de un breve delay, mostrar mensaje de éxito y limpiar formulario
+        setTimeout(() => {
           dispatchSwal('success')
-          // Resetear formulario después del éxito
-          setTimeout(() => {
-            const form = document.querySelector('form')
-            if (form) form.reset()
-          }, 2000)
-        } else {
-          throw new Error('Error en el servidor')
-        }
+          const form = document.querySelector('form')
+          if (form) form.reset()
+        }, 1500)
       } catch (error) {
-        console.error('Error enviando formulario:', error)
-        dispatchSwal('error')
+        console.error('Error abriendo cliente de correo:', error)
+        dispatchSwal('error', 'No se pudo abrir el cliente de correo. Por favor, contacta directamente a hola@eondev.site')
       } finally {
-        loading.value = false
+        setTimeout(() => {
+          loading.value = false
+        }, 1500)
       }
-    })
+    }
 
     return {
       onSubmit,
-      errors,
       fields,
       loading
     }

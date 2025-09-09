@@ -48,8 +48,8 @@
             :disabled="isRetrying"
             class="inline-flex items-center justify-center px-6 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <i v-if="isRetrying" class="fas fa-spinner fa-spin mr-2"></i>
-            <i v-else class="fas fa-redo mr-2"></i>
+            <font-awesome-icon v-if="isRetrying" icon="spinner" spin class="mr-2" />
+            <font-awesome-icon v-else icon="redo" class="mr-2" />
             {{ isRetrying ? 'Reintentando...' : 'Intentar de nuevo' }}
           </button>
 
@@ -58,7 +58,7 @@
             @click="handleGoHome"
             class="inline-flex items-center justify-center px-6 py-3 bg-white border-2 border-neutral-200 text-neutral-700 rounded-xl hover:bg-neutral-50 hover:border-neutral-300 focus:outline-none focus:ring-4 focus:ring-neutral-200 transition-all duration-300"
           >
-            <i class="fas fa-home mr-2"></i>
+            <font-awesome-icon icon="home" class="mr-2" />
             Ir al inicio
           </button>
 
@@ -67,7 +67,7 @@
             @click="handleReload"
             class="inline-flex items-center justify-center px-6 py-3 bg-white border-2 border-neutral-200 text-neutral-700 rounded-xl hover:bg-neutral-50 hover:border-neutral-300 focus:outline-none focus:ring-4 focus:ring-neutral-200 transition-all duration-300"
           >
-            <i class="fas fa-sync-alt mr-2"></i>
+            <font-awesome-icon icon="sync-alt" class="mr-2" />
             Recargar página
           </button>
         </div>
@@ -77,7 +77,7 @@
           <p class="text-sm font-medium text-neutral-700 mb-2">Sugerencias:</p>
           <ul class="text-sm text-neutral-600 space-y-1">
             <li v-for="(suggestion, index) in suggestions" :key="index" class="flex items-start">
-              <i class="fas fa-lightbulb text-yellow-500 mr-2 mt-0.5 text-xs"></i>
+              <font-awesome-icon icon="lightbulb" class="text-yellow-500 mr-2 mt-0.5 text-xs" />
               {{ suggestion }}
             </li>
           </ul>
