@@ -5,10 +5,10 @@
     <!-- Header de la sección -->
     <div class="text-center mb-16 animate-fade-in">
       <h2 class="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
-        Experiencia Técnica
+        {{ $t('experience.title') }}
       </h2>
       <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
-        Tecnologías y herramientas con las que he trabajado para crear soluciones escalables
+        {{ $t('experience.subtitle') }}
       </p>
       <div class="w-24 h-1 bg-gradient-to-r from-secondary-500 to-primary-400 mx-auto mt-6 rounded-full"></div>
     </div>
@@ -73,7 +73,7 @@
     <!-- Call to action sutil -->
     <div class="text-center mt-16 animate-fade-in-up" style="animation-delay: 0.8s">
       <p class="text-neutral-600 mb-6">
-        ¿Quieres saber más sobre mi experiencia técnica?
+        {{ $t('experience.learnMore') }}
       </p>
       <router-link
         to="/about"

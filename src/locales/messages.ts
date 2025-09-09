@@ -5,10 +5,19 @@ const messages = {
       headerAbout: 'Acerca',
       headerNews: 'Noticias',
       headerCTA: 'Contacto',
-      selectLanguage: 'Idioma'
+      selectLanguage: 'Idioma',
+      viewOnGithub: 'Ver en GitHub'
     },
     footer: {
-      mainMessage: 'Es una iniciativa personal con el proposito de crear una marca que permita impulsar el desarrollo de aplicaciones web enfocadas en las necesidades de los usuarios'
+      mainMessage: 'Es una iniciativa personal con el proposito de crear una marca que permita impulsar el desarrollo de aplicaciones web enfocadas en las necesidades de los usuarios',
+      followMe: 'Sígueme en',
+      navigation: 'Navegación',
+      technologies: 'Tecnologías',
+      contact: 'Contacto',
+      projectInMind: '¿Tienes un proyecto en mente?',
+      letsChat: 'Conversemos',
+      allRightsReserved: 'Todos los derechos reservados',
+      availableForProjects: 'Disponible para proyectos'
     },
     home: {
       aboutMe: {
@@ -55,6 +64,30 @@ const messages = {
     news: {
       title: 'Noticias'
     },
+    blog: {
+      title: 'Noticias',
+      subtitle: 'Artículos y reflexiones sobre desarrollo web, tecnología y mejores prácticas',
+      searchPlaceholder: 'Buscar artículos...',
+      loadingArticles: 'Cargando artículos...',
+      retryingArticles: 'Reintentando cargar artículos...',
+      errorLoadingArticles: 'Error al cargar los artículos',
+      noArticlesFound: 'No se encontraron artículos',
+      articlesInterest: '¿Te interesan más artículos sobre desarrollo web?',
+      viewAllArticles: 'Ver todos los artículos',
+      filterBy: 'Filtrar por',
+      articles: 'artículos',
+      articlesCount: {
+        3: '3 artículos',
+        6: '6 artículos',
+        9: '9 artículos',
+        12: '12 artículos'
+      }
+    },
+    experience: {
+      title: 'Experiencia Técnica',
+      subtitle: 'Tecnologías y herramientas con las que he trabajado para crear soluciones escalables',
+      learnMore: '¿Quieres saber más sobre mi experiencia técnica?'
+    },
     callToAction: {
       title: 'Trabajemos Juntos',
       subtitle: '¿Tienes un proyecto en mente? Me encantaría escuchar tus ideas y ayudarte a convertirlas en realidad.',
@@ -65,7 +98,11 @@ const messages = {
       message: 'Mensaje',
       messagePlaceholder: 'Cuéntame sobre tu proyecto o idea...',
       send: 'Enviar Mensaje',
-      sending: 'Enviando...'
+      sending: 'Enviando...',
+      emailSubject: 'Contacto desde Portfolio',
+      emailContactInfo: 'Información de contacto',
+      emailMessage: 'Mensaje',
+      emailFooter: 'Este mensaje fue enviado desde tu portfolio web.'
     }
   },
   en: {
@@ -75,10 +112,19 @@ const messages = {
       headerAbout: 'About',
       headerNews: 'News',
       headerCTA: 'Contact',
-      selectLanguage: 'Language'
+      selectLanguage: 'Language',
+      viewOnGithub: 'View on GitHub'
     },
     footer: {
-      mainMessage: 'It is a personal initiative with the purpose of creating a brand that allows to boost the development of web applications focused on the needs of users'
+      mainMessage: 'It is a personal initiative with the purpose of creating a brand that allows to boost the development of web applications focused on the needs of users',
+      followMe: 'Follow me on',
+      navigation: 'Navigation',
+      technologies: 'Technologies',
+      contact: 'Contact',
+      projectInMind: 'Have a project in mind?',
+      letsChat: 'Let\'s talk',
+      allRightsReserved: 'All rights reserved',
+      availableForProjects: 'Available for projects'
     },
     home: {
       aboutMe: {
@@ -125,6 +171,30 @@ const messages = {
     news: {
       title: 'News'
     },
+    blog: {
+      title: 'News',
+      subtitle: 'Articles and reflections on web development, technology and best practices',
+      searchPlaceholder: 'Search articles...',
+      loadingArticles: 'Loading articles...',
+      retryingArticles: 'Retrying to load articles...',
+      errorLoadingArticles: 'Error loading articles',
+      noArticlesFound: 'No articles found',
+      articlesInterest: 'Interested in more web development articles?',
+      viewAllArticles: 'View all articles',
+      filterBy: 'Filter by',
+      articles: 'articles',
+      articlesCount: {
+        3: '3 articles',
+        6: '6 articles',
+        9: '9 articles',
+        12: '12 articles'
+      }
+    },
+    experience: {
+      title: 'Technical Experience',
+      subtitle: 'Technologies and tools I\'ve worked with to create scalable solutions',
+      learnMore: 'Want to know more about my technical experience?'
+    },
     callToAction: {
       title: 'Let\'s Work Together',
       subtitle: 'Have a project in mind? I\'d love to hear your ideas and help you turn them into reality.',
@@ -135,7 +205,11 @@ const messages = {
       message: 'Message',
       messagePlaceholder: 'Tell me about your project or idea...',
       send: 'Send Message',
-      sending: 'Sending...'
+      sending: 'Sending...',
+      emailSubject: 'Contact from Portfolio',
+      emailContactInfo: 'Contact information',
+      emailMessage: 'Message',
+      emailFooter: 'This message was sent from your web portfolio.'
     }
   }
 }

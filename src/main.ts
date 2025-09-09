@@ -11,7 +11,30 @@ import {
   faDatabase,
   faCode,
   faFileCode,
-  faBlog
+  faBlog,
+  faSearch,
+  faTimes,
+  faThLarge,
+  faList,
+  faExclamationTriangle,
+  faSpinner,
+  faRedo,
+  faNewspaper,
+  faClock,
+  faCalendarAlt,
+  faBolt,
+  faShareAlt,
+  faChevronLeft,
+  faChevronRight,
+  faHeart,
+  faHome,
+  faSyncAlt,
+  faLightbulb,
+  faUser,
+  faEnvelope,
+  faCommentAlt,
+  faPaperPlane,
+  faChevronDown
 } from '@fortawesome/free-solid-svg-icons'
 import { createI18n } from 'vue-i18n'
 import messages from './locales/messages'
@@ -22,7 +45,30 @@ const fontAwesomeIcons = [
   faDatabase,
   faCode,
   faFileCode,
-  faBlog
+  faBlog,
+  faSearch,
+  faTimes,
+  faThLarge,
+  faList,
+  faExclamationTriangle,
+  faSpinner,
+  faRedo,
+  faNewspaper,
+  faClock,
+  faCalendarAlt,
+  faBolt,
+  faShareAlt,
+  faChevronLeft,
+  faChevronRight,
+  faHeart,
+  faHome,
+  faSyncAlt,
+  faLightbulb,
+  faUser,
+  faEnvelope,
+  faCommentAlt,
+  faPaperPlane,
+  faChevronDown
 ]
 
 library.add(...fontAwesomeIcons)
@@ -38,8 +84,8 @@ configure({
 
 const i18n = createI18n({
   legacy: false,
-  locale: 'en',
-  fallbackLocale: 'es',
+  locale: 'es',
+  fallbackLocale: 'en',
   messages
 })
 

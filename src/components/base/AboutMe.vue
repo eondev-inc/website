@@ -138,8 +138,8 @@
 
     <!-- Indicador de scroll -->
     <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-      <div class="w-6 h-10 border-2 border-neutral-300 rounded-full flex justify-center">
-        <div class="w-1 h-3 bg-neutral-400 rounded-full mt-2 animate-pulse"></div>
+      <div class="w-10 h-10 bg-white/80 backdrop-blur-sm border border-neutral-200 rounded-full flex items-center justify-center shadow-soft hover:shadow-lg transition-all duration-300">
+        <font-awesome-icon icon="chevron-down" class="text-neutral-600 text-lg" />
       </div>
     </div>
   </section>
