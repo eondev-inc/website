@@ -20,7 +20,7 @@
             <!-- Badge -->
             <div class="inline-flex items-center gap-2 px-4 py-2 bg-secondary-100 text-secondary-700 rounded-full text-sm font-medium mb-6">
               <div class="w-2 h-2 bg-secondary-500 rounded-full animate-pulse"></div>
-              Sobre mí
+              {{ $t('about.badge') }}
             </div>
 
             <!-- Título principal -->
@@ -88,9 +88,9 @@
           <h2 class="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
             {{ $t('home.aboutMe.meFirts') }}
           </h2>
-          <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
-            Mi trayectoria profesional y experiencias más destacadas
-          </p>
+            <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
+              {{ $t('about.timeline.intro') }}
+            </p>
           <div class="w-24 h-1 bg-gradient-to-r from-secondary-500 to-primary-400 mx-auto mt-6 rounded-full"></div>
         </div>
 
@@ -144,7 +144,7 @@
                         @click="toOutside(about.url)"
                         class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-secondary-500 to-primary-400 text-white rounded-xl hover:from-secondary-600 hover:to-primary-500 transition-all duration-300 shadow-soft hover:shadow-glow hover:-translate-y-0.5 text-sm font-medium"
                       >
-                        {{ $t('home.aboutMe.meSeeMore') }}
+                        {{ $t('about.timeline.seeMore') }}
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                         </svg>
@@ -177,17 +177,17 @@
                     <!-- Contenido -->
                     <div class="relative z-10">
                       <h3 class="text-xl font-bold text-neutral-900 mb-4 group-hover:text-gradient transition-all duration-300">
-                        Conecta conmigo
+                        {{ $t('about.linkedin.title') }}
                       </h3>
                       <p class="text-neutral-600 leading-relaxed mb-6">
-                        Sígueme en LinkedIn para más actualizaciones sobre mi trabajo y proyectos.
+                        {{ $t('about.linkedin.description') }}
                       </p>
                       <button
                         @click="toOutside('https://www.linkedin.com/in/yromeroc')"
                         class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-secondary-500 to-primary-400 text-white rounded-xl hover:from-secondary-600 hover:to-primary-500 transition-all duration-300 shadow-soft hover:shadow-glow hover:-translate-y-0.5 text-sm font-medium"
                       >
                         <font-awesome-icon icon="fa-brands fa-linkedin-in" class="w-4 h-4" />
-                        Ver LinkedIn
+                        {{ $t('about.linkedin.button') }}
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                         </svg>
@@ -217,23 +217,17 @@
       <div class="container-custom relative z-10">
         <div class="text-center max-w-3xl mx-auto animate-fade-in">
           <h2 class="text-3xl lg:text-4xl font-bold mb-6">
-            <span class="text-gradient">¿Listo para trabajar juntos?</span>
+            <span class="text-gradient">{{ $t('about.cta.title') }}</span>
           </h2>
           <p class="text-lg text-neutral-600 mb-8 leading-relaxed">
-            Si tienes un proyecto en mente o simplemente quieres conectar, estaré encantado de escucharte.
+            {{ $t('about.cta.description') }}
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <router-link to="/contact" class="btn-primary inline-flex items-center justify-center gap-2 group">
-              Iniciar conversación
+              {{ $t('about.cta.buttonContact') }}
               <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
               </svg>
-            </router-link>
-            <router-link to="/" class="btn-outline inline-flex items-center justify-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-              </svg>
-              Ir al inicio
             </router-link>
           </div>
         </div>

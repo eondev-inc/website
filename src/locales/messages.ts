@@ -19,6 +19,24 @@ const messages = {
       allRightsReserved: 'Todos los derechos reservados',
       availableForProjects: 'Disponible para proyectos'
     },
+    about: {
+      badge: 'Sobre mí',
+      timeline: {
+        intro: 'Mi trayectoria profesional y experiencias más destacadas',
+        seeMore: 'Ver más'
+      },
+      linkedin: {
+        title: 'Conecta conmigo',
+        description: 'Sígueme en LinkedIn para más actualizaciones sobre mi trabajo y proyectos.',
+        button: 'Ver LinkedIn'
+      },
+      cta: {
+        title: '¿Listo para trabajar juntos?',
+        description: 'Si tienes un proyecto en mente o simplemente quieres conectar, estaré encantado de escucharte.',
+        buttonContact: 'Iniciar conversación',
+        buttonHome: 'Ir al inicio'
+      }
+    },
     home: {
       aboutMe: {
         meFirts: 'Experiencia laboral',
@@ -139,6 +157,24 @@ const messages = {
       letsChat: "Let's talk",
       allRightsReserved: 'All rights reserved',
       availableForProjects: 'Available for projects'
+    },
+    about: {
+      badge: 'About me',
+      timeline: {
+        intro: 'My professional journey and most relevant experiences',
+        seeMore: 'See more'
+      },
+      linkedin: {
+        title: 'Connect with me',
+        description: 'Follow me on LinkedIn for more updates about my work and projects.',
+        button: 'View LinkedIn'
+      },
+      cta: {
+        title: 'Ready to work together?',
+        description: 'If you have a project in mind or just want to connect, I will be happy to hear from you.',
+        buttonContact: 'Start conversation',
+        buttonHome: 'Go to home'
+      }
     },
     home: {
       aboutMe: {

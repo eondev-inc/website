@@ -39,56 +39,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Filtros de categorías -->
-      <div class="flex flex-wrap justify-center gap-3">
-        <button
-          v-for="category in categories"
-          :key="category.id"
-          @click="selectedCategory = selectedCategory === category.id ? null : category.id"
-          :class="[
-            'px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 category-tag',
-            selectedCategory === category.id
-              ? 'text-white shadow-soft'
-              : 'bg-white text-neutral-700 border border-neutral-200 hover:bg-primary-50 hover:border-primary-300'
-          ]"
-          :style="selectedCategory === category.id ? `background-color: ${category.color}` : ''"
-          :aria-label="`Filtrar por ${category.name}, ${category.count} artículos`"
-        >
-          <span class="flex items-center space-x-2">
-            <span
-              :class="[
-                'w-2 h-2 rounded-full',
-                selectedCategory !== category.id ? 'opacity-60' : ''
-              ]"
-              :style="`background-color: ${category.color}`"
-            />
-            <span>{{ category.name }}</span>
-            <span
-              :class="[
-                'text-xs px-1.5 py-0.5 rounded-full',
-                selectedCategory === category.id
-                  ? 'bg-white/20 text-white'
-                  : 'bg-neutral-100 text-neutral-500'
-              ]"
-            >
-              {{ category.count }}
-            </span>
-          </span>
-        </button>
-
-        <!-- Botón para limpiar filtros -->
-        <button
-          v-if="selectedCategory !== null"
-          @click="selectedCategory = null"
-          class="px-3 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-neutral-100 text-neutral-600 hover:bg-neutral-200 flex items-center space-x-1"
-          aria-label="Limpiar filtros de categoría"
-        >
-          <font-awesome-icon icon="times" class="text-xs" />
-          <span>Limpiar</span>
-        </button>
-      </div>
-
       <!-- Controles de vista -->
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
@@ -167,7 +117,7 @@
         </button>
 
         <p class="text-sm text-neutral-500">
-          Si el problema persiste, intenta recargar la página
+          {{t('blog.problems')}}
         </p>
       </div>
     </div>
@@ -361,6 +311,54 @@
       </article>
     </div>
 
+    <!-- Filtros de categorías -->
+    <div class="flex flex-wrap justify-center gap-3 mt-12">
+      <button
+        v-for="category in categories"
+        :key="category.id"
+        @click="selectedCategory = selectedCategory === category.id ? null : category.id"
+        :class="[
+          'px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 category-tag',
+          selectedCategory === category.id
+            ? 'text-white shadow-soft'
+            : 'bg-white text-neutral-700 border border-neutral-200 hover:bg-primary-50 hover:border-primary-300'
+        ]"
+        :style="selectedCategory === category.id ? `background-color: ${category.color}` : ''"
+        :aria-label="`Filtrar por ${category.name}, ${category.count} artículos`"
+      >
+        <span class="flex items-center space-x-2">
+          <span
+            :class="[
+              'w-2 h-2 rounded-full',
+              selectedCategory !== category.id ? 'opacity-60' : ''
+            ]"
+            :style="`background-color: ${category.color}`"
+          />
+          <span>{{ category.name }}</span>
+          <span
+            :class="[
+              'text-xs px-1.5 py-0.5 rounded-full',
+              selectedCategory === category.id
+                ? 'bg-white/20 text-white'
+                : 'bg-neutral-100 text-neutral-500'
+            ]"
+          >
+            {{ category.count }}
+          </span>
+        </span>
+      </button>
+
+      <!-- Botón para limpiar filtros -->
+      <button
+        v-if="selectedCategory !== null"
+        @click="selectedCategory = null"
+        class="px-3 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-neutral-100 text-neutral-600 hover:bg-neutral-200 flex items-center space-x-1"
+        aria-label="Limpiar filtros de categoría"
+      >
+        <font-awesome-icon icon="times" class="text-xs" />
+        <span>Limpiar</span>
+      </button>
+    </div>
     <!-- Paginación -->
     <div v-if="totalPages > 1" class="flex justify-center items-center mt-12 space-x-2">
       <button
