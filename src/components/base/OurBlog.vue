@@ -117,7 +117,7 @@
         </button>
 
         <p class="text-sm text-neutral-500">
-          {{t('blog.problems')}}
+          {{$t('blog.problems')}}
         </p>
       </div>
     </div>
