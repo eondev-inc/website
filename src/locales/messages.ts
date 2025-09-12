@@ -149,6 +149,11 @@ const messages = {
         errorText: 'Hubo un problema',
         emailErrorText: 'No se pudo abrir el cliente de correo. Por favor, contacta directamente a hola@eondev.site'
       }
+    },
+    errors: {
+      under_construction: {
+        title: 'Estamos trabajando para Usted'
+      }
     }
   },
   en: {
@@ -301,7 +306,14 @@ const messages = {
         errorText: 'There was a problem',
         emailErrorText: 'Could not open email client. Please contact directly at hola@eondev.site'
       }
+    },
+    errors: {
+      under_construction: {
+        title: 'We are working for you'
+      }
     }
+  },
+  default: {
   }
 }
 
