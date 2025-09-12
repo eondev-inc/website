@@ -97,7 +97,20 @@ const messages = {
         6: '6 art\u00edculos',
         9: '9 art\u00edculos',
         12: '12 art\u00edculos'
-      }
+      },
+      show: 'Mostrar',
+      view: 'Vista',
+      retry: 'Reintentar',
+      retrying: 'Reintentando',
+      problems: 'Si contin\u00faan los problemas, int\u00e9ntalo m\u00e1s tarde.',
+      noResultsHelp: 'Prueba con diferentes palabras clave o elimina algunos filtros.',
+      loadedFromCache: 'Cargado desde cach\u00e9',
+      removeFavorite: 'Quitar de favoritos',
+      addFavorite: 'Agregar a favoritos',
+      readArticle: 'Leer art\u00edculo',
+      shareArticle: 'Compartir art\u00edculo',
+      share: 'Compartir',
+      clear: 'Limpiar'
     },
     experience: {
       title: 'Experiencia T\u00e9cnica',
@@ -236,7 +249,20 @@ const messages = {
         6: '6 articles',
         9: '9 articles',
         12: '12 articles'
-      }
+      },
+      show: 'Show',
+      view: 'View',
+      retry: 'Retry',
+      retrying: 'Retrying',
+      problems: 'If problems persist, try again later.',
+      noResultsHelp: 'Try different keywords or remove some filters.',
+      loadedFromCache: 'Loaded from cache',
+      removeFavorite: 'Remove from favorites',
+      addFavorite: 'Add to favorites',
+      readArticle: 'Read article',
+      shareArticle: 'Share article',
+      share: 'Share',
+      clear: 'Clear'
     },
     experience: {
       title: 'Technical Experience',
