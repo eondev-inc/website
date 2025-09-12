@@ -11,6 +11,17 @@
   --color-secondary: theme('colors.secondary.500');
   --color-accent: theme('colors.accent.500');
   
+  /* Variables para Dark/Light Mode */
+  --bg-primary: theme('colors.white');
+  --bg-secondary: theme('colors.neutral.50');
+  --bg-tertiary: theme('colors.neutral.100');
+  --text-primary: theme('colors.neutral.900');
+  --text-secondary: theme('colors.neutral.700');
+  --text-tertiary: theme('colors.neutral.500');
+  --border-primary: theme('colors.neutral.200');
+  --border-secondary: theme('colors.neutral.300');
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  
   /* Espaciado */
   --spacing-xs: theme('spacing.2');
   --spacing-sm: theme('spacing.4');
@@ -37,6 +48,24 @@
   --transition-fast: 0.15s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
+}
+
+/* Variables para modo oscuro con contraste WCAG AA/AAA */
+.dark {
+  --bg-primary: theme('colors.neutral.900');
+  --bg-secondary: theme('colors.neutral.800');
+  --bg-tertiary: theme('colors.neutral.700');
+  --text-primary: theme('colors.neutral.50');
+  --text-secondary: theme('colors.neutral.200');
+  --text-tertiary: theme('colors.neutral.400');
+  --border-primary: theme('colors.neutral.700');
+  --border-secondary: theme('colors.neutral.600');
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  
+  /* Colores primarios más brillantes para dark mode */
+  --color-primary: theme('colors.primary.400');
+  --color-secondary: theme('colors.secondary.400');
+  --color-accent: theme('colors.accent.400');
 }
 
 /* Estilos base mejorados */

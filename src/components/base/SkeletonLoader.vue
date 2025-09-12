@@ -13,9 +13,9 @@
   <div :class="containerClasses">
     <!-- Blog Card Skeleton -->
     <template v-if="variant === 'blog-card'">
-      <div class="bg-white rounded-3xl shadow-soft overflow-hidden animate-pulse">
+      <div class="bg-white dark:bg-neutral-800 rounded-3xl shadow-soft overflow-hidden animate-pulse">
         <!-- Image placeholder -->
-        <div class="w-full h-48 bg-gradient-to-r from-neutral-200 via-neutral-300 to-neutral-200 bg-animate" />
+        <div class="w-full h-48 bg-gradient-to-r from-neutral-200 via-neutral-300 to-neutral-200 dark:from-neutral-700 dark:via-neutral-600 dark:to-neutral-700 bg-animate" />
 
         <!-- Content -->
         <div class="p-6 space-y-4">

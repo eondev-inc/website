@@ -5,8 +5,8 @@
       :class="[
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
         isScrolled
-          ? 'bg-white/95 backdrop-blur-xl border-b border-neutral-100 shadow-sm'
-          : 'bg-white/50 backdrop-blur-sm'
+          ? 'bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl border-b border-neutral-100 dark:border-neutral-700 shadow-sm'
+          : 'bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm'
       ]"
     >
       <nav class="max-w-6xl mx-auto px-6 lg:px-8">
@@ -25,8 +25,8 @@
               >
             </div>
             <div class="hidden sm:flex flex-col">
-              <span class="text-lg font-bold text-neutral-800 leading-tight">Y|R</span>
-              <span class="text-xs text-neutral-500 -mt-1">Portfolio</span>
+              <span class="text-lg font-bold text-neutral-800 dark:text-neutral-200 leading-tight">Y|R</span>
+              <span class="text-xs text-neutral-500 dark:text-neutral-400 -mt-1">Portfolio</span>
             </div>
           </router-link>
 
@@ -40,8 +40,8 @@
                 :class="[
                   'relative px-6 py-2 text-sm font-medium rounded-full transition-all duration-300',
                   isActiveMenu === item.name || $route.name === item.name
-                    ? 'bg-white text-primary-700 shadow-soft'
-                    : 'text-neutral-600 hover:text-neutral-800 hover:bg-white/50'
+                    ? 'bg-white dark:bg-neutral-800 text-primary-700 dark:text-primary-400 shadow-soft'
+                    : 'text-neutral-600 dark:text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-100 hover:bg-white/50 dark:hover:bg-neutral-800/50'
                 ]"
                 @click="setActiveMenu(item.name)"
               >
@@ -57,7 +57,7 @@
               href="https://github.com/eondev-inc"
               target="_blank"
               rel="noopener noreferrer"
-              class="hidden sm:flex items-center space-x-2 px-4 py-2 bg-neutral-900 text-white text-sm font-medium rounded-full hover:bg-primary-700 transition-all duration-300 hover:shadow-soft hover:scale-105"
+              class="hidden sm:flex items-center space-x-2 px-4 py-2 bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 text-sm font-medium rounded-full hover:bg-primary-700 dark:hover:bg-primary-400 transition-all duration-300 hover:shadow-soft hover:scale-105"
             >
               <font-awesome-icon
                 icon="fa-brands fa-github"
@@ -73,10 +73,15 @@
               />
             </div>
 
+            <!-- Theme Toggle -->
+            <div class="relative">
+              <theme-toggle :simple-toggle="false" />
+            </div>
+
             <!-- Mobile menu button elegante -->
             <button
               @click="toggleMobileNav"
-              class="lg:hidden relative w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center text-neutral-700 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200"
+              class="lg:hidden relative w-10 h-10 bg-neutral-100 dark:bg-neutral-800 rounded-full flex items-center justify-center text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all duration-200"
             >
               <div class="w-4 h-4 flex flex-col justify-center items-center space-y-1">
                 <span
@@ -110,7 +115,7 @@
           isMobileNavOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
         ]"
       >
-        <div class="bg-white/98 backdrop-blur-xl border-t border-neutral-100">
+        <div class="bg-white/98 dark:bg-neutral-900/98 backdrop-blur-xl border-t border-neutral-100 dark:border-neutral-700">
           <div class="max-w-6xl mx-auto px-6 py-8">
             <div class="space-y-2">
               <router-link
@@ -157,11 +162,13 @@ import { defineComponent, ref, Ref, onMounted, onUnmounted } from 'vue'
 import { initFlowbite } from 'flowbite'
 import { useI18n } from 'vue-i18n'
 import LanguageSelector from './LanguageSelector.vue'
+import ThemeToggle from './ThemeToggle.vue'
 
 export default defineComponent({
   name: 'HeaderView',
   components: {
-    LanguageSelector
+    LanguageSelector,
+    ThemeToggle
   },
   setup() {
     const isActiveMenu: Ref<string> = ref('')

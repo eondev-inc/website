@@ -1,6 +1,6 @@
 <template>
   <!-- Hero Section Moderna -->
-  <section class="section-hero bg-gradient-to-br from-neutral-50 via-secondary-50/20 to-primary-50/20 relative overflow-hidden">
+  <section class="section-hero bg-gradient-to-br from-neutral-50 via-secondary-50/20 to-primary-50/20 dark:from-neutral-900 dark:via-secondary-900/20 dark:to-primary-900/20 relative overflow-hidden">
     <!-- Background decorativo -->
     <div class="absolute inset-0 overflow-hidden">
       <div class="absolute -top-40 -right-40 w-80 h-80 bg-secondary-400/20 rounded-full blur-3xl animate-float"></div>
@@ -16,8 +16,8 @@
         <!-- Contenido Principal -->
         <div class="lg:pr-8 animate-slide-up">
           <!-- Badge profesional -->
-          <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-6 animate-fade-in" style="animation-delay: 0.2s;">
-            <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium mb-6 animate-fade-in" style="animation-delay: 0.2s;">
+            <div class="w-2 h-2 bg-primary-500 dark:bg-primary-400 rounded-full animate-pulse"></div>
             {{ $t('home.aboutMe.availability') }}
           </div>
 
@@ -30,24 +30,24 @@
           </h1>
 
           <!-- Subtítulo -->
-          <h2 class="text-2xl lg:text-3xl font-display font-semibold text-neutral-600 mb-6 animate-slide-up" style="animation-delay: 0.4s;">
+          <h2 class="text-2xl lg:text-3xl font-display font-semibold text-neutral-600 dark:text-neutral-300 mb-6 animate-slide-up" style="animation-delay: 0.4s;">
             {{ $t('home.aboutMe.title') }}
           </h2>
 
           <!-- Descripción mejorada -->
-          <p class="text-lg text-neutral-600 leading-relaxed mb-8 max-w-2xl animate-slide-up" style="animation-delay: 0.5s;">
+          <p class="text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed mb-8 max-w-2xl animate-slide-up" style="animation-delay: 0.5s;">
             {{ $t('home.aboutMe.description') }}
           </p>
 
           <!-- Estadísticas destacadas -->
           <div class="grid grid-cols-3 gap-6 mb-8 animate-slide-up" style="animation-delay: 0.6s;">
             <div class="text-center">
-              <div class="text-3xl font-display font-bold text-primary-600 mb-1">9+</div>
-              <div class="text-sm text-neutral-500 font-medium">{{ $t('home.aboutMe.yearsExp') }}</div>
+              <div class="text-3xl font-display font-bold text-primary-600 dark:text-primary-400 mb-1">9+</div>
+              <div class="text-sm text-neutral-500 dark:text-neutral-400 font-medium">{{ $t('home.aboutMe.yearsExp') }}</div>
             </div>
             <div class="text-center">
-              <div class="text-3xl font-display font-bold text-secondary-600 mb-1">10+</div>
-              <div class="text-sm text-neutral-500 font-medium">{{ $t('home.aboutMe.projects') }}</div>
+              <div class="text-3xl font-display font-bold text-secondary-600 dark:text-secondary-400 mb-1">10+</div>
+              <div class="text-sm text-neutral-500 dark:text-neutral-400 font-medium">{{ $t('home.aboutMe.projects') }}</div>
             </div>
             <div class="text-center">
               <div class="text-3xl font-display font-bold text-accent-600 mb-1">10+</div>

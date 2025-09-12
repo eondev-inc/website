@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-gradient-to-t from-neutral-900 via-neutral-800 to-neutral-900 text-white relative overflow-hidden">
+  <footer class="bg-gradient-to-t from-neutral-900 via-neutral-800 to-neutral-900 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950 text-white relative overflow-hidden">
 
     <!-- Background decorativo -->
     <div class="absolute inset-0 bg-gradient-to-br from-secondary-900/20 via-transparent to-primary-900/20 pointer-events-none" />
