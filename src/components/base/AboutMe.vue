@@ -10,7 +10,6 @@
 
     <!-- Grid pattern sutil -->
     <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, #000 1px, transparent 1px); background-size: 50px 50px;"></div>
-
     <div class="container-custom relative z-10">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen py-20">
 
@@ -104,8 +103,6 @@
         <!-- Imagen/Visual mejorado -->
         <div class="relative lg:ml-8 animate-scale-in" style="animation-delay: 0.4s;">
           <!-- Elementos decorativos -->
-          <div class="absolute -inset-4 bg-gradient-to-br from-secondary-200/30 to-primary-200/30 rounded-3xl blur-2xl"></div>
-          <div class="absolute -inset-2 bg-gradient-to-br from-white/60 to-white/30 rounded-3xl backdrop-blur-sm"></div>
 
           <!-- Imagen principal -->
           <div class="relative bg-white rounded-3xl p-8 shadow-large hover:shadow-glow transition-all duration-500">

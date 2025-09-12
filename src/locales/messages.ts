@@ -19,6 +19,24 @@ const messages = {
       allRightsReserved: 'Todos los derechos reservados',
       availableForProjects: 'Disponible para proyectos'
     },
+    about: {
+      badge: 'Sobre mí',
+      timeline: {
+        intro: 'Mi trayectoria profesional y experiencias más destacadas',
+        seeMore: 'Ver más'
+      },
+      linkedin: {
+        title: 'Conecta conmigo',
+        description: 'Sígueme en LinkedIn para más actualizaciones sobre mi trabajo y proyectos.',
+        button: 'Ver LinkedIn'
+      },
+      cta: {
+        title: '¿Listo para trabajar juntos?',
+        description: 'Si tienes un proyecto en mente o simplemente quieres conectar, estaré encantado de escucharte.',
+        buttonContact: 'Iniciar conversación',
+        buttonHome: 'Ir al inicio'
+      }
+    },
     home: {
       aboutMe: {
         meFirts: 'Experiencia laboral',
@@ -79,7 +97,20 @@ const messages = {
         6: '6 art\u00edculos',
         9: '9 art\u00edculos',
         12: '12 art\u00edculos'
-      }
+      },
+      show: 'Mostrar',
+      view: 'Vista',
+      retry: 'Reintentar',
+      retrying: 'Reintentando',
+      problems: 'Si contin\u00faan los problemas, int\u00e9ntalo m\u00e1s tarde.',
+      noResultsHelp: 'Prueba con diferentes palabras clave o elimina algunos filtros.',
+      loadedFromCache: 'Cargado desde cach\u00e9',
+      removeFavorite: 'Quitar de favoritos',
+      addFavorite: 'Agregar a favoritos',
+      readArticle: 'Leer art\u00edculo',
+      shareArticle: 'Compartir art\u00edculo',
+      share: 'Compartir',
+      clear: 'Limpiar'
     },
     experience: {
       title: 'Experiencia T\u00e9cnica',
@@ -139,6 +170,24 @@ const messages = {
       letsChat: "Let's talk",
       allRightsReserved: 'All rights reserved',
       availableForProjects: 'Available for projects'
+    },
+    about: {
+      badge: 'About me',
+      timeline: {
+        intro: 'My professional journey and most relevant experiences',
+        seeMore: 'See more'
+      },
+      linkedin: {
+        title: 'Connect with me',
+        description: 'Follow me on LinkedIn for more updates about my work and projects.',
+        button: 'View LinkedIn'
+      },
+      cta: {
+        title: 'Ready to work together?',
+        description: 'If you have a project in mind or just want to connect, I will be happy to hear from you.',
+        buttonContact: 'Start conversation',
+        buttonHome: 'Go to home'
+      }
     },
     home: {
       aboutMe: {
@@ -200,7 +249,20 @@ const messages = {
         6: '6 articles',
         9: '9 articles',
         12: '12 articles'
-      }
+      },
+      show: 'Show',
+      view: 'View',
+      retry: 'Retry',
+      retrying: 'Retrying',
+      problems: 'If problems persist, try again later.',
+      noResultsHelp: 'Try different keywords or remove some filters.',
+      loadedFromCache: 'Loaded from cache',
+      removeFavorite: 'Remove from favorites',
+      addFavorite: 'Add to favorites',
+      readArticle: 'Read article',
+      shareArticle: 'Share article',
+      share: 'Share',
+      clear: 'Clear'
     },
     experience: {
       title: 'Technical Experience',

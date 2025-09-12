@@ -39,60 +39,10 @@
           </div>
         </div>
       </div>
-
-      <!-- Filtros de categorías -->
-      <div class="flex flex-wrap justify-center gap-3">
-        <button
-          v-for="category in categories"
-          :key="category.id"
-          @click="selectedCategory = selectedCategory === category.id ? null : category.id"
-          :class="[
-            'px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 category-tag',
-            selectedCategory === category.id
-              ? 'text-white shadow-soft'
-              : 'bg-white text-neutral-700 border border-neutral-200 hover:bg-primary-50 hover:border-primary-300'
-          ]"
-          :style="selectedCategory === category.id ? `background-color: ${category.color}` : ''"
-          :aria-label="`Filtrar por ${category.name}, ${category.count} artículos`"
-        >
-          <span class="flex items-center space-x-2">
-            <span
-              :class="[
-                'w-2 h-2 rounded-full',
-                selectedCategory !== category.id ? 'opacity-60' : ''
-              ]"
-              :style="`background-color: ${category.color}`"
-            />
-            <span>{{ category.name }}</span>
-            <span
-              :class="[
-                'text-xs px-1.5 py-0.5 rounded-full',
-                selectedCategory === category.id
-                  ? 'bg-white/20 text-white'
-                  : 'bg-neutral-100 text-neutral-500'
-              ]"
-            >
-              {{ category.count }}
-            </span>
-          </span>
-        </button>
-
-        <!-- Botón para limpiar filtros -->
-        <button
-          v-if="selectedCategory !== null"
-          @click="selectedCategory = null"
-          class="px-3 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-neutral-100 text-neutral-600 hover:bg-neutral-200 flex items-center space-x-1"
-          aria-label="Limpiar filtros de categoría"
-        >
-          <font-awesome-icon icon="times" class="text-xs" />
-          <span>Limpiar</span>
-        </button>
-      </div>
-
       <!-- Controles de vista -->
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
-          <span class="text-sm text-neutral-600">Mostrar:</span>
+          <span class="text-sm text-neutral-600">{{$t('blog.show')}}:</span>
           <select
             v-model="itemsPerPage"
             class="px-3 py-2 bg-white border border-neutral-200 rounded-lg focus:border-primary-400 focus:ring-2 focus:ring-primary-100 text-sm"
@@ -105,7 +55,7 @@
         </div>
 
         <div class="flex items-center space-x-2">
-          <span class="text-sm text-neutral-600">Vista:</span>
+          <span class="text-sm text-neutral-600">{{$t('blog.view')}}:</span>
           <div class="flex bg-neutral-100 rounded-lg p-1">
             <button
               @click="viewMode = 'grid'"
@@ -163,11 +113,11 @@
         >
           <font-awesome-icon v-if="isRetrying" icon="spinner" spin />
           <font-awesome-icon v-else icon="redo" />
-          <span>{{ isRetrying ? 'Reintentando...' : 'Reintentar' }}</span>
+          <span>{{ isRetrying ? $t('blog.retrying') : $t('blog.retry') }}</span>
         </button>
 
         <p class="text-sm text-neutral-500">
-          Si el problema persiste, intenta recargar la página
+          {{$t('blog.problems')}}
         </p>
       </div>
     </div>
@@ -179,7 +129,7 @@
       </div>
       <h3 class="text-xl font-semibold text-neutral-700 mb-2">{{ $t('blog.noArticlesFound') }}</h3>
       <p class="text-neutral-500">
-        Intenta con otros términos de búsqueda o selecciona una categoría diferente
+        {{$t('blog.noResultsHelp')}}
       </p>
     </div>
 
@@ -300,7 +250,7 @@
               <span
                 v-if="blog._cached"
                 class="flex items-center space-x-1 text-green-600"
-                title="Cargado desde caché"
+                :title="$t('blog.loadedFromCache')"
               >
                 <font-awesome-icon icon="bolt" class="text-xs" />
                 <span>Rápido</span>
@@ -317,7 +267,7 @@
                     ? 'bg-red-500 text-white shadow-soft active'
                     : 'bg-neutral-100 text-neutral-500 hover:bg-red-50 hover:text-red-500'
                 ]"
-                :aria-label="favorites.includes(blog.id) ? 'Quitar de favoritos' : 'Agregar a favoritos'"
+                :aria-label="favorites.includes(blog.id) ? $t('blog.removeFavorite') : $t('blog.addFavorite')"
               >
                 <font-awesome-icon icon="heart" />
               </button>
@@ -333,7 +283,7 @@
               class="inline-flex items-center space-x-2 text-primary-600 hover:text-primary-700 font-medium text-sm transition-colors duration-200 group/link"
               :aria-label="`Leer artículo: ${cleanHtml(blog.title.rendered)}`"
             >
-              <span>Leer artículo</span>
+              <span>{{$t('blog.readArticle')}}</span>
               <svg
                 class="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1"
                 fill="none"
@@ -348,10 +298,10 @@
             <button
               @click="shareArticle(blog)"
               class="inline-flex items-center space-x-1 text-neutral-500 hover:text-accent-600 text-sm transition-colors duration-200"
-              :aria-label="`Compartir artículo: ${cleanHtml(blog.title.rendered)}`"
+              :aria-label="`${$t('blog.shareArticle')}: ${cleanHtml(blog.title.rendered)}`"
             >
               <font-awesome-icon icon="share-alt" />
-              <span>Compartir</span>
+              <span>{{$t('blog.share')}}</span>
             </button>
           </div>
         </div>
@@ -361,6 +311,54 @@
       </article>
     </div>
 
+    <!-- Filtros de categorías -->
+    <div class="flex flex-wrap justify-center gap-3 mt-12">
+      <button
+        v-for="category in categories"
+        :key="category.id"
+        @click="selectedCategory = selectedCategory === category.id ? null : category.id"
+        :class="[
+          'px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 category-tag',
+          selectedCategory === category.id
+            ? 'text-white shadow-soft'
+            : 'bg-white text-neutral-700 border border-neutral-200 hover:bg-primary-50 hover:border-primary-300'
+        ]"
+        :style="selectedCategory === category.id ? `background-color: ${category.color}` : ''"
+  :aria-label="`${$t('blog.filterBy')} ${category.name}, ${category.count} ${$t('blog.articles')}`"
+      >
+        <span class="flex items-center space-x-2">
+          <span
+            :class="[
+              'w-2 h-2 rounded-full',
+              selectedCategory !== category.id ? 'opacity-60' : ''
+            ]"
+            :style="`background-color: ${category.color}`"
+          />
+          <span>{{ category.name }}</span>
+          <span
+            :class="[
+              'text-xs px-1.5 py-0.5 rounded-full',
+              selectedCategory === category.id
+                ? 'bg-white/20 text-white'
+                : 'bg-neutral-100 text-neutral-500'
+            ]"
+          >
+            {{ category.count }}
+          </span>
+        </span>
+      </button>
+
+      <!-- Botón para limpiar filtros -->
+      <button
+        v-if="selectedCategory !== null"
+        @click="selectedCategory = null"
+        class="px-3 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-neutral-100 text-neutral-600 hover:bg-neutral-200 flex items-center space-x-1"
+        :aria-label="$t('blog.clearFilters')"
+      >
+        <font-awesome-icon icon="times" class="text-xs" />
+  <span>{{$t('blog.clear')}}</span>
+      </button>
+    </div>
     <!-- Paginación -->
     <div v-if="totalPages > 1" class="flex justify-center items-center mt-12 space-x-2">
       <button
