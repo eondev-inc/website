@@ -10,7 +10,6 @@
 
     <!-- Grid pattern sutil -->
     <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, #000 1px, transparent 1px); background-size: 50px 50px;"></div>
-|
     <div class="container-custom relative z-10">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen py-20">
 
