@@ -353,7 +353,7 @@
         v-if="selectedCategory !== null"
         @click="selectedCategory = null"
         class="px-3 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-neutral-100 text-neutral-600 hover:bg-neutral-200 flex items-center space-x-1"
-        aria-label="Limpiar filtros de categoría"
+        :aria-label="$t('blog.clearFilters')"
       >
         <font-awesome-icon icon="times" class="text-xs" />
   <span>{{$t('blog.clear')}}</span>
