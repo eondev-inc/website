@@ -106,14 +106,6 @@ router.beforeEach((to, from, next) => {
     }
     metaDescription.setAttribute('content', to.meta.description as string)
   }
-
-  // Aquí podrías añadir lógica de autenticación en el futuro
-  // if (to.meta.requiresAuth && !isAuthenticated()) {
-  //   next('/login')
-  // } else {
-  //   next()
-  // }
-
   next()
 })
 
