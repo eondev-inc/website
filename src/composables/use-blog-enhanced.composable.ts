@@ -17,7 +17,7 @@ import useBlogFeatures from './blog/use-blog-features.composable'
 
 // Utilidades
 import { estimateReadingTime, truncate } from './utils/text-utils'
-import { formatDate, formatDateShort } from './utils/date-utils'
+import { formatDate } from './utils/date-utils'
 import { cleanHtml, decodeHtmlEntities } from './utils/html-utils'
 
 // Interfaces
