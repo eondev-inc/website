@@ -6,7 +6,8 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-essential',
     '@vue/standard',
-    '@vue/typescript/recommended'
+    '@vue/typescript/recommended',
+    'plugin:vuejs-accessibility/recommended'
   ],
   parserOptions: {
     ecmaVersion: 2020
@@ -19,6 +20,12 @@ module.exports = {
       anonymous: 'always',
       named: 'never',
       asyncArrow: 'always'
-    }]
+    }],
+    // Accessibility rules - convertir a warnings en lugar de errores
+    'vuejs-accessibility/anchor-has-content': 'warn',
+    'vuejs-accessibility/label-has-for': 'warn',
+    'vuejs-accessibility/form-control-has-label': 'warn',
+    'vuejs-accessibility/click-events-have-key-events': 'warn',
+    'vuejs-accessibility/mouse-events-have-key-events': 'warn'
   }
 }
