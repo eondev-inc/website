@@ -46,9 +46,8 @@ export function useFocusTrap() {
     if (event.shiftKey && document.activeElement === firstElement) {
       event.preventDefault()
       lastElement.focus()
-    }
-    // Si es Tab y estamos en el último elemento, ir al primero
-    else if (!event.shiftKey && document.activeElement === lastElement) {
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+      // Si es Tab y estamos en el último elemento, ir al primero
       event.preventDefault()
       firstElement.focus()
     }
