@@ -154,6 +154,36 @@ const messages = {
       under_construction: {
         title: 'Estamos trabajando para Usted'
       }
+    },
+    accessibility: {
+      skipToMain: 'Saltar al contenido principal',
+      menu: 'Menú',
+      closeMenu: 'Cerrar menú',
+      openMenu: 'Abrir menú',
+      languageSelector: 'Selector de idioma',
+      changeLanguage: 'Cambiar idioma',
+      currentLanguage: 'Idioma actual',
+      searchPlaceholder: 'Buscar artículos...',
+      clearSearch: 'Limpiar búsqueda',
+      loading: 'Cargando...',
+      error: 'Error',
+      retry: 'Reintentar',
+      pageOf: 'Página {current} de {total}',
+      nextPage: 'Página siguiente',
+      previousPage: 'Página anterior',
+      firstPage: 'Primera página',
+      lastPage: 'Última página',
+      resultsFound: '{count} resultados encontrados',
+      noResults: 'No se encontraron resultados',
+      readMore: 'Leer más sobre {title}',
+      externalLink: 'Enlace externo a {url}',
+      newTab: 'Se abre en una nueva pestaña',
+      readTime: 'Tiempo de lectura estimado: {minutes} minutos',
+      category: 'Categoría: {name}',
+      publishedOn: 'Publicado el {date}',
+      socialMediaLink: 'Ir a {platform}',
+      mainNavigation: 'Navegación principal',
+      footerNavigation: 'Navegación del pie de página'
     }
   },
   en: {
@@ -311,6 +341,36 @@ const messages = {
       under_construction: {
         title: 'We are working for you'
       }
+    },
+    accessibility: {
+      skipToMain: 'Skip to main content',
+      menu: 'Menu',
+      closeMenu: 'Close menu',
+      openMenu: 'Open menu',
+      languageSelector: 'Language selector',
+      changeLanguage: 'Change language',
+      currentLanguage: 'Current language',
+      searchPlaceholder: 'Search articles...',
+      clearSearch: 'Clear search',
+      loading: 'Loading...',
+      error: 'Error',
+      retry: 'Retry',
+      pageOf: 'Page {current} of {total}',
+      nextPage: 'Next page',
+      previousPage: 'Previous page',
+      firstPage: 'First page',
+      lastPage: 'Last page',
+      resultsFound: '{count} results found',
+      noResults: 'No results found',
+      readMore: 'Read more about {title}',
+      externalLink: 'External link to {url}',
+      newTab: 'Opens in a new tab',
+      readTime: 'Estimated reading time: {minutes} minutes',
+      category: 'Category: {name}',
+      publishedOn: 'Published on {date}',
+      socialMediaLink: 'Go to {platform}',
+      mainNavigation: 'Main navigation',
+      footerNavigation: 'Footer navigation'
     }
   },
   default: {
