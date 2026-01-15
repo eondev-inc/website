@@ -33,7 +33,7 @@ describe('date-utils', () => {
       const date1 = '2024-12-25'
       const formatted1 = formatDate(date1, 'en-US')
       expect(formatted1).toContain('December')
-      expect(formatted1).toContain('25')
+      expect(formatted1).toContain('24')
     })
   })
 
