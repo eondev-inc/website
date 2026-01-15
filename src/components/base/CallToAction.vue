@@ -132,7 +132,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { Field, Form, ErrorMessage, useForm } from 'vee-validate'
+import { Field, Form, ErrorMessage } from 'vee-validate'
 import { useI18n } from 'vue-i18n'
 import * as yup from 'yup'
 import Swal from 'sweetalert2'
@@ -141,12 +141,6 @@ interface FormField {
   name: string
   rules: yup.StringSchema
   type: string
-}
-
-interface FormValues {
-  name: string
-  email: string
-  message: string
 }
 
 export default defineComponent({

@@ -67,7 +67,7 @@ const router = createRouter({
   history: createWebHistory(process.env.NODE_ENV === 'production' ? '/website/' : '/'),
   routes,
   // Comportamiento de scroll personalizado
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(to, _from, savedPosition) {
     // Si hay una posición guardada (navegación con back/forward), usarla
     if (savedPosition) {
       return savedPosition
@@ -88,7 +88,7 @@ const router = createRouter({
 })
 
 // Navigation Guards
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   // Actualizar el título de la página basado en los meta datos
   if (to.meta && to.meta.title) {
     document.title = to.meta.title as string
