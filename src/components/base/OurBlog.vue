@@ -588,6 +588,36 @@ export default defineComponent({
       const total = blogEnhanced.totalPages.value
       const current = blogEnhanced.currentPage.value
       const delta = 2
+      const pages: (number | string)[] = []
+
+      if (total <= 7) {
+        // Si hay 7 o menos páginas, mostrar todas
+        for (let i = 1; i <= total; i++) {
+          pages.push(i)
+        }
+      } else {
+        // Lógica compleja para páginas con elipsis
+        if (current <= delta + 1) {
+          for (let i = 1; i <= Math.min(delta * 2 + 2, total); i++) {
+            pages.push(i)
+          }
+          if (total > delta * 2 + 2) {
+            pages.push('...', total)
+          }
+        } else if (current >= total - delta) {
+          pages.push(1)
+          if (total > delta * 2 + 2) pages.push('...')
+          for (let i = Math.max(total - delta * 2 - 1, 2); i <= total; i++) {
+            pages.push(i)
+          }
+        } else {
+          pages.push(1, '...')
+          for (let i = current - delta; i <= current + delta; i++) {
+            pages.push(i)
+          }
+          pages.push('...', total)
+        }
+      }
 
       if (total <= 7) return buildSequentialPages(total)
       if (current <= delta + 1) return buildPagesNearStart(total, delta)

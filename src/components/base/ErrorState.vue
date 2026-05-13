@@ -12,7 +12,6 @@
 <template>
   <div :class="containerClasses">
     <div class="text-center py-12 px-6">
-
       <!-- Icono de error -->
       <div class="mb-6">
         <div :class="iconContainerClasses">
@@ -32,10 +31,14 @@
 
         <!-- Información técnica (opcional) -->
         <details v-if="showTechnicalInfo && technicalMessage" class="text-left">
-          <summary class="text-sm text-neutral-500 cursor-pointer hover:text-neutral-700 transition-colors">
+          <summary
+            class="text-sm text-neutral-500 cursor-pointer hover:text-neutral-700 transition-colors"
+          >
             Información técnica
           </summary>
-          <div class="mt-2 p-3 bg-neutral-100 rounded-lg text-sm font-mono text-neutral-700">
+          <div
+            class="mt-2 p-3 bg-neutral-100 rounded-lg text-sm font-mono text-neutral-700"
+          >
             {{ technicalMessage }}
           </div>
         </details>
@@ -48,9 +51,14 @@
             :disabled="isRetrying"
             class="inline-flex items-center justify-center px-6 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <font-awesome-icon v-if="isRetrying" icon="spinner" spin class="mr-2" />
+            <font-awesome-icon
+              v-if="isRetrying"
+              icon="spinner"
+              spin
+              class="mr-2"
+            />
             <font-awesome-icon v-else icon="redo" class="mr-2" />
-            {{ isRetrying ? 'Reintentando...' : 'Intentar de nuevo' }}
+            {{ isRetrying ? "Reintentando..." : "Intentar de nuevo" }}
           </button>
 
           <button
@@ -76,8 +84,15 @@
         <div v-if="suggestions && suggestions.length > 0" class="pt-4">
           <p class="text-sm font-medium text-neutral-700 mb-2">Sugerencias:</p>
           <ul class="text-sm text-neutral-600 space-y-1">
-            <li v-for="(suggestion, index) in suggestions" :key="index" class="flex items-start">
-              <font-awesome-icon icon="lightbulb" class="text-yellow-500 mr-2 mt-0.5 text-xs" />
+            <li
+              v-for="(suggestion, index) in suggestions"
+              :key="index"
+              class="flex items-start"
+            >
+              <font-awesome-icon
+                icon="lightbulb"
+                class="text-yellow-500 mr-2 mt-0.5 text-xs"
+              />
               {{ suggestion }}
             </li>
           </ul>
@@ -87,7 +102,10 @@
         <div v-if="showContact" class="pt-4 border-t border-neutral-200">
           <p class="text-xs text-neutral-500">
             Si el problema persiste,
-            <a href="mailto:support@example.com" class="text-primary-600 hover:text-primary-700 underline">
+            <a
+              href="mailto:support@example.com"
+              class="text-primary-600 hover:text-primary-700 underline"
+            >
               contacta con soporte
             </a>
           </p>
@@ -103,25 +121,25 @@ import { useRouter } from 'vue-router'
 
 interface ErrorType {
   network: {
-    icon: 'fa-wifi'
-    color: 'text-orange-500'
-    bgColor: 'bg-orange-100'
-  }
+    icon: 'fa-wifi';
+    color: 'text-orange-500';
+    bgColor: 'bg-orange-100';
+  };
   timeout: {
-    icon: 'fa-clock'
-    color: 'text-blue-500'
-    bgColor: 'bg-blue-100'
-  }
+    icon: 'fa-clock';
+    color: 'text-blue-500';
+    bgColor: 'bg-blue-100';
+  };
   parse: {
-    icon: 'fa-file-alt'
-    color: 'text-red-500'
-    bgColor: 'bg-red-100'
-  }
+    icon: 'fa-file-alt';
+    color: 'text-red-500';
+    bgColor: 'bg-red-100';
+  };
   unknown: {
-    icon: 'fa-exclamation-triangle'
-    color: 'text-gray-500'
-    bgColor: 'bg-gray-100'
-  }
+    icon: 'fa-exclamation-triangle';
+    color: 'text-gray-500';
+    bgColor: 'bg-gray-100';
+  };
 }
 
 export default defineComponent({
@@ -148,7 +166,8 @@ export default defineComponent({
      */
     message: {
       type: String,
-      default: 'Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo.'
+      default:
+        'Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo.'
     },
 
     /**
@@ -221,7 +240,8 @@ export default defineComponent({
     size: {
       type: String as PropType<'small' | 'medium' | 'large'>,
       default: 'medium',
-      validator: (value: string) => ['small', 'medium', 'large'].includes(value)
+      validator: (value: string) =>
+        ['small', 'medium', 'large'].includes(value)
     },
 
     /**
@@ -266,7 +286,9 @@ export default defineComponent({
         large: 'min-h-[500px]'
       }
 
-      return `flex items-center justify-center ${sizeClasses[props.size]} ${props.containerClass}`
+      return `flex items-center justify-center ${sizeClasses[props.size]} ${
+        props.containerClass
+      }`
     })
 
     const iconContainerClasses = computed(() => {
@@ -277,7 +299,9 @@ export default defineComponent({
         large: 'w-20 h-20'
       }
 
-      return `${sizeClasses[props.size]} ${errorType.bgColor} rounded-full flex items-center justify-center mx-auto`
+      return `${sizeClasses[props.size]} ${
+        errorType.bgColor
+      } rounded-full flex items-center justify-center mx-auto`
     })
 
     const iconClasses = computed(() => {
@@ -288,7 +312,9 @@ export default defineComponent({
         large: 'text-3xl'
       }
 
-      return `fas ${errorType.icon} ${errorType.color} ${sizeClasses[props.size]}`
+      return `fas ${errorType.icon} ${errorType.color} ${
+        sizeClasses[props.size]
+      }`
     })
 
     const handleRetry = () => {
@@ -302,7 +328,7 @@ export default defineComponent({
 
     const handleReload = () => {
       emit('reload')
-      window.location.reload()
+      globalThis.location.reload()
     }
 
     return {
@@ -361,7 +387,7 @@ button {
 }
 
 button:not(:disabled)::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;

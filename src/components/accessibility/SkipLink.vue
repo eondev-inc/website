@@ -1,17 +1,13 @@
 <template>
-  <a
-    href="#main-content"
-    class="skip-link"
-    @click.prevent="skipToMain"
-  >
-    {{ $t('accessibility.skipToMain') }}
+  <a href="#main-content" class="skip-link" @click.prevent="skipToMain">
+    {{ $t("accessibility.skipToMain") }}
   </a>
 </template>
 
 <script setup lang="ts">
-import { useSkipLink } from '@/composables/utils/accessibility-utils'
+import { useSkipLink } from "@/composables/utils/accessibility-utils";
 
-const { skipToMain } = useSkipLink()
+const { skipToMain } = useSkipLink();
 </script>
 
 <style scoped>
@@ -21,7 +17,7 @@ const { skipToMain } = useSkipLink()
   left: 0;
   z-index: 100;
   padding: 8px 16px;
-  background-color: #3b82f6;
+  background-color: #1d4ed8;
   color: white;
   text-decoration: none;
   font-weight: 600;
