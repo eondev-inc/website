@@ -547,6 +547,43 @@ export default defineComponent({
     // Computed para compatibilidad con la plantilla existente
     const blogPost = computed(() => blogEnhanced.posts.value)
 
+    const buildSequentialPages = (total: number): (number | string)[] => {
+      const pages: (number | string)[] = []
+      for (let i = 1; i <= total; i++) pages.push(i)
+      return pages
+    }
+
+    const buildPagesNearStart = (
+      total: number,
+      delta: number
+    ): (number | string)[] => {
+      const pages: (number | string)[] = []
+      for (let i = 1; i <= Math.min(delta * 2 + 2, total); i++) pages.push(i)
+      if (total > delta * 2 + 2) pages.push('...', total)
+      return pages
+    }
+
+    const buildPagesNearEnd = (
+      total: number,
+      delta: number
+    ): (number | string)[] => {
+      const pages: (number | string)[] = [1]
+      if (total > delta * 2 + 2) pages.push('...')
+      for (let i = Math.max(total - delta * 2 - 1, 2); i <= total; i++) { pages.push(i) }
+      return pages
+    }
+
+    const buildPagesMiddle = (
+      current: number,
+      total: number,
+      delta: number
+    ): (number | string)[] => {
+      const pages: (number | string)[] = [1, '...']
+      for (let i = current - delta; i <= current + delta; i++) pages.push(i)
+      pages.push('...', total)
+      return pages
+    }
+
     const visiblePages = computed(() => {
       const total = blogEnhanced.totalPages.value
       const current = blogEnhanced.currentPage.value
@@ -582,7 +619,10 @@ export default defineComponent({
         }
       }
 
-      return pages
+      if (total <= 7) return buildSequentialPages(total)
+      if (current <= delta + 1) return buildPagesNearStart(total, delta)
+      if (current >= total - delta) return buildPagesNearEnd(total, delta)
+      return buildPagesMiddle(current, total, delta)
     })
 
     // Method compatible con el template existente
