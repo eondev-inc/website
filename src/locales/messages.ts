@@ -19,6 +19,24 @@ const messages = {
       allRightsReserved: 'Todos los derechos reservados',
       availableForProjects: 'Disponible para proyectos'
     },
+    about: {
+      badge: 'Sobre mí',
+      timeline: {
+        intro: 'Mi trayectoria profesional y experiencias más destacadas',
+        seeMore: 'Ver más'
+      },
+      linkedin: {
+        title: 'Conecta conmigo',
+        description: 'Sígueme en LinkedIn para más actualizaciones sobre mi trabajo y proyectos.',
+        button: 'Ver LinkedIn'
+      },
+      cta: {
+        title: '¿Listo para trabajar juntos?',
+        description: 'Si tienes un proyecto en mente o simplemente quieres conectar, estaré encantado de escucharte.',
+        buttonContact: 'Iniciar conversación',
+        buttonHome: 'Ir al inicio'
+      }
+    },
     home: {
       aboutMe: {
         meFirts: 'Experiencia laboral',
@@ -79,7 +97,20 @@ const messages = {
         6: '6 art\u00edculos',
         9: '9 art\u00edculos',
         12: '12 art\u00edculos'
-      }
+      },
+      show: 'Mostrar',
+      view: 'Vista',
+      retry: 'Reintentar',
+      retrying: 'Reintentando',
+      problems: 'Si contin\u00faan los problemas, int\u00e9ntalo m\u00e1s tarde.',
+      noResultsHelp: 'Prueba con diferentes palabras clave o elimina algunos filtros.',
+      loadedFromCache: 'Cargado desde cach\u00e9',
+      removeFavorite: 'Quitar de favoritos',
+      addFavorite: 'Agregar a favoritos',
+      readArticle: 'Leer art\u00edculo',
+      shareArticle: 'Compartir art\u00edculo',
+      share: 'Compartir',
+      clear: 'Limpiar'
     },
     experience: {
       title: 'Experiencia T\u00e9cnica',
@@ -118,6 +149,41 @@ const messages = {
         errorText: 'Hubo un problema',
         emailErrorText: 'No se pudo abrir el cliente de correo. Por favor, contacta directamente a hola@eondev.site'
       }
+    },
+    errors: {
+      under_construction: {
+        title: 'Estamos trabajando para Usted'
+      }
+    },
+    accessibility: {
+      skipToMain: 'Saltar al contenido principal',
+      menu: 'Menú',
+      closeMenu: 'Cerrar menú',
+      openMenu: 'Abrir menú',
+      languageSelector: 'Selector de idioma',
+      changeLanguage: 'Cambiar idioma',
+      currentLanguage: 'Idioma actual',
+      searchPlaceholder: 'Buscar artículos...',
+      clearSearch: 'Limpiar búsqueda',
+      loading: 'Cargando...',
+      error: 'Error',
+      retry: 'Reintentar',
+      pageOf: 'Página {current} de {total}',
+      nextPage: 'Página siguiente',
+      previousPage: 'Página anterior',
+      firstPage: 'Primera página',
+      lastPage: 'Última página',
+      resultsFound: '{count} resultados encontrados',
+      noResults: 'No se encontraron resultados',
+      readMore: 'Leer más sobre {title}',
+      externalLink: 'Enlace externo a {url}',
+      newTab: 'Se abre en una nueva pestaña',
+      readTime: 'Tiempo de lectura estimado: {minutes} minutos',
+      category: 'Categoría: {name}',
+      publishedOn: 'Publicado el {date}',
+      socialMediaLink: 'Ir a {platform}',
+      mainNavigation: 'Navegación principal',
+      footerNavigation: 'Navegación del pie de página'
     }
   },
   en: {
@@ -139,6 +205,24 @@ const messages = {
       letsChat: "Let's talk",
       allRightsReserved: 'All rights reserved',
       availableForProjects: 'Available for projects'
+    },
+    about: {
+      badge: 'About me',
+      timeline: {
+        intro: 'My professional journey and most relevant experiences',
+        seeMore: 'See more'
+      },
+      linkedin: {
+        title: 'Connect with me',
+        description: 'Follow me on LinkedIn for more updates about my work and projects.',
+        button: 'View LinkedIn'
+      },
+      cta: {
+        title: 'Ready to work together?',
+        description: 'If you have a project in mind or just want to connect, I will be happy to hear from you.',
+        buttonContact: 'Start conversation',
+        buttonHome: 'Go to home'
+      }
     },
     home: {
       aboutMe: {
@@ -200,7 +284,20 @@ const messages = {
         6: '6 articles',
         9: '9 articles',
         12: '12 articles'
-      }
+      },
+      show: 'Show',
+      view: 'View',
+      retry: 'Retry',
+      retrying: 'Retrying',
+      problems: 'If problems persist, try again later.',
+      noResultsHelp: 'Try different keywords or remove some filters.',
+      loadedFromCache: 'Loaded from cache',
+      removeFavorite: 'Remove from favorites',
+      addFavorite: 'Add to favorites',
+      readArticle: 'Read article',
+      shareArticle: 'Share article',
+      share: 'Share',
+      clear: 'Clear'
     },
     experience: {
       title: 'Technical Experience',
@@ -239,7 +336,44 @@ const messages = {
         errorText: 'There was a problem',
         emailErrorText: 'Could not open email client. Please contact directly at hola@eondev.site'
       }
+    },
+    errors: {
+      under_construction: {
+        title: 'We are working for you'
+      }
+    },
+    accessibility: {
+      skipToMain: 'Skip to main content',
+      menu: 'Menu',
+      closeMenu: 'Close menu',
+      openMenu: 'Open menu',
+      languageSelector: 'Language selector',
+      changeLanguage: 'Change language',
+      currentLanguage: 'Current language',
+      searchPlaceholder: 'Search articles...',
+      clearSearch: 'Clear search',
+      loading: 'Loading...',
+      error: 'Error',
+      retry: 'Retry',
+      pageOf: 'Page {current} of {total}',
+      nextPage: 'Next page',
+      previousPage: 'Previous page',
+      firstPage: 'First page',
+      lastPage: 'Last page',
+      resultsFound: '{count} results found',
+      noResults: 'No results found',
+      readMore: 'Read more about {title}',
+      externalLink: 'External link to {url}',
+      newTab: 'Opens in a new tab',
+      readTime: 'Estimated reading time: {minutes} minutes',
+      category: 'Category: {name}',
+      publishedOn: 'Published on {date}',
+      socialMediaLink: 'Go to {platform}',
+      mainNavigation: 'Main navigation',
+      footerNavigation: 'Footer navigation'
     }
+  },
+  default: {
   }
 }
 

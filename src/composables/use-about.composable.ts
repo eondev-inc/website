@@ -1,5 +1,3 @@
-import { AboutMe } from '@/interfaces/about-me.interface'
-
 const useAboutMe = () => {
   const aboutMeResume: any[] = [
     {
