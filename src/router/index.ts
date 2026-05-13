@@ -90,14 +90,14 @@ const router = createRouter({
 // Navigation Guards
 router.beforeEach((to, _from, next) => {
   // Actualizar el título de la página basado en los meta datos
-  if (to.meta && to.meta.title) {
+  if (to.meta?.title) {
     document.title = to.meta.title as string
   } else {
     document.title = 'Mi Portfolio' // Título por defecto
   }
 
   // Actualizar meta description si existe
-  if (to.meta && to.meta.description) {
+  if (to.meta?.description) {
     let metaDescription = document.querySelector('meta[name="description"]')
     if (!metaDescription) {
       metaDescription = document.createElement('meta')

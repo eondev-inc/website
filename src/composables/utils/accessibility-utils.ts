@@ -102,7 +102,9 @@ export function useScreenReaderAnnounce() {
 
   onMounted(() => {
     // Crear elemento de anuncio si no existe
-    if (!document.getElementById('screen-reader-announcer')) {
+    if (document.getElementById('screen-reader-announcer')) {
+      announcer.value = document.getElementById('screen-reader-announcer')
+    } else {
       const element = document.createElement('div')
       element.id = 'screen-reader-announcer'
       element.setAttribute('role', 'status')
@@ -118,8 +120,6 @@ export function useScreenReaderAnnounce() {
       `
       document.body.appendChild(element)
       announcer.value = element
-    } else {
-      announcer.value = document.getElementById('screen-reader-announcer')
     }
   })
 
@@ -158,7 +158,7 @@ export function useKeyboardNavigation() {
     currentIndex: number,
     onIndexChange: (newIndex: number) => void
   ) => {
-    let newIndex = currentIndex
+    let newIndex: number
 
     switch (event.key) {
       case 'ArrowDown':
