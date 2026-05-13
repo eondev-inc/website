@@ -1,25 +1,27 @@
 <template>
   <!-- Sección de blog avanzada -->
   <section class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
-
     <!-- Header de la sección -->
     <div class="text-center mb-16 animate-fade-in">
       <h2 class="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
-        {{ $t('news.title') }}
+        {{ $t("news.title") }}
       </h2>
       <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
-        {{ $t('blog.subtitle') }}
+        {{ $t("blog.subtitle") }}
       </p>
-      <div class="w-24 h-1 bg-gradient-to-r from-secondary-500 to-primary-400 mx-auto mt-6 rounded-full" />
+      <div
+        class="w-24 h-1 bg-gradient-to-r from-secondary-500 to-primary-400 mx-auto mt-6 rounded-full"
+      />
     </div>
 
     <!-- Controles avanzados -->
     <div class="mb-12 space-y-6 animate-slide-up">
-
       <!-- Barra de búsqueda -->
       <div class="max-w-md mx-auto">
         <div class="relative">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <div
+            class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+          >
             <font-awesome-icon icon="search" class="text-neutral-400" />
           </div>
           <input
@@ -28,8 +30,11 @@
             :placeholder="$t('blog.searchPlaceholder')"
             class="w-full pl-10 pr-4 py-3 bg-white border-2 border-neutral-200 rounded-xl focus:border-primary-400 focus:ring-4 focus:ring-primary-100 transition-all duration-300 placeholder-neutral-400"
             @input="debouncedSearch"
+          />
+          <div
+            v-if="searchQuery"
+            class="absolute inset-y-0 right-0 pr-3 flex items-center"
           >
-          <div v-if="searchQuery" class="absolute inset-y-0 right-0 pr-3 flex items-center">
             <button
               @click="clearSearch"
               class="text-neutral-400 hover:text-neutral-600 transition-colors"
@@ -42,26 +47,28 @@
       <!-- Controles de vista -->
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
-          <span class="text-sm text-neutral-600">{{$t('blog.show')}}:</span>
+          <span class="text-sm text-neutral-600">{{ $t("blog.show") }}:</span>
           <select
             v-model="itemsPerPage"
             class="px-3 py-2 bg-white border border-neutral-200 rounded-lg focus:border-primary-400 focus:ring-2 focus:ring-primary-100 text-sm"
           >
-            <option value="3">{{ $t('blog.articlesCount.3') }}</option>
-            <option value="6">{{ $t('blog.articlesCount.6') }}</option>
-            <option value="9">{{ $t('blog.articlesCount.9') }}</option>
-            <option value="12">{{ $t('blog.articlesCount.12') }}</option>
+            <option value="3">{{ $t("blog.articlesCount.3") }}</option>
+            <option value="6">{{ $t("blog.articlesCount.6") }}</option>
+            <option value="9">{{ $t("blog.articlesCount.9") }}</option>
+            <option value="12">{{ $t("blog.articlesCount.12") }}</option>
           </select>
         </div>
 
         <div class="flex items-center space-x-2">
-          <span class="text-sm text-neutral-600">{{$t('blog.view')}}:</span>
+          <span class="text-sm text-neutral-600">{{ $t("blog.view") }}:</span>
           <div class="flex bg-neutral-100 rounded-lg p-1">
             <button
               @click="viewMode = 'grid'"
               :class="[
                 'p-2 rounded transition-all duration-200',
-                viewMode === 'grid' ? 'bg-white shadow-sm text-primary-600' : 'text-neutral-500 hover:text-neutral-700'
+                viewMode === 'grid'
+                  ? 'bg-white shadow-sm text-primary-600'
+                  : 'text-neutral-500 hover:text-neutral-700',
               ]"
             >
               <font-awesome-icon icon="th-large" />
@@ -70,7 +77,9 @@
               @click="viewMode = 'list'"
               :class="[
                 'p-2 rounded transition-all duration-200',
-                viewMode === 'list' ? 'bg-white shadow-sm text-primary-600' : 'text-neutral-500 hover:text-neutral-700'
+                viewMode === 'list'
+                  ? 'bg-white shadow-sm text-primary-600'
+                  : 'text-neutral-500 hover:text-neutral-700',
               ]"
             >
               <font-awesome-icon icon="list" />
@@ -83,9 +92,15 @@
     <!-- Loading state -->
     <div v-if="isLoading" class="flex justify-center items-center py-20">
       <div class="text-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4" />
+        <div
+          class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"
+        />
         <p class="text-neutral-600">
-          {{ isRetrying ? $t('blog.retryingArticles') : $t('blog.loadingArticles') }}
+          {{
+            isRetrying
+              ? $t("blog.retryingArticles")
+              : $t("blog.loadingArticles")
+          }}
         </p>
       </div>
     </div>
@@ -93,15 +108,19 @@
     <!-- Error state -->
     <div v-else-if="error && !isLoading" class="text-center py-20">
       <div class="mb-6">
-        <font-awesome-icon icon="exclamation-triangle" class="text-4xl text-amber-500 mb-4" />
+        <font-awesome-icon
+          icon="exclamation-triangle"
+          class="text-4xl text-amber-500 mb-4"
+        />
         <h3 class="text-xl font-semibold text-neutral-700 mb-2">
-          {{ $t('blog.errorLoadingArticles') }}
+          {{ $t("blog.errorLoadingArticles") }}
         </h3>
         <p class="text-neutral-500 mb-1">
           {{ error.message }}
         </p>
         <p class="text-sm text-neutral-400">
-          Tipo: {{ error.type }} | {{ formatDate(new Date(error.timestamp).toISOString()) }}
+          Tipo: {{ error.type }} |
+          {{ formatDate(new Date(error.timestamp).toISOString()) }}
         </p>
       </div>
 
@@ -113,23 +132,28 @@
         >
           <font-awesome-icon v-if="isRetrying" icon="spinner" spin />
           <font-awesome-icon v-else icon="redo" />
-          <span>{{ isRetrying ? $t('blog.retrying') : $t('blog.retry') }}</span>
+          <span>{{ isRetrying ? $t("blog.retrying") : $t("blog.retry") }}</span>
         </button>
 
         <p class="text-sm text-neutral-500">
-          {{$t('blog.problems')}}
+          {{ $t("blog.problems") }}
         </p>
       </div>
     </div>
 
     <!-- No results -->
-    <div v-else-if="filteredPosts.length === 0 && !isLoading && !error" class="text-center py-20">
+    <div
+      v-else-if="filteredPosts.length === 0 && !isLoading && !error"
+      class="text-center py-20"
+    >
       <div class="mb-4">
         <font-awesome-icon icon="search" class="text-4xl text-neutral-400" />
       </div>
-      <h3 class="text-xl font-semibold text-neutral-700 mb-2">{{ $t('blog.noArticlesFound') }}</h3>
+      <h3 class="text-xl font-semibold text-neutral-700 mb-2">
+        {{ $t("blog.noArticlesFound") }}
+      </h3>
       <p class="text-neutral-500">
-        {{$t('blog.noResultsHelp')}}
+        {{ $t("blog.noResultsHelp") }}
       </p>
     </div>
 
@@ -140,7 +164,7 @@
         'transition-all duration-300',
         viewMode === 'grid'
           ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
-          : 'space-y-6'
+          : 'space-y-6',
       ]"
     >
       <article
@@ -149,40 +173,53 @@
         :ref="`blogCard-${blog.id}`"
         :class="[
           'group bg-white rounded-3xl shadow-soft transition-all duration-300 overflow-hidden animate-slide-up',
-          viewMode === 'list' ? 'flex flex-col md:flex-row max-w-4xl mx-auto' : ''
+          viewMode === 'list'
+            ? 'flex flex-col md:flex-row max-w-4xl mx-auto'
+            : '',
         ]"
         :style="`animation-delay: ${index * 0.1}s`"
       >
-
         <!-- Image container -->
-        <div :class="['relative overflow-hidden', viewMode === 'list' ? 'md:w-80 h-48 md:h-auto' : '']">
+        <div
+          :class="[
+            'relative overflow-hidden',
+            viewMode === 'list' ? 'md:w-80 h-48 md:h-auto' : '',
+          ]"
+        >
           <img
             v-if="blog.jetpack_featured_media_url"
             :src="blog.jetpack_featured_media_url"
             :alt="blog.title.rendered"
             :class="[
               'object-cover transition-transform duration-500 group-hover:scale-105',
-              viewMode === 'list' ? 'w-full h-full' : 'w-full h-48'
+              viewMode === 'list' ? 'w-full h-full' : 'w-full h-48',
             ]"
             loading="lazy"
-          >
+          />
 
           <!-- Placeholder si no hay imagen -->
           <div
             v-else
             :class="[
               'bg-gradient-to-br from-secondary-100 to-primary-100 flex items-center justify-center',
-              viewMode === 'list' ? 'w-full h-full' : 'w-full h-48'
+              viewMode === 'list' ? 'w-full h-full' : 'w-full h-48',
             ]"
           >
-            <font-awesome-icon icon="newspaper" class="text-4xl text-neutral-400" />
+            <font-awesome-icon
+              icon="newspaper"
+              class="text-4xl text-neutral-400"
+            />
           </div>
 
           <!-- Overlay gradient -->
-          <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          />
 
           <!-- Date badge -->
-          <div class="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-neutral-700 shadow-soft">
+          <div
+            class="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-neutral-700 shadow-soft"
+          >
             {{ formatDate(blog.date) }}
           </div>
         </div>
@@ -190,20 +227,35 @@
         <!-- Content -->
         <div :class="['p-6 space-y-4', viewMode === 'list' ? 'flex-1' : '']">
           <!-- Category tags -->
-          <div v-if="blog.categories && blog.categories.length > 0" class="flex flex-wrap gap-2">
+          <div
+            v-if="blog.categories && blog.categories.length > 0"
+            class="flex flex-wrap gap-2"
+          >
             <span
               v-for="categoryId in blog.categories.slice(0, 3)"
               :key="categoryId"
               class="inline-flex items-center space-x-1 px-2 py-1 text-xs rounded-full font-medium transition-colors duration-200"
               :style="`
-                background-color: ${categories.find(c => c.id === categoryId)?.color || '#3b82f6'}15;
-                color: ${categories.find(c => c.id === categoryId)?.color || '#3b82f6'};
-                border: 1px solid ${categories.find(c => c.id === categoryId)?.color || '#3b82f6'}30;
+                background-color: ${
+                  categories.find((c) => c.id === categoryId)?.color ||
+                  '#3b82f6'
+                }15;
+                color: ${
+                  categories.find((c) => c.id === categoryId)?.color ||
+                  '#3b82f6'
+                };
+                border: 1px solid ${
+                  categories.find((c) => c.id === categoryId)?.color ||
+                  '#3b82f6'
+                }30;
               `"
             >
               <span
                 class="w-1.5 h-1.5 rounded-full"
-                :style="`background-color: ${categories.find(c => c.id === categoryId)?.color || '#3b82f6'}`"
+                :style="`background-color: ${
+                  categories.find((c) => c.id === categoryId)?.color ||
+                  '#3b82f6'
+                }`"
               />
               <span>{{ getCategoryName(categoryId) }}</span>
             </span>
@@ -220,7 +272,9 @@
           <h3
             :class="[
               'font-bold text-neutral-900 group-hover:text-primary-700 transition-colors duration-300',
-              viewMode === 'list' ? 'text-2xl line-clamp-2' : 'text-xl line-clamp-2'
+              viewMode === 'list'
+                ? 'text-2xl line-clamp-2'
+                : 'text-xl line-clamp-2',
             ]"
             v-html="blog.title.rendered"
           />
@@ -229,17 +283,32 @@
           <p
             :class="[
               'text-neutral-600 leading-relaxed',
-              viewMode === 'list' ? 'text-base line-clamp-4' : 'text-sm line-clamp-3'
+              viewMode === 'list'
+                ? 'text-base line-clamp-4'
+                : 'text-sm line-clamp-3',
             ]"
-            v-html="cleanHtml(truncate(blog.excerpt.rendered, viewMode === 'list' ? 250 : 150))"
+            v-html="
+              cleanHtml(
+                truncate(blog.excerpt.rendered, viewMode === 'list' ? 250 : 150)
+              )
+            "
           />
 
           <!-- Meta information -->
-          <div class="flex items-center justify-between pt-2 border-t border-neutral-100">
+          <div
+            class="flex items-center justify-between pt-2 border-t border-neutral-100"
+          >
             <div class="flex items-center space-x-4 text-xs text-neutral-500">
               <span class="flex items-center space-x-1">
                 <font-awesome-icon icon="clock" />
-                <span>{{ estimateReadingTime(blog.content?.rendered || blog.excerpt.rendered) }} min</span>
+                <span
+                  >{{
+                    estimateReadingTime(
+                      blog.content?.rendered || blog.excerpt.rendered
+                    )
+                  }}
+                  min</span
+                >
               </span>
 
               <span class="flex items-center space-x-1">
@@ -265,9 +334,13 @@
                   'w-7 h-7 rounded-full transition-all duration-300 flex items-center justify-center text-xs favorite-heart',
                   favorites.includes(blog.id)
                     ? 'bg-red-500 text-white shadow-soft active'
-                    : 'bg-neutral-100 text-neutral-500 hover:bg-red-50 hover:text-red-500'
+                    : 'bg-neutral-100 text-neutral-500 hover:bg-red-50 hover:text-red-500',
                 ]"
-                :aria-label="favorites.includes(blog.id) ? $t('blog.removeFavorite') : $t('blog.addFavorite')"
+                :aria-label="
+                  favorites.includes(blog.id)
+                    ? $t('blog.removeFavorite')
+                    : $t('blog.addFavorite')
+                "
               >
                 <font-awesome-icon icon="heart" />
               </button>
@@ -283,7 +356,7 @@
               class="inline-flex items-center space-x-2 text-primary-600 hover:text-primary-700 font-medium text-sm transition-colors duration-200 group/link"
               :aria-label="`Leer artículo: ${cleanHtml(blog.title.rendered)}`"
             >
-              <span>{{$t('blog.readArticle')}}</span>
+              <span>{{ $t("blog.readArticle") }}</span>
               <svg
                 class="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1"
                 fill="none"
@@ -291,23 +364,32 @@
                 viewBox="0 0 24 24"
                 aria-hidden="true"
               >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
               </svg>
             </a>
 
             <button
               @click="shareArticle(blog)"
               class="inline-flex items-center space-x-1 text-neutral-500 hover:text-accent-600 text-sm transition-colors duration-200"
-              :aria-label="`${$t('blog.shareArticle')}: ${cleanHtml(blog.title.rendered)}`"
+              :aria-label="`${$t('blog.shareArticle')}: ${cleanHtml(
+                blog.title.rendered
+              )}`"
             >
               <font-awesome-icon icon="share-alt" />
-              <span>{{$t('blog.share')}}</span>
+              <span>{{ $t("blog.share") }}</span>
             </button>
           </div>
         </div>
 
         <!-- Hover border effect -->
-        <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-secondary-400 to-primary-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm scale-105" />
+        <div
+          class="absolute inset-0 rounded-3xl bg-gradient-to-br from-secondary-400 to-primary-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm scale-105"
+        />
       </article>
     </div>
 
@@ -316,21 +398,30 @@
       <button
         v-for="category in categories"
         :key="category.id"
-        @click="selectedCategory = selectedCategory === category.id ? null : category.id"
+        @click="
+          selectedCategory =
+            selectedCategory === category.id ? null : category.id
+        "
         :class="[
           'px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 category-tag',
           selectedCategory === category.id
             ? 'text-white shadow-soft'
-            : 'bg-white text-neutral-700 border border-neutral-200 hover:bg-primary-50 hover:border-primary-300'
+            : 'bg-white text-neutral-700 border border-neutral-200 hover:bg-primary-50 hover:border-primary-300',
         ]"
-        :style="selectedCategory === category.id ? `background-color: ${category.color}` : ''"
-  :aria-label="`${$t('blog.filterBy')} ${category.name}, ${category.count} ${$t('blog.articles')}`"
+        :style="
+          selectedCategory === category.id
+            ? `background-color: ${category.color}`
+            : ''
+        "
+        :aria-label="`${$t('blog.filterBy')} ${category.name}, ${
+          category.count
+        } ${$t('blog.articles')}`"
       >
         <span class="flex items-center space-x-2">
           <span
             :class="[
               'w-2 h-2 rounded-full',
-              selectedCategory !== category.id ? 'opacity-60' : ''
+              selectedCategory !== category.id ? 'opacity-60' : '',
             ]"
             :style="`background-color: ${category.color}`"
           />
@@ -340,7 +431,7 @@
               'text-xs px-1.5 py-0.5 rounded-full',
               selectedCategory === category.id
                 ? 'bg-white/20 text-white'
-                : 'bg-neutral-100 text-neutral-500'
+                : 'bg-neutral-100 text-neutral-500',
             ]"
           >
             {{ category.count }}
@@ -356,11 +447,14 @@
         :aria-label="$t('blog.clearFilters')"
       >
         <font-awesome-icon icon="times" class="text-xs" />
-  <span>{{$t('blog.clear')}}</span>
+        <span>{{ $t("blog.clear") }}</span>
       </button>
     </div>
     <!-- Paginación -->
-    <div v-if="totalPages > 1" class="flex justify-center items-center mt-12 space-x-2">
+    <div
+      v-if="totalPages > 1"
+      class="flex justify-center items-center mt-12 space-x-2"
+    >
       <button
         @click="currentPage = Math.max(1, currentPage - 1)"
         :disabled="currentPage === 1"
@@ -377,7 +471,7 @@
             'px-4 py-2 rounded-lg transition-colors',
             currentPage === page
               ? 'bg-primary-600 text-white'
-              : 'bg-white border border-neutral-200 text-neutral-600 hover:bg-neutral-50'
+              : 'bg-white border border-neutral-200 text-neutral-600 hover:bg-neutral-50',
           ]"
         >
           {{ page }}
@@ -395,9 +489,12 @@
     </div>
 
     <!-- Call to action -->
-    <div class="text-center mt-16 animate-fade-in-up" style="animation-delay: 0.8s;">
+    <div
+      class="text-center mt-16 animate-fade-in-up"
+      style="animation-delay: 0.8s"
+    >
       <p class="text-neutral-600 mb-6">
-        {{ $t('blog.articlesInterest') }}
+        {{ $t("blog.articlesInterest") }}
       </p>
       <a
         href="https://steemit.com/@seventrust"
@@ -405,9 +502,19 @@
         rel="noopener noreferrer"
         class="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-secondary-600 to-primary-400 text-white rounded-xl hover:from-secondary-700 hover:to-primary-500 transition-all duration-300 shadow-soft hover:shadow-glow hover:-translate-y-0.5"
       >
-        <span>{{ $t('blog.viewAllArticles') }}</span>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        <span>{{ $t("blog.viewAllArticles") }}</span>
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+          />
         </svg>
       </a>
     </div>
@@ -419,7 +526,7 @@ import { defineComponent, onMounted, computed } from 'vue'
 import useBlogEnhanced from '@/composables/use-blog-enhanced.composable'
 
 interface Props {
-  articlesNumber: number
+  articlesNumber: number;
 }
 
 export default defineComponent({
@@ -458,8 +565,7 @@ export default defineComponent({
             pages.push(i)
           }
           if (total > delta * 2 + 2) {
-            pages.push('...')
-            pages.push(total)
+            pages.push('...', total)
           }
         } else if (current >= total - delta) {
           pages.push(1)
@@ -468,13 +574,11 @@ export default defineComponent({
             pages.push(i)
           }
         } else {
-          pages.push(1)
-          pages.push('...')
+          pages.push(1, '...')
           for (let i = current - delta; i <= current + delta; i++) {
             pages.push(i)
           }
-          pages.push('...')
-          pages.push(total)
+          pages.push('...', total)
         }
       }
 
@@ -575,11 +679,13 @@ export default defineComponent({
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
   }
   50% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6), 0 0 30px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6),
+      0 0 30px rgba(59, 130, 246, 0.4);
   }
 }
 
@@ -676,13 +782,18 @@ export default defineComponent({
 }
 
 .category-tag::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
   transition: left 0.5s;
 }
 
@@ -701,7 +812,9 @@ export default defineComponent({
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Responsive adjustments */
