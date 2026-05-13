@@ -8,14 +8,22 @@
       aria-haspopup="true"
     >
       <div class="flex items-center space-x-2">
-        <span>{{ $t('header.selectLanguage') }}</span>
+        <span>{{ $t("header.selectLanguage") }}</span>
         <svg
-          :class="['w-4 h-4 transition-transform duration-200', isDropdownOpen ? 'rotate-180' : '']"
+          :class="[
+            'w-4 h-4 transition-transform duration-200',
+            isDropdownOpen ? 'rotate-180' : '',
+          ]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
       </div>
     </button>
@@ -28,7 +36,7 @@
         role="menu"
         aria-orientation="vertical"
       >
-        <li role="none">
+        <li>
           <button
             type="button"
             class="inline-flex w-full px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 transition-colors duration-200 focus:outline-none focus:bg-neutral-50"
@@ -40,12 +48,12 @@
                 src="../../assets/img/united-kingdom-flag-icon.svg"
                 alt="English"
                 class="w-4 h-4"
-              >
+              />
               <span>English</span>
             </div>
           </button>
         </li>
-        <li role="none">
+        <li>
           <button
             type="button"
             class="inline-flex w-full px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 transition-colors duration-200 focus:outline-none focus:bg-neutral-50"
@@ -57,7 +65,7 @@
                 src="../../assets/img/spain-flag-icon.png"
                 alt="Español"
                 class="w-4 h-4"
-              >
+              />
               <span>Español</span>
             </div>
           </button>
@@ -104,7 +112,10 @@ export default defineComponent({
     }
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownContainer.value && !dropdownContainer.value.contains(event.target as Node)) {
+      if (
+        dropdownContainer.value &&
+        !dropdownContainer.value.contains(event.target as Node)
+      ) {
         closeDropdown()
       }
     }
