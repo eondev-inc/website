@@ -3,29 +3,7 @@
  * @module html-utils
  */
 
-export interface HtmlEntities {
-  [key: string]: string
-}
-
-const htmlEntities: HtmlEntities = {
-  '&amp;': '&',
-  '&lt;': '<',
-  '&gt;': '>',
-  '&quot;': '"',
-  '&#39;': "'",
-  '&#039;': "'",
-  '&nbsp;': ' ',
-  '&copy;': '©',
-  '&reg;': '®',
-  '&trade;': '™',
-  '&hellip;': '…',
-  '&mdash;': '—',
-  '&ndash;': '–',
-  '&lsquo;': "'",
-  '&rsquo;': "'",
-  '&ldquo;': '"',
-  '&rdquo;': '"'
-}
+import { decode } from 'html-entities'
 
 /**
  * Decodifica entidades HTML
@@ -33,11 +11,7 @@ const htmlEntities: HtmlEntities = {
  * @returns Texto decodificado
  */
 export const decodeHtmlEntities = (text: string): string => {
-  let decoded = text
-  for (const [entity, char] of Object.entries(htmlEntities)) {
-    decoded = decoded.replace(new RegExp(entity, 'g'), char)
-  }
-  return decoded
+  return decode(text)
 }
 
 /**

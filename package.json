@@ -32,6 +32,7 @@
     "@vueuse/core": "^13.9.0",
     "animate.css": "^4.1.1",
     "flowbite": "^1.6.4",
+    "html-entities": "^2.5.3",
     "sweetalert2": "^11.7.2",
     "vee-validate": "^4.7.4",
     "vue": "^3.2.13",

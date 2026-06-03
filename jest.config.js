@@ -7,7 +7,9 @@ module.exports = {
       tsconfig: {
         jsx: 'preserve',
         esModuleInterop: true,
-        allowSyntheticDefaultImports: true
+        allowSyntheticDefaultImports: true,
+        module: 'esnext',
+        target: 'es2020'
       }
     }]
   },
