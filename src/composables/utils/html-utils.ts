@@ -11,7 +11,7 @@ import { decode } from 'html-entities'
  * @returns Texto decodificado
  */
 export const decodeHtmlEntities = (text: string): string => {
-  return decode(text, { scope: 'all' })
+  return decode(text)
 }
 
 /**

@@ -105,7 +105,7 @@ router.beforeEach((to, _from, next) => {
       metaDescription.setAttribute('name', 'description')
       document.head.appendChild(metaDescription)
     }
-    metaDescription.setAttribute('content', DOMPurify.sanitize(to.meta.description as string))
+    metaDescription.setAttribute('content', DOMPurify.sanitize(to.meta.description as string, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] }))
   }
   next()
 })

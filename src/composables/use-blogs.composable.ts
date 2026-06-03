@@ -1,10 +1,11 @@
 const useBlogs = () => {
   const retrievePost = async (perPage: number) => {
-    const techUrl = import.meta.env.VITE_API_BLOG_URL || 'http://localhost:3000'
-    console.log('Fetching posts from:', techUrl)
+    const baseUrl = import.meta.env.VITE_API_BLOG_URL || 'https://techcrunch.com/wp-json/wp/v2/posts'
+    const url = `${baseUrl}?per_page=${perPage}&context=embed`
+    console.log('Fetching posts from:', url)
 
     try {
-      const response = await fetch(techUrl, {
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
