@@ -22,6 +22,7 @@ module.exports = {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '\\.(png|jpg|jpeg|gif|svg|webp|ico)$': '<rootDir>/tests/__mocks__/fileMock.js',
     '^vue-i18n$': 'vue-i18n/dist/vue-i18n.cjs.js',
+    '^@vue/test-utils$': '<rootDir>/node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js',
     '^@intlify/(.*)$': '@intlify/$1/dist/$1.cjs.js'
   },
   testMatch: [
