@@ -32,7 +32,7 @@
     "@vueuse/core": "^14.1.0",
     "animate.css": "^4.1.1",
     "dompurify": "^3.4.14",
-    "flowbite": "^1.6.4",
+    "flowbite": "^4.0.1",
     "html-entities": "^2.5.3",
     "sweetalert2": "^11.7.2",
     "vee-validate": "^4.7.4",
