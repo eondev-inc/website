@@ -5,6 +5,10 @@ describe('router meta sanitization', () => {
   let router: ReturnType<typeof createRouter>
 
   beforeEach(() => {
+    // Reset DOM state leaked between tests
+    document.head.querySelector('meta[name="description"]')?.remove()
+    document.title = ''
+
     // Create fresh router for each test
     router = createRouter({
       history: createWebHistory('/'),
@@ -20,34 +24,30 @@ describe('router meta sanitization', () => {
         }
       ]
     })
-  })
 
-  afterEach(() => {
-    if (router) {
-      router.beforeEach((to, _from, next) => {
-        // Actual router sanitization logic
-        if (to.meta && to.meta.title) {
-          document.title = to.meta.title as string
-        } else {
-          document.title = 'Default'
-        }
+    // Mirror of the production guard in src/router/index.ts
+    router.beforeEach((to, _from, next) => {
+      if (to.meta && to.meta.title) {
+        document.title = to.meta.title as string
+      } else {
+        document.title = 'Default'
+      }
 
-        if (to.meta && to.meta.description) {
-          let metaDescription = document.querySelector('meta[name="description"]')
-          if (!metaDescription) {
-            metaDescription = document.createElement('meta')
-            metaDescription.setAttribute('name', 'description')
-            document.head.appendChild(metaDescription)
-          }
-          // Strip ALL HTML for meta description (not allowed in content attribute)
-          metaDescription.setAttribute(
-            'content',
-            DOMPurify.sanitize(to.meta.description as string, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] })
-          )
+      if (to.meta && to.meta.description) {
+        let metaDescription = document.querySelector('meta[name="description"]')
+        if (!metaDescription) {
+          metaDescription = document.createElement('meta')
+          metaDescription.setAttribute('name', 'description')
+          document.head.appendChild(metaDescription)
         }
-        next()
-      })
-    }
+        // Strip ALL HTML for meta description (not allowed in content attribute)
+        metaDescription.setAttribute(
+          'content',
+          DOMPurify.sanitize(to.meta.description as string, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] })
+        )
+      }
+      next()
+    })
   })
 
   describe('router beforeEach guard', () => {
@@ -142,8 +142,8 @@ describe('router meta sanitization', () => {
       await router.push('/empty')
       await router.isReady()
 
-      const metaContent = document.querySelector('meta[name="description"]')?.getAttribute('content')
-      expect(metaContent).toBe('')
+      // Production guard skips falsy descriptions: no meta tag is written
+      expect(document.querySelector('meta[name="description"]')).toBeNull()
     })
   })
 })

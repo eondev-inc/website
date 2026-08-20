@@ -289,7 +289,7 @@ export default defineComponent({
 
         // Configuración del destinatario
         const recipientEmail =
-          import.meta.env.VITE_CONTACT_EMAIL || 'fallback@example.com'
+          process.env.VITE_CONTACT_EMAIL || 'fallback@example.com'
 
         // Construir el asunto del correo
         const subject = encodeURIComponent(

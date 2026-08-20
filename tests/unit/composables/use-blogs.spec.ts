@@ -5,22 +5,17 @@ describe('use-blogs composable', () => {
   let mockFetch: jest.SpyInstance | null = null
 
   beforeEach(() => {
-    // Only mock fetch if it's available in globalThis
-    if (typeof (globalThis as any).fetch === 'function') {
-      mockFetch = jest.spyOn(globalThis as any, 'fetch').mockResolvedValueOnce(
-        new Response(JSON.stringify([]), {
-          status: 200,
-          headers: { 'Content-Type': 'application/json' }
-        })
-      )
-    }
+    // jsdom has no fetch; mock it directly (same pattern as use-blogs.composable.spec)
+    mockFetch = jest.fn().mockResolvedValueOnce({
+      ok: true,
+      status: 200
+    } as unknown as Response)
+    ;(globalThis as any).fetch = mockFetch
   })
 
   afterEach(() => {
-    if (mockFetch) {
-      mockFetch.mockRestore()
-      mockFetch = null
-    }
+    mockFetch = null
+    delete (globalThis as any).fetch
     Object.assign(process.env, originalEnv)
   })
 

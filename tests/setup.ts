@@ -1,5 +1,11 @@
 import '@testing-library/jest-dom'
 
+// Fallback env shim: source reads process.env.VITE_* (webpack DefinePlugin
+// injects them at build time); provide deterministic defaults for Jest.
+process.env.VITE_API_BLOG_URL =
+  process.env.VITE_API_BLOG_URL || 'https://techcrunch.com/wp-json/wp/v2/posts'
+process.env.VITE_CONTACT_EMAIL = process.env.VITE_CONTACT_EMAIL || ''
+
 type StorageRecord = Record<string, string>
 
 interface LocalStorageMock {

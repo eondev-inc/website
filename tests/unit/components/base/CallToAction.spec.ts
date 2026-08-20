@@ -1,8 +1,8 @@
-import { mount, VueWrapper } from '@vue/test-utils'
+import { mount, VueWrapper, flushPromises } from '@vue/test-utils'
 import { fireEvent, waitFor } from '@testing-library/vue'
 import Swal from 'sweetalert2'
 import CallToAction from '@/components/base/CallToAction.vue'
-import { renderWithApp } from '../../../helpers'
+import { renderWithApp, createTestI18n } from '../../../helpers'
 
 // Mock sweetalert2
 jest.mock('sweetalert2', () => ({
@@ -12,34 +12,22 @@ jest.mock('sweetalert2', () => ({
   }
 }))
 
-// Mock vee-validate
-jest.mock('vee-validate', () => ({
-  Field: { name: 'Field', template: '<input />' },
-  Form: { name: 'Form', template: '<form><slot /></form>' },
-  ErrorMessage: { name: 'ErrorMessage', template: '<span />' }
-}))
+// Real vee-validate and vue-i18n: validation tests need the real engines
 
-// Mock vue-i18n
-jest.mock('vue-i18n', () => ({
-  useI18n: () => ({
-    t: (key: string) => key
-  })
-}))
-
-// Mock import.meta.env
-Object.defineProperty(import.meta, 'env', {
-  value: {
-    VITE_CONTACT_EMAIL: ''
-  },
-  writable: true
-})
+// Component reads process.env.VITE_CONTACT_EMAIL (Jest runs in Node)
 
 describe('CallToAction.vue', () => {
+  const originalEnv = { ...process.env }
+
   beforeEach(() => {
     jest.clearAllMocks()
     jest.useFakeTimers()
-    // Reset import.meta.env before each test
-    import.meta.env.VITE_CONTACT_EMAIL = ''
+    // Reset env before each test
+    process.env.VITE_CONTACT_EMAIL = ''
+  })
+
+  afterAll(() => {
+    Object.assign(process.env, originalEnv)
   })
 
   afterEach(() => {
@@ -48,20 +36,20 @@ describe('CallToAction.vue', () => {
 
   describe('VITE_CONTACT_EMAIL env var handling', () => {
     it('should use VITE_CONTACT_EMAIL when env var is set', async () => {
-      import.meta.env.VITE_CONTACT_EMAIL = 'test@example.com'
+      process.env.VITE_CONTACT_EMAIL = 'test@example.com'
 
       const wrapper: VueWrapper<any> = mount(CallToAction, {
         global: {
-          mocks: {
-            $t: (key: string) => key
-          }
+          plugins: [createTestI18n()]
         }
       })
 
-      // Simulate form submission to trigger onSubmit
-      const form = wrapper.find('form')
-      await form.trigger('submit')
-      await wrapper.vm.$nextTick()
+      // Real vee-validate validates on submit: fill valid data so onSubmit runs
+      await wrapper.find('input#name').setValue('John Doe')
+      await wrapper.find('input#email').setValue('john@example.com')
+      await wrapper.find('textarea#message').setValue('Mensaje de prueba valido')
+      await wrapper.find('form').trigger('submit')
+      await flushPromises()
 
       // Verify Swal.fire was called (info notification before mailto)
       expect(Swal.fire).toHaveBeenCalled()
@@ -72,9 +60,7 @@ describe('CallToAction.vue', () => {
     it('should use fallback email when VITE_CONTACT_EMAIL is unset', async () => {
       const wrapper: VueWrapper<any> = mount(CallToAction, {
         global: {
-          mocks: {
-            $t: (key: string) => key
-          }
+          plugins: [createTestI18n()]
         }
       })
 
@@ -85,18 +71,16 @@ describe('CallToAction.vue', () => {
     })
 
     it('should handle empty string VITE_CONTACT_EMAIL gracefully', async () => {
-      import.meta.env.VITE_CONTACT_EMAIL = ''
+      process.env.VITE_CONTACT_EMAIL = ''
 
       const wrapper: VueWrapper<any> = mount(CallToAction, {
         global: {
-          mocks: {
-            $t: (key: string) => key
-          }
+          plugins: [createTestI18n()]
         }
       })
 
       // Empty string is falsy, fallback should be used
-      expect(import.meta.env.VITE_CONTACT_EMAIL).toBe('')
+      expect(process.env.VITE_CONTACT_EMAIL).toBe('')
       expect(wrapper.exists()).toBe(true)
 
       wrapper.unmount()

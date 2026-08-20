@@ -38,9 +38,9 @@ describe('html-utils', () => {
 
     it('should handle nested entities safely (no bypass)', () => {
       // &amp;#58; should not decode to ':' via regex bypass
-      // The library decodes fully: first &amp; → &, then &#58; → :
-      // So full decode is ':'
-      expect(decodeHtmlEntities('&amp;#58;')).toBe(':')
+      // html-entities decodes in a single pass: &amp; → &, but the resulting
+      // &#58; is NOT re-decoded, so the output is '&#58;' — not ':'
+      expect(decodeHtmlEntities('&amp;#58;')).toBe('&#58;')
     })
 
     it('should decode numeric entities correctly', () => {
