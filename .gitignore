@@ -35,3 +35,4 @@ AGENTS.*
 .atl/
 *.backup
 *.bak
+.playwright-cli/
