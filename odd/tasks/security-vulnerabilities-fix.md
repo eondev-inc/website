@@ -53,20 +53,15 @@ la toolchain vulnerable y habilita el uso correcto de variables `VITE_*`.
 
 ### T3 — Fix XSS y saneado (F1 + F2)
 
-- [ ] `src/composables/utils/html-utils.ts`:
-  - Eliminar regex de strip-then-decode.
-  - Implementar `cleanHtml` con DOMPurify `ALLOWED_TAGS: []`.
-  - Implementar `sanitizeHtml` con allowlist básica (`p`, `br`, `strong`, `em`, `a`).
-- [ ] `src/components/base/OurBlog.vue`:
+- [x] `src/composables/utils/html-utils.ts`:
+  - Corregir orden de `cleanHtml` (decode primero, strip después).
+  - Implementar `sanitizeHtml` con DOMPurify allowlist (`p`, `br`, `strong`, `em`, `a`).
+- [x] `src/components/base/OurBlog.vue`:
   - Cambiar `v-html="blog.title.rendered"` a interpolación `{{ cleanHtml(...) }}`.
-  - Usar `sanitizeHtml` para el excerpt si debe mantener formato.
-- [ ] Tests de regresión en `tests/unit/composables/utils/html-utils.spec.ts`:
-  - Payload `<script>alert(1)</script>`.
-  - Payload `<img src=x onerror=alert(1)>`.
-  - Payload `&lt;img src=x onerror=alert(1)&gt;`.
-  - Verificar que la salida no contiene tags ni handlers.
+  - Usar `sanitizeHtml` para el excerpt.
+- [x] Tests de regresión en `tests/unit/composables/utils/html-utils.spec.ts`.
 
-**Evidencia de cierre**: tests nuevos pasan + no quedan `v-html` alimentados por la API.
+**Evidencia de cierre**: tests nuevos pasan, no quedan `v-html` alimentados por la API. Commit `a38cb30`.
 
 ### T4 — Validación de enlaces y navegación segura (F3 + F9)
 

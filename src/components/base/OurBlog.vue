@@ -351,7 +351,7 @@
           <!-- Actions -->
           <div class="pt-2 flex items-center justify-between">
             <a
-              :href="blog.link"
+              :href="safeExternalUrl(blog.link)"
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center space-x-2 text-primary-600 hover:text-primary-700 font-medium text-sm transition-colors duration-200 group/link"
@@ -525,6 +525,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, computed } from 'vue'
 import useBlogEnhanced from '@/composables/use-blog-enhanced.composable'
+import { safeExternalUrl } from '@/composables/utils/url-utils'
 
 interface Props {
   articlesNumber: number;
@@ -638,6 +639,7 @@ export default defineComponent({
       truncate: blogEnhanced.truncate,
       cleanHtml: blogEnhanced.cleanHtml,
       sanitizeHtml: blogEnhanced.sanitizeHtml,
+      safeExternalUrl,
       formatDate: blogEnhanced.formatDate,
 
       // Estados avanzados para manejo de errores
