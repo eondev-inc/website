@@ -18,7 +18,7 @@ import useBlogFeatures from './blog/use-blog-features.composable'
 // Utilidades
 import { estimateReadingTime, truncate } from './utils/text-utils'
 import { formatDate } from './utils/date-utils'
-import { cleanHtml, decodeHtmlEntities } from './utils/html-utils'
+import { cleanHtml, decodeHtmlEntities, sanitizeHtml } from './utils/html-utils'
 
 // Interfaces
 import type { UseBlogEnhanced } from '@/interfaces/blog.interface'
@@ -118,6 +118,7 @@ export default function useBlogEnhanced(): UseBlogEnhanced {
     formatDate,
     cleanHtml,
     decodeHtmlEntities,
+    sanitizeHtml,
     truncate,
 
     // Estados avanzados

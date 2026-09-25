@@ -42,6 +42,7 @@ jest.mock('@/composables/use-blog-enhanced.composable', () => ({
     estimateReadingTime: () => 1,
     formatDate: () => '01/01/2026',
     cleanHtml: (v: string) => v,
+    sanitizeHtml: (v: string) => v,
     decodeHtmlEntities: (v: string) => v,
     truncate: (v: string) => v,
     cacheExpiry: ref(1800000)

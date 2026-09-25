@@ -32,6 +32,16 @@ la toolchain vulnerable y habilita el uso correcto de variables `VITE_*`.
 
 ### T2 — Variables de entorno y URL de la API unificada
 
+- [x] Renombrar variables `VUE_APP_*` a `VITE_*` y actualizar `.env.example`.
+- [x] Crear `src/config/api.ts` con validación de origen.
+- [x] Reemplazar todos los `fetch` hardcodeados por la config central.
+- [x] Ajustar `vite.config.ts` para inyectar `process.env.VITE_*` y mantener compatibilidad con Jest.
+- [x] Actualizar tests que usaban `VITE_API_BLOG_URL`.
+
+**Evidencia de cierre**: `grep -r "techcrunch.com/wp-json" src/` solo devuelve la config y el default. Commit `19461ed`.
+
+### T2 — Variables de entorno y URL de la API unificada
+
 - [ ] Renombrar variables `VUE_APP_*` a `VITE_*` y actualizar `.env.example`.
 - [ ] Crear `src/config/api.ts` con validación de origen:
   - Leer `import.meta.env.VITE_API_BASE_URL`.
