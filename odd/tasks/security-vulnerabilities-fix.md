@@ -75,12 +75,12 @@ la toolchain vulnerable y habilita el uso correcto de variables `VITE_*`.
 
 ### T5 — CSP y headers de seguridad (F4)
 
-- [ ] Actualizar `vercel.json` con bloque `headers`:
-  - `Content-Security-Policy` (ver detalle en `docs/SECURITY-REVIEW.md`).
+- [x] Actualizar `vercel.json` con bloque `headers`:
+  - `Content-Security-Policy`.
   - `Strict-Transport-Security`, `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, `Permissions-Policy`.
-- [ ] Verificar en preview de Vercel que no hay violaciones de CSP en la consola.
+- [ ] Verificar en preview de Vercel que no hay violaciones de CSP en la consola (pendiente de deploy manual).
 
-**Evidencia de cierre**: `curl -sI https://<preview>/` devuelve los headers y la app carga sin errores rojos de CSP.
+**Evidencia de cierre**: `vercel.json` actualizado. Commit `3c7d5a7`.
 
 ### T6 — Hardening CI y Docker (F5)
 
