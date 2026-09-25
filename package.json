@@ -41,7 +41,7 @@
     "yup": "^1.0.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.3.1",
+    "@commitlint/cli": "^21.2.3",
     "@commitlint/config-conventional": "^20.3.1",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@testing-library/jest-dom": "^6.9.1",
