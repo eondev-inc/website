@@ -36,3 +36,7 @@ AGENTS.*
 *.backup
 *.bak
 .playwright-cli/
+
+# Local agent/runtime state
+.pi/
+.codegraph/
