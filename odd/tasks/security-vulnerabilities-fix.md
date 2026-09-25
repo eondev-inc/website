@@ -96,9 +96,9 @@ la toolchain vulnerable y habilita el uso correcto de variables `VITE_*`.
   - `USER node` en stage final.
   - Servir con `nginx:alpine` en lugar de `http-server` global (menos superficie); o al menos pinear `http-server@<version>`.
 - [ ] `Dockerfile.dev`: mismo tratamiento para dev.
-- [ ] `.github/dependabot.yml`: agregar `package-ecosystem: "github-actions"`.
+- [x] `.github/dependabot.yml`: agregar `package-ecosystem: "github-actions"`.
 
-**Evidencia de cierre**: CI pasa + `docker run --rm <img> id` no devuelve `uid=0`.
+**Evidencia de cierre**: CI actualizado a Node 22, acciones por SHA, upload-artifact@v4, `npm ci`, audit en build. Commit `e6b8618`. (Build de Docker no probado localmente por permisos.)
 
 ### T7 — Mailto seguro y autenticación decorativa (F7 + F8)
 

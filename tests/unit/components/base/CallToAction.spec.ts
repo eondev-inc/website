@@ -70,6 +70,30 @@ describe('CallToAction.vue', () => {
       wrapper.unmount()
     })
 
+    it('should encode cc email in mailto URL', async () => {
+      process.env.VITE_CONTACT_EMAIL = 'test@example.com'
+      const openSpy = jest.spyOn(window, 'open').mockImplementation(() => null)
+
+      const wrapper: VueWrapper<any> = mount(CallToAction, {
+        global: {
+          plugins: [createTestI18n()]
+        }
+      })
+
+      await wrapper.find('input#name').setValue('John Doe')
+      await wrapper.find('input#email').setValue('john+test@example.com')
+      await wrapper.find('textarea#message').setValue('Mensaje de prueba')
+      await wrapper.find('form').trigger('submit')
+      await flushPromises()
+
+      const mailtoUrl = openSpy.mock.calls[0][0] as string
+      expect(mailtoUrl).toContain('cc=john%2Btest%40example.com')
+      expect(mailtoUrl).not.toContain('cc=john+test@example.com')
+
+      openSpy.mockRestore()
+      wrapper.unmount()
+    })
+
     it('should handle empty string VITE_CONTACT_EMAIL gracefully', async () => {
       process.env.VITE_CONTACT_EMAIL = ''
 
