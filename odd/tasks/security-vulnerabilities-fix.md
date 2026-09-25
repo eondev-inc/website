@@ -22,13 +22,13 @@ la toolchain vulnerable y habilita el uso correcto de variables `VITE_*`.
 
 ### T1 — Spike: Vite config mínima y build verde
 
-- [ ] Crear `vite.config.ts` equivalente a la configuración actual (alias `@`, Vue, TypeScript, SCSS, Tailwind).
-- [ ] Migrar `public/index.html` a `index.html` en root (script `src/main.ts`, `<base>` si es necesario).
-- [ ] Ajustar `package.json`: scripts `dev`, `build`, `preview`, `test`, `test:ci`; eliminar dependencias de Vue CLI.
-- [ ] Ejecutar `npm install` / `yarn install` y `yarn build` sin errores.
-- [ ] Ejecutar `yarn test:ci` y lograr que pase (o documentar qué tests se rompen y por qué).
+- [x] Crear `vite.config.ts` equivalente a la configuración actual (alias `@`, Vue, TypeScript, SCSS, Tailwind).
+- [x] Migrar `public/index.html` a `index.html` en root (script `src/main.ts`, `<base>` si es necesario).
+- [x] Ajustar `package.json`: scripts `dev`, `build`, `preview`, `test`, `test:ci`; eliminar dependencias de Vue CLI.
+- [x] Ejecutar `npm install` y `npm run build` sin errores.
+- [x] Ejecutar `npm run test:ci` y lograr que pase.
 
-**Evidencia de cierre**: build exitoso + tests pasan.
+**Evidencia de cierre**: build exitoso + tests pasan. Commit `17e55ba`. Se migró de `yarn` a `npm` porque `yarn` no está instalado en el entorno.
 
 ### T2 — Variables de entorno y URL de la API unificada
 

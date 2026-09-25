@@ -13,6 +13,7 @@ import type {
   CategoryPattern
 } from '@/interfaces/blog.interface'
 import { decodeHtmlEntities } from '@/composables/utils/html-utils'
+import { getApiUrl } from '@/config/api'
 
 const CACHE_DURATION = 30 * 60 * 1000 // 30 minutos
 
@@ -133,7 +134,7 @@ export default function useBlogCategories() {
     }
 
     try {
-      const response = await fetch('https://techcrunch.com/wp-json/wp/v2/categories?per_page=100')
+      const response = await fetch(getApiUrl('/categories?per_page=100'))
 
       if (!response.ok) {
         throw new Error(`Error al cargar categorías: ${response.status}`)

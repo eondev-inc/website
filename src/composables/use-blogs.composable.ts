@@ -1,7 +1,8 @@
+import { getApiUrl } from '@/config/api'
+
 const useBlogs = () => {
   const retrievePost = async (perPage: number) => {
-    const baseUrl = process.env.VITE_API_BLOG_URL || 'https://techcrunch.com/wp-json/wp/v2/posts'
-    const url = `${baseUrl}?per_page=${perPage}&context=embed`
+    const url = `${getApiUrl('/posts')}?per_page=${perPage}&context=embed`
     console.log('Fetching posts from:', url)
 
     try {
