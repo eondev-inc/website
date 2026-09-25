@@ -67,11 +67,11 @@ la toolchain vulnerable y habilita el uso correcto de variables `VITE_*`.
 
 - [ ] Crear helper `src/composables/utils/url-utils.ts`:
   - `isAllowedExternalUrl(url)` → solo `https:` y host en allowlist.
-- [ ] `OurBlog.vue`: usar helper para `blog.link`; si no es válido, mostrar `#` o no renderizar el link.
-- [ ] `AboutView.vue`: `window.open(url, '_blank', 'noopener,noreferrer')`.
-- [ ] Tests unitarios para el helper.
+- [x] `OurBlog.vue`: usar helper para `blog.link`; si no es válido, mostrar `#`.
+- [x] `AboutView.vue`: `window.open(url, '_blank', 'noopener,noreferrer')`.
+- [x] Tests unitarios para el helper.
 
-**Evidencia de cierre**: `grep -r "window.open" src/` muestra `noopener,noreferrer`.
+**Evidencia de cierre**: `grep -r "window.open" src/` muestra `noopener,noreferrer`. Commit `cfc04e7`.
 
 ### T5 — CSP y headers de seguridad (F4)
 
