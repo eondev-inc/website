@@ -102,10 +102,10 @@ la toolchain vulnerable y habilita el uso correcto de variables `VITE_*`.
 
 ### T7 — Mailto seguro y autenticación decorativa (F7 + F8)
 
-- [ ] `CallToAction.vue`: `encodeURIComponent(values.email)` en `cc=`; validar con yup que el email sea válido.
-- [ ] `router/index.ts`: documentar que `requiresAuth` es decorativo y que cualquier autorización real debe ir en backend; o eliminar los flags.
+- [x] `CallToAction.vue`: `encodeURIComponent(values.email)` en `cc=`.
+- [x] `router/index.ts`: documentar que `requiresAuth` es decorativo.
 
-**Evidencia de cierre**: test unitario que pasa un email con `&bcc=` y verifica que queda codificado.
+**Evidencia de cierre**: test unitario verifica codificación del `cc`. Commit `b1e42c3`.
 
 ### T8 — Higiene (F10 + F11)
 

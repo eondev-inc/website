@@ -33,3 +33,5 @@ AGENTS.*
 *-output.*
 # Local Pi runtime state
 .atl/
+*.backup
+*.bak
