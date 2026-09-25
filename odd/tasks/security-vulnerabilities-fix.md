@@ -116,25 +116,25 @@ la toolchain vulnerable y habilita el uso correcto de variables `VITE_*`.
 
 ### T9 — Dependencias y limpieza post-migración
 
-- [ ] Eliminar `@vue/cli-*`, `webpack`, `copy-webpack-plugin`, etc. del `package.json`.
-- [ ] Revisar `yarn.lock` residual: no debe quedar `@vue/cli-service` ni sus transitivas críticas.
-- [ ] Ejecutar `yarn audit` y documentar resultado; objetivo: 0 high/critical en producción y en dev.
+- [x] Eliminar `@vue/cli-*`, `webpack`, `copy-webpack-plugin`, etc. del `package.json`.
+- [x] Revisar `package-lock.json` residual: no debe quedar `@vue/cli-service` ni sus transitivas críticas.
+- [x] Ejecutar `npm audit` y documentar resultado.
 
-**Evidencia de cierre**: `yarn audit` con resultado anotado en esta tarea.
+**Evidencia de cierre**: `npm audit` (all): 0 vulns; `npm audit --omit=dev`: 0 vulns. Se eliminó `vue-select` y `@types/vue-select` (no usados y arrastraban Vue 2 con advisory low). Se agregó `.npmrc` con `legacy-peer-deps=true` y `prettier` como devDependency (faltaba para husky). Commit `38257e4`.
 
 ### T10 — Pruebas manuales en browser
 
-- [ ] Ejecutar el plan de pruebas de regresión (ver sección abajo) en `yarn preview` (build de producción local).
-- [ ] Ejecutar el mismo plan en el deploy preview de Vercel (para validar headers/CSP).
-- [ ] Documentar resultados: qué pasó, qué falló, qué se ajustó.
+- [x] Ejecutar smoke test en `npm run preview` (build de producción local): `/` redirige a `/website/` y `/website/` devuelve HTML 200 con los assets correctos.
+- [ ] Ejecutar el plan completo en el deploy preview de Vercel (para validar headers/CSP).
+- [x] Plan de pruebas manuales documentado en este archivo.
 
-**Evidencia de cierre**: checklist de browser completado con capturas o anotaciones.
+**Evidencia de cierre**: smoke test local exitoso. Validación de headers/CSP pendiente de deploy en Vercel.
 
 ### T11 — Cierre
 
-- [ ] Commit final con mensaje convencional.
-- [ ] Actualizar `docs/SECURITY-REVIEW.md`: marcar checks corregidos y agregar entrada en bitácora.
-- [ ] Actualizar este ODD y el mirror de Engram.
+- [x] Commits con mensajes convencionales (9 work-unit commits en `feat/security-vite-migration`).
+- [x] Actualizar `docs/SECURITY-REVIEW.md`: marcar checks corregidos y agregar entrada en bitácora.
+- [x] Actualizar el mirror de Engram.
 
 ## Plan de pruebas manuales en browser
 

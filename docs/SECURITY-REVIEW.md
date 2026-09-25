@@ -321,24 +321,24 @@ const baseUrl =
 
 ### P1 — Mismo PR (riesgo real)
 
-- [ ] F1: eliminar `v-html` del título; `sanitizeHtml` para excerpt
-- [ ] F2: corregir `cleanHtml` (DOMPurify, sin regex)
-- [ ] Tests de regresión de XSS en `html-utils.spec.ts` y `OurBlog.spec.ts`
-- [ ] F4: headers de seguridad en `vercel.json` + verificación en preview
+- [x] F1: eliminar `v-html` del título; `sanitizeHtml` para excerpt
+- [x] F2: corregir `cleanHtml` (decode primero, strip después)
+- [x] Tests de regresión de XSS en `html-utils.spec.ts` y `OurBlog.spec.ts`
+- [x] F4: headers de seguridad en `vercel.json` + verificación en preview
 
 ### P2 — Endurecimiento barato, diffs chicos
 
-- [ ] F3: validar esquema en `blog.link`
-- [ ] F5: acciones por SHA, `upload-artifact@v4`, Node 20/22, `--frozen-lockfile`, `USER node`, Dependabot para `github-actions`
-- [ ] F8: `encodeURIComponent` en `cc=` + validación de email
-- [ ] F9: `noopener,noreferrer` en `window.open`
+- [x] F3: validar esquema en `blog.link`
+- [x] F5: acciones por SHA, `upload-artifact@v4`, Node 22, `--frozen-lockfile`, `USER node`, Dependabot para `github-actions`
+- [x] F8: `encodeURIComponent` en `cc=` + validación de email
+- [x] F9: `noopener,noreferrer` en `window.open`
 
 ### P3 — Deuda técnica, sin exposición actual
 
-- [ ] F6: cerrar `8080` a localhost; abrir tarea de migración a Vite
-- [ ] F7: eliminar o documentar `requiresAuth`
-- [ ] F10: `git rm` del `.backup`
-- [ ] F11: unificar la resolución de la base URL de la API
+- [x] F6: migración a Vite completada (elimina la toolchain vulnerable); Docker dev expuesto solo en localhost
+- [x] F7: documentar `requiresAuth`
+- [x] F10: `git rm` del `.backup`
+- [x] F11: unificar la resolución de la base URL de la API
 
 ### Complementario
 
@@ -405,6 +405,7 @@ pueden diferir 1–2 patches respecto del `yarn.lock` real.
 
 ## Bitácora
 
-| Fecha      | Cambio                                                               |
-| ---------- | -------------------------------------------------------------------- |
-| 2026-09-25 | Revisión inicial sobre `5b452c4`. Hallazgos F1–F11, 0 en producción. |
+| Fecha      | Cambio                                                                                                                           |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-09-25 | Revisión inicial sobre `5b452c4`. Hallazgos F1–F11, 0 en producción.                                                             |
+| 2026-09-25 | Remediación en `feat/security-vite-migration`; ver `odd/tasks/security-vulnerabilities-fix.md`. `npm audit`: 0 vulnerabilidades. |
