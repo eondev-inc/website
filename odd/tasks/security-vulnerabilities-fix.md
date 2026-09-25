@@ -109,10 +109,10 @@ la toolchain vulnerable y habilita el uso correcto de variables `VITE_*`.
 
 ### T8 — Higiene (F10 + F11)
 
-- [ ] `git rm src/composables/use-blog-enhanced.composable.ts.backup`.
-- [ ] Verificar que `.gitignore` cubra backups comunes (`*.backup`, `*.bak`).
+- [x] `git rm src/composables/use-blog-enhanced.composable.ts.backup`.
+- [x] Verificar que `.gitignore` cubra backups comunes (`*.backup`, `*.bak`).
 
-**Evidencia de cierre**: `git ls-files | grep -i backup` vacío.
+**Evidencia de cierre**: `git ls-files | grep -i backup` vacío. Commit `d5c0861`.
 
 ### T9 — Dependencias y limpieza post-migración
 
