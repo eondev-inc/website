@@ -42,6 +42,7 @@ jest.mock('@/composables/use-blog-enhanced.composable', () => ({
     estimateReadingTime: () => 1,
     formatDate: () => '01/01/2026',
     cleanHtml: (v: string) => v,
+    sanitizeHtml: (v: string) => v,
     decodeHtmlEntities: (v: string) => v,
     truncate: (v: string) => v,
     cacheExpiry: ref(1800000)
@@ -52,7 +53,7 @@ const makePost = (overrides: Partial<BlogPost> = {}): BlogPost => ({
   id: 1,
   title: { rendered: 'Post AI' },
   excerpt: { rendered: 'Excerpt' },
-  link: 'https://example.com/post',
+  link: 'https://techcrunch.com/post',
   date: '2026-01-01T00:00:00.000Z',
   categories: [1],
   ...overrides
@@ -138,7 +139,7 @@ describe('OurBlog.vue', () => {
     const view = await renderWithApp(OurBlog)
 
     const readLink = view.getByRole('link', { name: 'Leer artículo: Post AI' })
-    expect(readLink).toHaveAttribute('href', 'https://example.com/post')
+    expect(readLink).toHaveAttribute('href', 'https://techcrunch.com/post')
     expect(readLink).toHaveAttribute('target', '_blank')
   })
 

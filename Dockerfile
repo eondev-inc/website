@@ -1,26 +1,38 @@
 # Stage 1: Build
-FROM node:lts-alpine AS build-stage
+FROM node:22-alpine AS build-stage
 
 WORKDIR /app
 
 COPY package*.json ./
-COPY yarn.lock ./
-
-RUN yarn install
+RUN npm ci
 
 COPY . .
-
-RUN yarn run build
+RUN npm run build
 
 # Stage 2: Production
-FROM node:lts-alpine AS production-stage
+FROM nginx:alpine AS production-stage
 
-RUN yarn global add http-server
+# SPA nginx config: serve the app under /website/ (matches Vite base)
+RUN cat > /etc/nginx/conf.d/default.conf <<'EOF'
+server {
+  listen 80;
+  server_name _;
+  root /usr/share/nginx/html;
+  index index.html;
 
-WORKDIR /app
+  location = / {
+    return 302 /website/;
+  }
 
-COPY --from=build-stage /app/dist ./dist
+  location /website/ {
+    alias /usr/share/nginx/html/;
+    try_files $uri $uri/ /index.html;
+  }
+}
+EOF
 
-EXPOSE 8080
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-CMD [ "http-server", "dist" ]
+EXPOSE 80
+
+USER nginx

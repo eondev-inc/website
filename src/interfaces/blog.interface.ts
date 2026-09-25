@@ -173,6 +173,7 @@ export interface UseBlogEnhanced {
   // Utilidades
   formatDate: (dateString: string) => string
   cleanHtml: (html: string) => string
+  sanitizeHtml: (html: string) => string
   decodeHtmlEntities: (text: string) => string
   truncate: (str: string, length: number) => string
 

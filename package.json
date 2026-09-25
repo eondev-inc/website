@@ -3,18 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ext .js,.ts,.vue src/ tests/",
     "test": "jest",
-    "test:unit": "jest --coverage",
-    "test:watch": "jest --watch",
     "test:ci": "jest --ci --coverage --maxWorkers=2",
     "prepare": "husky"
   },
   "lint-staged": {
     "*.{js,ts,vue}": [
-      "vue-cli-service lint --fix"
+      "eslint --fix"
     ],
     "*.{css,scss,vue}": [
       "prettier --write"
@@ -39,7 +38,6 @@
     "vue": "^3.2.13",
     "vue-i18n": "11",
     "vue-router": "^4.6.4",
-    "vue-select": "^3.20.2",
     "yup": "^1.0.1"
   },
   "devDependencies": {
@@ -49,13 +47,10 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/vue": "^8.1.0",
     "@types/jest": "^30.0.0",
-    "@types/vue-select": "^3.16.2",
+    "@types/node": "^26.6.2",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
-    "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-plugin-router": "~5.0.0",
-    "@vue/cli-plugin-typescript": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
+    "@vitejs/plugin-vue": "^5.2.4",
     "@vue/eslint-config-standard": "^8.0.1",
     "@vue/eslint-config-typescript": "^11.0.3",
     "@vue/test-utils": "^2.4.0-alpha.2",
@@ -72,10 +67,11 @@
     "jest-environment-jsdom": "^30.2.0",
     "lint-staged": "^16.2.7",
     "postcss": "^8.4.17",
+    "prettier": "^3.9.9",
     "sass": "^1.32.7",
-    "sass-loader": "^13.3.2",
     "tailwindcss": "^3.1.8",
     "ts-jest": "^29.4.6",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^6.3.5"
   }
 }

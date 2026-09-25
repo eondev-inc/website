@@ -6,6 +6,9 @@ import DOMPurify from 'dompurify'
  * Cada ruta incluye lazy loading, meta información para SEO y chunk names optimizados
  */
 const routes: Array<RouteRecordRaw> = [
+  // NOTA DE SEGURIDAD: `requiresAuth` en una SPA solo es decorativo. Cualquier
+  // autorización real debe implementarse en el servidor; el frontend solo puede
+  // decidir qué UI mostrar u ocultar.
   // Página principal del portfolio
   {
     path: '/',
