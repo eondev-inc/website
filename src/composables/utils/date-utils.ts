@@ -10,15 +10,15 @@
  * @returns Fecha formateada
  */
 export const formatDate = (dateString: string, locale = 'es-ES'): string => {
-  try {
-    return new Date(dateString).toLocaleDateString(locale, {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
-  } catch {
+  const date = new Date(dateString)
+  if (Number.isNaN(date.getTime())) {
     return 'Fecha inválida'
   }
+  return date.toLocaleDateString(locale, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
 }
 
 /**
@@ -28,13 +28,13 @@ export const formatDate = (dateString: string, locale = 'es-ES'): string => {
  * @returns Fecha formateada corta
  */
 export const formatDateShort = (dateString: string, locale = 'es-ES'): string => {
-  try {
-    return new Date(dateString).toLocaleDateString(locale, {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    })
-  } catch {
+  const date = new Date(dateString)
+  if (Number.isNaN(date.getTime())) {
     return 'Fecha inválida'
   }
+  return date.toLocaleDateString(locale, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  })
 }
