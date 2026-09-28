@@ -72,6 +72,7 @@
               <a
                 href="https://www.linkedin.com/in/yromeroc"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="btn-outline inline-flex items-center justify-center gap-2"
               >
                 <font-awesome-icon
