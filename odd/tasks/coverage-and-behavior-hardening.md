@@ -130,9 +130,13 @@ lógica sin sumar protección.
 
 ## Evidencia de commits
 
-| Tarea                           | Commit    |
-| ------------------------------- | --------- |
-| T1 — `date-utils`               | `a50869a` |
-| T2 — `AboutView` outbound links | `bfc1e3c` |
-| T3 — cobertura de accesibilidad | `ef65750` |
-| T4 — denominador de cobertura   | `84ea792` |
+Entregado en tres PRs encadenados, cada uno bajo el presupuesto de 400 líneas.
+
+| Tarea                                        | Commit    | PR  |
+| -------------------------------------------- | --------- | --- |
+| T1 — `date-utils`                            | `e666a41` | 1   |
+| T2 — `AboutView` outbound links              | `cf3bb05` | 1   |
+| Ancla `rel="noopener noreferrer"` (JD-A-001) | `a45c4ce` | 1   |
+| T3 — cobertura de accesibilidad              | `c426deb` | 2   |
+| T4 — denominador de cobertura                | `442e5b7` | 2   |
+| Este registro ODD                            | —         | 3   |
