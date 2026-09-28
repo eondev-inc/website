@@ -33,10 +33,16 @@ module.exports = {
     '**/__tests__/*.(js|jsx|ts|tsx)'
   ],
   collectCoverageFrom: [
-    // Denominator = composables + components only (per design): thin view
-    // wrappers and App.vue are permanently out of scope (user decision).
+    // Denominator = composables + components + config + router. `config/api.ts`
+    // holds the OWASP origin allowlist and `router/index.ts` holds route
+    // metadata sanitization — both are security-relevant and both are already
+    // specced, so excluding them only made the reported % look better than it
+    // was. Still out of scope (user decision): thin view wrappers, App.vue,
+    // main.ts, locales.
     'src/composables/**/*.{js,ts,vue}',
     'src/components/**/*.{js,ts,vue}',
+    'src/config/**/*.{js,ts,vue}',
+    'src/router/**/*.{js,ts,vue}',
     '!src/**/*.d.ts',
     '!src/**/*.interface.ts',
     '!src/**/*.backup.*'
