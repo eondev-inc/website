@@ -72,6 +72,7 @@
               <a
                 href="https://www.linkedin.com/in/yromeroc"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="btn-outline inline-flex items-center justify-center gap-2"
               >
                 <font-awesome-icon
@@ -364,6 +365,7 @@
 import { defineComponent, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import useAboutMe from '../composables/use-about.composable'
+import { toOutside } from '../composables/utils/outbound-links'
 
 export default defineComponent({
   name: 'AboutMe',
@@ -380,9 +382,7 @@ export default defineComponent({
 
     return {
       localizedAboutMe,
-      toOutside: (url: string) => {
-        window.open(url, '_blank', 'noopener,noreferrer')
-      }
+      toOutside
     }
   }
 })

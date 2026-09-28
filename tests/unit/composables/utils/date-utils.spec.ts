@@ -20,13 +20,12 @@ describe('date-utils', () => {
 
     it('should handle invalid dates', () => {
       const result = formatDate('invalid-date')
-      // Different environments may return different strings
-      expect(result === 'Fecha inválida' || result === 'Invalid Date').toBe(true)
+      expect(result).toBe('Fecha inválida')
     })
 
     it('should handle empty strings', () => {
       const result = formatDate('')
-      expect(result === 'Fecha inválida' || result === 'Invalid Date').toBe(true)
+      expect(result).toBe('Fecha inválida')
     })
 
     it('should format different date formats', () => {
@@ -56,7 +55,12 @@ describe('date-utils', () => {
 
     it('should handle invalid dates', () => {
       const result = formatDateShort('invalid-date')
-      expect(result === 'Fecha inválida' || result === 'Invalid Date').toBe(true)
+      expect(result).toBe('Fecha inválida')
+    })
+
+    it('should handle empty strings', () => {
+      const result = formatDateShort('')
+      expect(result).toBe('Fecha inválida')
     })
 
     it('should be shorter than long format', () => {
