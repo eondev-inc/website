@@ -1,10 +1,12 @@
 name: CI Pipeline
 
 on:
+  # `master` es el branch por defecto de este repositorio: sin él, ningún PR
+  # ni push corría CI (los 7 PRs del refactor de diseño pasaron sin checks).
   pull_request:
-    branches: [main, develop]
+    branches: [master, main, develop]
   push:
-    branches: [main]
+    branches: [master, main]
 
 jobs:
   lint:
