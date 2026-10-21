@@ -9,9 +9,7 @@
       <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
         {{ $t("blog.subtitle") }}
       </p>
-      <div
-        class="w-24 h-1 bg-gradient-to-r from-secondary-500 to-primary-400 mx-auto mt-6 rounded-full"
-      />
+      <div class="accent-bar mx-auto mt-6" />
     </div>
 
     <!-- Controles avanzados -->
@@ -201,7 +199,7 @@
           <div
             v-else
             :class="[
-              'bg-gradient-to-br from-secondary-100 to-primary-100 flex items-center justify-center',
+              'bg-primary-50 border border-primary-100 flex items-center justify-center',
               viewMode === 'list' ? 'w-full h-full' : 'w-full h-48',
             ]"
           >
@@ -211,14 +209,9 @@
             />
           </div>
 
-          <!-- Overlay gradient -->
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          />
-
           <!-- Date badge -->
           <div
-            class="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-neutral-700 shadow-soft"
+            class="absolute top-4 left-4 px-3 py-1 bg-white rounded-full text-xs font-medium text-neutral-700 shadow-soft"
           >
             {{ formatDate(blog.date) }}
           </div>
@@ -238,15 +231,15 @@
               :style="`
                 background-color: ${
                   categories.find((c) => c.id === categoryId)?.color ||
-                  '#3b82f6'
+                  '#0f766e'
                 }15;
                 color: ${
                   categories.find((c) => c.id === categoryId)?.color ||
-                  '#3b82f6'
+                  '#0f766e'
                 };
                 border: 1px solid ${
                   categories.find((c) => c.id === categoryId)?.color ||
-                  '#3b82f6'
+                  '#0f766e'
                 }30;
               `"
             >
@@ -254,7 +247,7 @@
                 class="w-1.5 h-1.5 rounded-full"
                 :style="`background-color: ${
                   categories.find((c) => c.id === categoryId)?.color ||
-                  '#3b82f6'
+                  '#0f766e'
                 }`"
               />
               <span>{{ getCategoryName(categoryId) }}</span>
@@ -290,7 +283,10 @@
             ]"
             v-html="
               sanitizeHtml(
-                truncate(blog.excerpt.rendered, viewMode === 'list' ? 250 : 150)
+                truncate(
+                  blog.excerpt.rendered,
+                  viewMode === 'list' ? 250 : 150,
+                ),
               )
             "
           />
@@ -305,7 +301,7 @@
                 <span
                   >{{
                     estimateReadingTime(
-                      blog.content?.rendered || blog.excerpt.rendered
+                      blog.content?.rendered || blog.excerpt.rendered,
                     )
                   }}
                   min</span
@@ -378,7 +374,7 @@
               @click="shareArticle(blog)"
               class="inline-flex items-center space-x-1 text-neutral-500 hover:text-accent-600 text-sm transition-colors duration-200"
               :aria-label="`${$t('blog.shareArticle')}: ${cleanHtml(
-                blog.title.rendered
+                blog.title.rendered,
               )}`"
             >
               <font-awesome-icon icon="share-alt" />
@@ -386,11 +382,6 @@
             </button>
           </div>
         </div>
-
-        <!-- Hover border effect -->
-        <div
-          class="absolute inset-0 rounded-3xl bg-gradient-to-br from-secondary-400 to-primary-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm scale-105"
-        />
       </article>
     </div>
 
@@ -501,7 +492,7 @@
         href="https://steemit.com/@seventrust"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-secondary-600 to-primary-400 text-white rounded-xl hover:from-secondary-700 hover:to-primary-500 transition-all duration-300 shadow-soft hover:shadow-glow hover:-translate-y-0.5"
+        class="inline-flex items-center space-x-2 px-6 py-3 bg-primary-700 text-white rounded-lg hover:bg-primary-800 transition-all duration-300 shadow-soft hover:shadow-medium"
       >
         <span>{{ $t("blog.viewAllArticles") }}</span>
         <svg
@@ -685,14 +676,15 @@ export default defineComponent({
   }
 }
 
-@keyframes pulse-glow {
+@keyframes heart-pulse {
   0%,
   100% {
-    box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+    transform: scale(1);
+    opacity: 1;
   }
   50% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6),
-      0 0 30px rgba(59, 130, 246, 0.4);
+    transform: scale(1.12);
+    opacity: 0.85;
   }
 }
 
@@ -737,20 +729,14 @@ export default defineComponent({
 
 /* Hover effects para los botones */
 .hover-lift {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .hover-lift:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* Efectos de glassmorphism para controles */
-.glass {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Transiciones suaves para cambios de vista */
@@ -778,43 +764,21 @@ export default defineComponent({
 }
 
 .favorite-heart.active {
-  animation: pulse-glow 2s infinite;
+  animation: heart-pulse 2s infinite;
 }
 
 /* Efectos hover para categorías */
 .category-tag {
   transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.category-tag::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: left 0.5s;
-}
-
-.category-tag:hover::before {
-  left: 100%;
 }
 
 /* Loader personalizado */
 .custom-loader {
   width: 48px;
   height: 48px;
-  border: 3px solid rgba(59, 130, 246, 0.1);
+  border: 3px solid rgba(15, 118, 110, 0.15);
   border-radius: 50%;
-  border-top-color: #3b82f6;
+  border-top-color: #0f766e;
   animation: spin 1s ease-in-out infinite;
 }
 
@@ -838,7 +802,7 @@ export default defineComponent({
 
 /* Focus states for accessibility */
 .focus-visible {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid #0f766e;
   outline-offset: 2px;
 }
 
