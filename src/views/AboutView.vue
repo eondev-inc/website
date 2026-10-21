@@ -2,23 +2,7 @@
   <!-- About View Completamente Renovado -->
   <div class="min-h-screen">
     <!-- Hero Section -->
-    <section
-      class="relative py-20 lg:py-32 bg-gradient-to-br from-neutral-50 via-secondary-50/20 to-primary-50/20 overflow-hidden"
-    >
-      <!-- Background decorativo -->
-      <div class="absolute inset-0 overflow-hidden">
-        <div
-          class="absolute -top-40 -right-40 w-80 h-80 bg-secondary-400/20 rounded-full blur-3xl animate-float"
-        ></div>
-        <div
-          class="absolute -bottom-40 -left-40 w-96 h-96 bg-primary-400/20 rounded-full blur-3xl animate-float"
-          style="animation-delay: 1s"
-        ></div>
-        <div
-          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-secondary-300/10 rounded-full blur-2xl animate-pulse-soft"
-        ></div>
-      </div>
-
+    <section class="relative py-20 lg:py-32 bg-neutral-50 overflow-hidden">
       <div class="container-custom relative z-10">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <!-- Contenido Principal -->
@@ -38,7 +22,7 @@
               class="text-4xl lg:text-6xl font-display font-bold leading-tight mb-6"
             >
               {{ $t("home.aboutMe.meTitle") }}
-              <span class="text-gradient-hero block mt-2">
+              <span class="text-primary-700 block mt-2">
                 {{ $t("home.aboutMe.meSubs") }}
               </span>
             </h1>
@@ -89,17 +73,9 @@
             class="relative lg:ml-8 animate-scale-in"
             style="animation-delay: 0.4s"
           >
-            <!-- Elementos decorativos -->
-            <div
-              class="absolute -inset-4 bg-gradient-to-br from-secondary-200/30 to-primary-200/30 rounded-3xl blur-2xl"
-            ></div>
-            <div
-              class="absolute -inset-2 bg-gradient-to-br from-white/60 to-white/30 rounded-3xl backdrop-blur-sm"
-            ></div>
-
             <!-- Imagen principal -->
             <div
-              class="relative bg-white rounded-3xl p-8 shadow-large hover:shadow-glow transition-all duration-500"
+              class="relative bg-white rounded-3xl p-8 shadow-soft hover:shadow-medium transition-all duration-500"
             >
               <img
                 src="../assets/img/Coding.png"
@@ -108,15 +84,6 @@
                 class="w-full h-auto rounded-2xl hover:scale-105 transition-transform duration-500"
               />
             </div>
-
-            <!-- Elementos decorativos adicionales -->
-            <div
-              class="absolute -top-4 -left-4 w-20 h-20 bg-secondary-300/30 rounded-full blur-xl animate-pulse-soft"
-            ></div>
-            <div
-              class="absolute -bottom-8 left-12 w-16 h-16 bg-primary-300/30 rounded-full blur-xl animate-pulse-soft"
-              style="animation-delay: 1s"
-            ></div>
           </div>
         </div>
       </div>
@@ -133,16 +100,14 @@
           <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
             {{ $t("about.timeline.intro") }}
           </p>
-          <div
-            class="w-24 h-1 bg-gradient-to-r from-secondary-500 to-primary-400 mx-auto mt-6 rounded-full"
-          ></div>
+          <div class="accent-bar mx-auto mt-6"></div>
         </div>
 
         <!-- Timeline moderna -->
         <div class="relative">
           <!-- Línea central -->
           <div
-            class="absolute left-4 md:left-1/2 md:transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-secondary-200 via-primary-300 to-secondary-200"
+            class="absolute left-4 md:left-1/2 md:transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-neutral-200"
           ></div>
 
           <div class="space-y-12">
@@ -154,7 +119,7 @@
             >
               <!-- Punto en la línea -->
               <div
-                class="absolute left-0 md:left-1/2 md:transform md:-translate-x-1/2 w-8 h-8 bg-gradient-to-br from-secondary-500 to-primary-400 rounded-full flex items-center justify-center shadow-large z-10"
+                class="absolute left-0 md:left-1/2 md:transform md:-translate-x-1/2 w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center shadow-soft z-10"
               >
                 <svg
                   class="w-4 h-4 text-white"
@@ -179,13 +144,8 @@
                   "
                 >
                   <div
-                    class="relative bg-white/80 backdrop-blur-sm border border-neutral-200 rounded-3xl p-8 shadow-soft hover:shadow-glow hover:-translate-y-2 transition-all duration-500 group-hover:bg-white"
+                    class="relative bg-white border border-neutral-200 rounded-3xl p-8 shadow-soft hover:shadow-medium hover:-translate-y-2 transition-all duration-500 group-hover:bg-white"
                   >
-                    <!-- Background gradient en hover -->
-                    <div
-                      class="absolute inset-0 bg-gradient-to-br from-secondary-50/50 to-primary-50/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    ></div>
-
                     <!-- Contenido -->
                     <div class="relative z-10">
                       <!-- Header -->
@@ -193,7 +153,7 @@
                         class="flex flex-col md:flex-row md:justify-between md:items-center mb-4 gap-2"
                       >
                         <h3
-                          class="text-xl font-bold text-neutral-900 group-hover:text-gradient transition-all duration-300"
+                          class="text-xl font-bold text-neutral-900 group-hover:text-primary-700 transition-all duration-300"
                         >
                           {{ about.title }}
                         </h3>
@@ -212,7 +172,7 @@
                       <!-- Botón -->
                       <button
                         @click="toOutside(about.url)"
-                        class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-secondary-500 to-primary-400 text-white rounded-xl hover:from-secondary-600 hover:to-primary-500 transition-all duration-300 shadow-soft hover:shadow-glow hover:-translate-y-0.5 text-sm font-medium"
+                        class="inline-flex items-center gap-2 px-4 py-2 bg-primary-700 text-white rounded-xl hover:bg-primary-800 transition-all duration-300 shadow-soft hover:shadow-medium text-sm font-medium"
                       >
                         {{ $t("about.timeline.seeMore") }}
                         <svg
@@ -233,7 +193,7 @@
 
                     <!-- Decorative elements -->
                     <div
-                      class="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-secondary-100 to-primary-100 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500"
+                      class="absolute top-4 right-4 w-20 h-20 bg-primary-50 border border-primary-100 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500"
                     ></div>
                   </div>
                 </div>
@@ -244,7 +204,7 @@
             <div class="relative animate-slide-up" style="animation-delay: 1s">
               <!-- Punto en la línea -->
               <div
-                class="absolute left-0 md:left-1/2 md:transform md:-translate-x-1/2 w-8 h-8 bg-gradient-to-br from-secondary-500 to-primary-400 rounded-full flex items-center justify-center shadow-large z-10"
+                class="absolute left-0 md:left-1/2 md:transform md:-translate-x-1/2 w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center shadow-soft z-10"
               >
                 <font-awesome-icon
                   icon="fa-brands fa-linkedin-in"
@@ -256,17 +216,12 @@
               <div class="ml-16 md:ml-0 group">
                 <div class="md:pr-8 md:text-right md:mr-auto md:w-1/2">
                   <div
-                    class="relative bg-white/80 backdrop-blur-sm border border-neutral-200 rounded-3xl p-8 shadow-soft hover:shadow-glow hover:-translate-y-2 transition-all duration-500 group-hover:bg-white"
+                    class="relative bg-white border border-neutral-200 rounded-3xl p-8 shadow-soft hover:shadow-medium hover:-translate-y-2 transition-all duration-500 group-hover:bg-white"
                   >
-                    <!-- Background gradient en hover -->
-                    <div
-                      class="absolute inset-0 bg-gradient-to-br from-secondary-50/50 to-primary-50/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    ></div>
-
                     <!-- Contenido -->
                     <div class="relative z-10">
                       <h3
-                        class="text-xl font-bold text-neutral-900 mb-4 group-hover:text-gradient transition-all duration-300"
+                        class="text-xl font-bold text-neutral-900 mb-4 group-hover:text-primary-700 transition-all duration-300"
                       >
                         {{ $t("about.linkedin.title") }}
                       </h3>
@@ -277,7 +232,7 @@
                         @click="
                           toOutside('https://www.linkedin.com/in/yromeroc')
                         "
-                        class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-secondary-500 to-primary-400 text-white rounded-xl hover:from-secondary-600 hover:to-primary-500 transition-all duration-300 shadow-soft hover:shadow-glow hover:-translate-y-0.5 text-sm font-medium"
+                        class="inline-flex items-center gap-2 px-4 py-2 bg-primary-700 text-white rounded-xl hover:bg-primary-800 transition-all duration-300 shadow-soft hover:shadow-medium text-sm font-medium"
                       >
                         <font-awesome-icon
                           icon="fa-brands fa-linkedin-in"
@@ -302,7 +257,7 @@
 
                     <!-- Decorative elements -->
                     <div
-                      class="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-secondary-100 to-primary-100 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500"
+                      class="absolute top-4 right-4 w-20 h-20 bg-primary-50 border border-primary-100 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500"
                     ></div>
                   </div>
                 </div>
@@ -314,23 +269,11 @@
     </section>
 
     <!-- CTA Section -->
-    <section
-      class="py-16 lg:py-24 bg-gradient-to-br from-secondary-50 via-white to-primary-50 relative overflow-hidden"
-    >
-      <!-- Background decorativo -->
-      <div class="absolute inset-0 overflow-hidden">
-        <div
-          class="absolute top-20 left-20 w-32 h-32 bg-secondary-200/30 rounded-full blur-xl animate-float"
-        ></div>
-        <div
-          class="absolute bottom-20 right-20 w-24 h-24 bg-primary-200/30 rounded-full blur-xl animate-float-delayed"
-        ></div>
-      </div>
-
+    <section class="py-16 lg:py-24 bg-neutral-50 relative overflow-hidden">
       <div class="container-custom relative z-10">
         <div class="text-center max-w-3xl mx-auto animate-fade-in">
           <h2 class="text-3xl lg:text-4xl font-bold mb-6">
-            <span class="text-gradient">{{ $t("about.cta.title") }}</span>
+            <span class="text-primary-700">{{ $t("about.cta.title") }}</span>
           </h2>
           <p class="text-lg text-neutral-600 mb-8 leading-relaxed">
             {{ $t("about.cta.description") }}
