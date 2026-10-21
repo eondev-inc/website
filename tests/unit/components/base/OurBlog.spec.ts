@@ -232,7 +232,8 @@ describe('OurBlog.vue', () => {
     await fireEvent.click(pagination.getByRole('button', { name: '3' }))
     await nextTick()
     expect(baseState.currentPage.value).toBe(3)
-    expect(pagination.getByRole('button', { name: '3' }).className).toContain('bg-primary-600')
+    // El paginado activo usa primary-700: es el único turquesa con 4.5:1 sobre blanco.
+    expect(pagination.getByRole('button', { name: '3' }).className).toContain('bg-primary-700')
 
     await fireEvent.click(pagination.getAllByRole('button')[0]) // prev → 2
     await nextTick()

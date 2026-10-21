@@ -145,10 +145,6 @@
   }
 
   /* Superficie turquesa tenue y barra de acento (sustituyen reglas decorativas) */
-  .surface-primary {
-    @apply bg-primary-50 border border-primary-100 rounded-2xl;
-  }
-
   .accent-bar {
     @apply w-16 h-1 bg-primary-600 rounded-full;
   }

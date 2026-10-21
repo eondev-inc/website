@@ -25,6 +25,13 @@ const BANNED = [
   { pattern: /shadow-glow/, rule: 'sin sombras con brillo de color' }
 ]
 
+// `#3b82f6` es `info.500` y sigue siendo legítimo en la paleta, así que el azul
+// fuera de paleta solo se persigue en las plantillas, nunca en el config.
+const BANNED_IN_TEMPLATES = [
+  { pattern: /#3b82f6/i, rule: 'azul fuera de paleta: usa primary-700 (#0f766e)' },
+  { pattern: /rgba\(\s*59\s*,\s*130\s*,\s*246/, rule: 'azul fuera de paleta: usa primary-700 (#0f766e)' }
+]
+
 function walk(dir: string): string[] {
   return readdirSync(dir).flatMap((entry) => {
     const full = join(dir, entry)
@@ -45,10 +52,12 @@ describe('flat design guard', () => {
     const violations: string[] = []
 
     for (const file of files) {
+      const rules = file.endsWith('.vue') ? [...BANNED, ...BANNED_IN_TEMPLATES] : BANNED
+
       readFileSync(file, 'utf8')
         .split('\n')
         .forEach((line, index) => {
-          for (const { pattern, rule } of BANNED) {
+          for (const { pattern, rule } of rules) {
             if (pattern.test(line)) {
               violations.push(`${relative(REPO_ROOT, file)}:${index + 1} — ${rule}`)
             }

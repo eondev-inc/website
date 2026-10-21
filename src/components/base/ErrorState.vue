@@ -49,7 +49,7 @@
             v-if="showRetry"
             @click="handleRetry"
             :disabled="isRetrying"
-            class="inline-flex items-center justify-center px-6 py-3 bg-primary-600 text-white rounded-xl hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            class="inline-flex items-center justify-center px-6 py-3 bg-primary-700 text-white rounded-xl hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <font-awesome-icon
               v-if="isRetrying"
@@ -104,7 +104,7 @@
             Si el problema persiste,
             <a
               href="mailto:support@example.com"
-              class="text-primary-600 hover:text-primary-700 underline"
+              class="text-primary-700 hover:text-primary-800 underline"
             >
               contacta con soporte
             </a>
