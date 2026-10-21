@@ -186,9 +186,5 @@ module.exports = {
       }
     }
   },
-  plugins: [
-    require('flowbite/plugin'),
-    // Plugin para mejor tipografía
-    require('@tailwindcss/typography')
-  ]
+  plugins: [require('flowbite/plugin')]
 }
