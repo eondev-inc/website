@@ -1,6 +1,9 @@
 <template>
   <!-- Hero Section Moderna -->
-  <section class="section-hero bg-neutral-50 relative overflow-hidden">
+  <section
+    ref="rootEl"
+    class="section-hero bg-neutral-50 relative overflow-hidden"
+  >
     <div class="container-custom relative z-10">
       <div
         class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen py-20"
@@ -52,7 +55,7 @@
           >
             <div class="text-center">
               <div
-                class="text-3xl font-display font-bold text-primary-600 mb-1"
+                class="text-3xl font-display font-bold text-primary-700 mb-1"
               >
                 9+
               </div>
@@ -62,7 +65,7 @@
             </div>
             <div class="text-center">
               <div
-                class="text-3xl font-display font-bold text-secondary-600 mb-1"
+                class="text-3xl font-display font-bold text-primary-700 mb-1"
               >
                 10+
               </div>
@@ -71,7 +74,9 @@
               </div>
             </div>
             <div class="text-center">
-              <div class="text-3xl font-display font-bold text-accent-600 mb-1">
+              <div
+                class="text-3xl font-display font-bold text-primary-700 mb-1"
+              >
                 10+
               </div>
               <div class="text-sm text-neutral-500 font-medium">
@@ -225,7 +230,9 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
+
+const rootEl = ref<HTMLElement | null>(null)
 
 // Datos del stack tecnológico
 const techStack = [
@@ -258,12 +265,17 @@ const socialLinks = [
   }
 ]
 
+// El observer se limita a este componente: un query global forzaba opacity-0
+// en las secciones de Experience y OurBlog, que solo reaparecían al scrollear.
+let observer: IntersectionObserver | null = null
+
 onMounted(() => {
   // Inicializar animaciones cuando el componente se monte
-  const elements = document.querySelectorAll(
-    '.animate-slide-up, .animate-fade-in, .animate-scale-in'
-  )
-  const observer = new IntersectionObserver(
+  const elements =
+    rootEl.value?.querySelectorAll(
+      '.animate-slide-up, .animate-fade-in, .animate-scale-in'
+    ) ?? []
+  observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -285,7 +297,12 @@ onMounted(() => {
 
   elements.forEach((el) => {
     el.classList.add('opacity-0', 'translate-y-4', 'scale-95')
-    observer.observe(el)
+    observer?.observe(el)
   })
+})
+
+onUnmounted(() => {
+  observer?.disconnect()
+  observer = null
 })
 </script>
