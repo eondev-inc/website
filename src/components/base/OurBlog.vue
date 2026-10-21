@@ -126,7 +126,7 @@
         <button
           @click="retryLoad"
           :disabled="isRetrying"
-          class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center space-x-2 mx-auto"
+          class="px-6 py-3 bg-primary-700 text-white rounded-lg hover:bg-primary-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center space-x-2 mx-auto"
         >
           <font-awesome-icon v-if="isRetrying" icon="spinner" spin />
           <font-awesome-icon v-else icon="redo" />
@@ -350,7 +350,7 @@
               :href="safeExternalUrl(blog.link)"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center space-x-2 text-primary-600 hover:text-primary-700 font-medium text-sm transition-colors duration-200 group/link"
+              class="inline-flex items-center space-x-2 text-primary-700 hover:text-primary-800 font-medium text-sm transition-colors duration-200 group/link"
               :aria-label="`Leer artículo: ${cleanHtml(blog.title.rendered)}`"
             >
               <span>{{ $t("blog.readArticle") }}</span>
@@ -462,7 +462,7 @@
           :class="[
             'px-4 py-2 rounded-lg transition-colors',
             currentPage === page
-              ? 'bg-primary-600 text-white'
+              ? 'bg-primary-700 text-white'
               : 'bg-white border border-neutral-200 text-neutral-600 hover:bg-neutral-50',
           ]"
         >
@@ -728,16 +728,6 @@ export default defineComponent({
 }
 
 /* Hover effects para los botones */
-.hover-lift {
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.hover-lift:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
 
 /* Transiciones suaves para cambios de vista */
 .view-transition {

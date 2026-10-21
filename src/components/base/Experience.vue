@@ -56,7 +56,7 @@
               <span
                 v-for="tech in experience.technologies"
                 :key="tech"
-                class="px-3 py-1 text-xs font-medium text-primary-600 bg-primary-100 rounded-full"
+                class="px-3 py-1 text-xs font-medium text-primary-700 bg-primary-100 rounded-full"
               >
                 {{ tech }}
               </span>
