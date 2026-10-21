@@ -157,17 +157,7 @@ module.exports = {
         soft: '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
         medium: '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
         large: '0 10px 50px -12px rgba(0, 0, 0, 0.25)',
-        'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
-        glow: '0 0 20px rgba(59, 130, 246, 0.15)',
-        'glow-lg': '0 0 40px rgba(59, 130, 246, 0.15)'
-      },
-      backgroundImage: {
-        // Gradientes modernos
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'mesh-gradient': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        'hero-gradient': 'linear-gradient(135deg, #0ea5e9 0%, #ec4899 50%, #f97316 100%)',
-        'card-gradient': 'linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)'
+        'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)'
       },
       animation: {
         // Animaciones suaves y profesionales
