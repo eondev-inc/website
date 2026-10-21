@@ -44,7 +44,10 @@ describe('HeaderView.vue', () => {
     await nextTick()
 
     const header = view.container.querySelector('header')
-    expect(header?.className).toContain('bg-white/95')
+    // El estado con scroll ya no difiere por opacidad de fondo (ambos son
+    // `bg-white` planos): se distingue por el borde y la sombra.
+    expect(header?.className).toContain('border-b')
+    expect(header?.className).toContain('shadow-sm')
   })
 
   it('should render the desktop GitHub link', async () => {
@@ -73,8 +76,8 @@ describe('HeaderView.vue', () => {
     await nextTick()
 
     const header = view.container.querySelector('header')
-    expect(header?.className).toContain('bg-white/50')
-    expect(header?.className).not.toContain('bg-white/95')
+    expect(header?.className).toContain('bg-white')
+    expect(header?.className).not.toContain('shadow-sm')
   })
 
   it('should close the mobile menu after a link is clicked', async () => {
