@@ -136,6 +136,33 @@ Gate independiente (`gentle-ai-verify`, read-only) sobre `master..HEAD`: veredic
 | Lint                                         | 0 errores, 25 warnings preexistentes (`label-has-for`, `no-explicit-any`)     |
 | Contraste                                    | todo texto normal ≥4.5:1; iconos y texto ≥24px ≥3:1                           |
 
+### Verificación visual en navegador
+
+`npm run dev` + Chromium headless contra `/`, `/about`, `/blog`, `/contact` a 1440×900 y el
+home en 390×844 con el menú móvil abierto. Lo que se midió es el **estilo computado del DOM
+renderizado**, no el texto del fuente:
+
+| Medición                                                | Resultado                                                                 |
+| ------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Elementos con `background-image` conteniendo `gradient` | 0 en las 5 superficies                                                    |
+| Elementos con `filter: blur(...)`                       | 0                                                                         |
+| Elementos con `backdrop-filter` distinto de `none`      | 0                                                                         |
+| Elementos con `background-clip: text`                   | 0                                                                         |
+| Errores de consola / `pageerror`                        | 0                                                                         |
+| Secciones con `opacity: 0` sin interactuar              | 0 tras `0220e9e` (antes: los bloques completos de Experiencia y Noticias) |
+
+**Hallazgos que el guard estático no podía ver**, corregidos en `0220e9e`:
+
+1. Las tres métricas del hero (`9+`, `10+`, `10+`) se pintaban en turquesa, magenta y naranja:
+   tres colores compitiendo entre sí para tres números pares, el mismo patrón que la
+   refactorización eliminó en el resto del sitio. Ahora comparten `primary-700`.
+2. `AboutMe.vue` lanzaba un `document.querySelectorAll` global en `onMounted` y forzaba
+   `opacity-0` en **todos** los `.animate-*` de la página, incluidos los títulos de `Experience`
+   y `OurBlog`, que pertenecen a otros componentes. Esas secciones quedaban invisibles hasta que
+   un scroll real las intersectaba: cualquier captura de página completa, PDF, print o render sin
+   interacción mostraba secciones en blanco. El observer ahora consulta solo la raíz de su propio
+   componente y se desconecta en `onUnmounted` (antes quedaba vivo tras navegar).
+
 **Sobre el tamaño del diff**: `.husky/pre-commit` ejecuta `lint-staged` con `prettier --write`
 sobre los `.vue`/`.css`/`.md` tocados, así que cada commit reformatea el archivo completo.
 El diff de 748 inserciones / 757 eliminaciones incluye esa normalización, no solo la
@@ -148,6 +175,10 @@ reducción semántica (neto: −9 líneas).
   alta, por eso quedó prohibido en la tabla de reglas.
 - Un guard basado en clases no atrapa un hex suelto. Se necesita el barrido de color además
   del de utilidades.
+- Un componente no debe consultar el documento entero. El hero imponía `opacity-0` a las
+  secciones de otros componentes y las dejaba invisibles en cualquier render sin scroll. Ni la
+  suite ni el guard lo detectan: jsdom no tiene layout ni `IntersectionObserver`, así que solo un
+  navegador real, o una captura de página completa, lo revela.
 - El escape más caro fueron las clases que Tailwind ya no compila: tras T2, `bg-gradient-*` y
   `shadow-glow` no renderizaban **nada**, así que cada fase intermedia dejó la UI rota de
   forma silenciosa hasta que se migró cada componente. El orden correcto — tokens primero y
@@ -165,3 +196,8 @@ reducción semántica (neto: −9 líneas).
    (`#8b5cf6`, `#a855f7`, `#10b981`, `#f59e0b`). Es dato, no estilo: decisión de producto.
 5. 25 warnings de ESLint preexistentes (`label-has-for`, `no-explicit-any`) en componentes
    tocados por esta rama. No introducidos aquí.
+6. En la timeline de `/about`, los párrafos de las tarjetas pares heredan `text-align: right`
+   del layout zig-zag (`md:text-right`): el texto largo queda alineado a la derecha y se lee
+   mal. Es preexistente y toca layout, no color: fuera del alcance de esta rama.
+7. Erratas de contenido en `src/locales`: «Hola! Soy yerffrey Romero» (minúscula) y «Sobre mi»
+   (sin tilde). No son estilo; se corrigen en el catálogo de i18n.
