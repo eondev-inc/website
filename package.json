@@ -34,7 +34,7 @@
     "html-entities": "^2.5.3",
     "sweetalert2": "^11.7.2",
     "vee-validate": "^4.7.4",
-    "vue": "^3.2.13",
+    "vue": "^3.5.44",
     "vue-i18n": "11",
     "vue-router": "^4.6.4",
     "yup": "^1.0.1"
