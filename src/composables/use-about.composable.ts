@@ -3,6 +3,18 @@ const useAboutMe = () => {
     {
       es: [
         {
+          title: 'Líder Técnico Advisor IA - Imed SA',
+          description: 'Como Líder Técnico Advisor IA en la Subgerencia de Desarrollo de Imed S.A, lidero la definición, adopción y evolución de la IA como capacidad organizacional. Trabajo con Arquitectura en lineamientos y estándares para soluciones basadas en IA, asesoro a las células de desarrollo en la selección de herramientas y buenas prácticas, y colaboro con Productos y Operaciones para identificar oportunidades donde la IA genere valor real en productos y procesos internos.',
+          url: 'https://imed.cl/',
+          fromTo: 'Jun. 2026 - Actualidad'
+        },
+        {
+          title: 'Desarrollador Senior - Imed SA',
+          description: 'Formé parte de la célula de desarrollo del producto Licencia Médica Electrónica (LME) en Imed S.A, donde me desempeñé como desarrollador Fullstack con Node.js, PHP, React y Next.js, desarrollando nuevas funcionalidades y manteniendo las soluciones existentes. Trabajé con bases de datos relacionales y no relacionales como MySQL y MongoDB, abordando distintos tipos de requerimientos de forma eficiente.',
+          url: 'https://imed.cl/',
+          fromTo: 'Mar. 2025 - Jun. 2026'
+        },
+        {
           title: 'Líder Técnico - Imed SA',
           description: `Como Líder Técnico en la célula Escritorio Médico en Imed S.A, 
           lideré y coordiné el 
@@ -11,7 +23,7 @@ const useAboutMe = () => {
           otros líderes técnicos y equipos de la empresa para asegurar la calidad y 
           eficiencia del desarrollo del producto.`,
           url: 'https://escritoriomedico.i-med.cl/',
-          fromTo: 'Febrero. 2023 - Actualidad'
+          fromTo: 'Feb. 2023 - Mar. 2025'
         },
         {
           title: 'Desarrollador Fullstack - Imed SA',
@@ -58,10 +70,22 @@ const useAboutMe = () => {
       ],
       en: [
         {
+          title: 'Technical Leader & AI Advisor - Imed SA',
+          description: 'As Technical Leader and AI Advisor in the Development Subdivision at Imed S.A, I lead the definition, adoption, and evolution of AI as an organizational capability. I work with Architecture on guidelines and standards for AI-based solutions, advise development cells on tool selection and best practices, and collaborate with Product and Operations to identify opportunities where AI creates real value in our products and internal processes.',
+          url: 'https://imed.cl/',
+          fromTo: 'Jun. 2026 - Present'
+        },
+        {
+          title: 'Senior Developer - Imed SA',
+          description: 'I was part of the development cell for the Electronic Medical License (LME) product at Imed S.A, where I worked as a Fullstack developer with Node.js, PHP, React, and Next.js, building new features and maintaining existing solutions. I also worked with relational and non-relational databases such as MySQL and MongoDB, addressing different types of requirements efficiently.',
+          url: 'https://imed.cl/',
+          fromTo: 'Mar. 2025 - Jun. 2026'
+        },
+        {
           title: 'Technical Leader - Imed SA',
           description: 'As a Technical Leader in the Medical Desktop cell at Imed S.A, I led and coordinated the work of the development team for the Medical Desktop product to maintain and improve the technical architecture of the product. I identified and resolved technical problems and worked with other technical leaders and teams in the company to ensure the quality and efficiency of the product development.',
           url: 'https://escritoriomedico.cl',
-          fromTo: 'Feb. 2023 - Present'
+          fromTo: 'Feb. 2023 - Mar. 2025'
         },
         {
           title: 'Fullstack Developer - Imed SA',

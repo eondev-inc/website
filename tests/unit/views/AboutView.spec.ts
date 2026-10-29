@@ -46,6 +46,7 @@ describe('outbound-links (consumed by AboutView.vue)', () => {
   // the guard silently breaks the portfolio's own outbound links.
   it.each([
     'https://escritoriomedico.i-med.cl/',
+    'https://imed.cl/',
     'https://mimed.com',
     'https://web.archive.org/web/20200919024522/https://www.izitapp.com/',
     'https://tuclase.cl',

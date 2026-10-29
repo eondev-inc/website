@@ -95,8 +95,10 @@ Portfolio web profesional que incluye:
 ## 📋 Requisitos Previos
 
 - **Node.js** >= 18.x
-- **Yarn** >= 1.22.x (o npm >= 8.x)
+- **npm** >= 8.x
 - **Git** >= 2.x
+- **Make** >= 4.x (opcional, para los objetivos de `make`)
+- **Docker** + Docker Compose (opcional, para el entorno en contenedor)
 
 ## 🚀 Instalación
 
@@ -110,10 +112,14 @@ cd website
 ### 2. Instalar dependencias
 
 ```bash
-yarn install
+make install
 ```
 
+Equivale a `npm ci` y a crear `.env.local` a partir de `.env.example`.
+
 ### 3. Configurar variables de entorno
+
+`make install` ya genera `.env.local`. Para hacerlo manualmente:
 
 ```bash
 cp .env.example .env.local
@@ -124,40 +130,61 @@ Edita `.env.local` con tus configuraciones.
 ### 4. Iniciar servidor de desarrollo
 
 ```bash
-yarn serve
+make dev
 ```
 
-La aplicación estará disponible en `http://localhost:8080`
+La aplicación estará disponible en `http://localhost:5173`.
+
+O con Docker (mismo servidor de Vite, puerto 8080):
+
+```bash
+make docker-up
+```
+
+### 5. Ver los objetivos disponibles
+
+```bash
+make help
+```
 
 ## 📜 Scripts Disponibles
 
-### Desarrollo
+### Vía Make (recomendado)
 
 ```bash
-# Servidor de desarrollo con hot-reload
-yarn serve
-
-# Build de producción
-yarn build
-
-# Linting con auto-fix
-yarn lint
+make install     # Instala dependencias y prepara .env.local
+make dev         # Servidor de desarrollo con hot-reload (0.0.0.0:5173)
+make build       # Build de producción en dist/
+make preview     # Sirve el build de producción
+make test        # Tests con Jest
+make test-watch  # Tests en modo watch
+make test-ci     # Tests en modo CI con coverage
+make lint        # ESLint sobre src/ y tests/
+make lint-fix    # ESLint con auto-corrección
+make typecheck   # tsc --noEmit
+make check       # lint + typecheck + tests con coverage
+make clean       # Limpia dist/, coverage/ y cachés de build
 ```
 
-### Testing
+### Docker
 
 ```bash
-# Ejecutar todos los tests
-yarn test
+make docker-up          # Levanta el stack de desarrollo (http://localhost:8080)
+make docker-logs        # Logs del stack
+make docker-down        # Detiene el stack y resetea el volumen node_modules
+make docker-prod-build  # Construye la imagen de producción (nginx)
+make docker-prod-up     # Levanta la imagen de producción (http://localhost:8081/website/)
+```
 
-# Tests con coverage
-yarn test:unit
+### Vía npm
 
-# Tests en modo watch
-yarn test:watch
-
-# Tests para CI
-yarn test:ci
+```bash
+npm run dev        # Servidor de desarrollo
+npm run build      # Build de producción
+npm run preview    # Vista previa del build
+npm run lint       # ESLint
+npm test           # Tests
+npm run test:ci    # Tests en modo CI con coverage
 ```
 
 ## 📁 Estructura del Proyecto
@@ -190,23 +217,23 @@ Ver documentación completa de arquitectura en [docs/ARCHITECTURE.md](docs/ARCHI
 
 ```bash
 # Todos los tests
-yarn test
+make test
 
 # Con coverage
-yarn test:unit
+make coverage
 
 # Modo watch
-yarn test:watch
+make test-watch
 ```
 
 ### Coverage
 
-El proyecto mantiene >70% de cobertura en:
+El proyecto mantiene los umbrales definidos en `jest.config.js`:
 
-- Branches
-- Functions
-- Lines
-- Statements
+- Branches: 78%
+- Functions: 90%
+- Lines: 90%
+- Statements: 90%
 
 ## 🪝 Git Hooks
 
