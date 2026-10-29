@@ -8,6 +8,7 @@ import { safeExternalUrl } from './url-utils'
 const ALLOWED_ORIGINS = [
   'https://techcrunch.com',
   'https://www.linkedin.com',
+  'https://imed.cl',
   'https://escritoriomedico.i-med.cl',
   'https://mimed.com',
   'https://web.archive.org',
