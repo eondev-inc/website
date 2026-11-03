@@ -36,3 +36,6 @@ AGENTS.*
 *.backup
 *.bak
 .playwright-cli/
+
+# SonarQube scanner
+.scannerwork
