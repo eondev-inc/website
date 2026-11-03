@@ -172,6 +172,22 @@ describe('OurBlog.vue', () => {
     expect(input.value).toBe('')
   })
 
+  it('should expose an accessible label for the search input', async () => {
+    const view = await renderWithApp(OurBlog)
+    const input = view.getByPlaceholderText('Buscar artículos...')
+
+    expect(view.getByLabelText('Buscar artículos...')).toBe(input)
+    expect(input).toHaveAttribute('id')
+  })
+
+  it('should associate the items-per-page label with its select', async () => {
+    const view = await renderWithApp(OurBlog)
+    const select = view.getByRole('combobox')
+
+    expect(view.getByLabelText('Mostrar:')).toBe(select)
+    expect(select).toHaveAttribute('id')
+  })
+
   it('should change the items per page from the selector', async () => {
     const view = await renderWithApp(OurBlog)
     const select = view.getByRole('combobox') as HTMLSelectElement

@@ -23,7 +23,8 @@ module.exports = {
     }],
     // Accessibility rules - convertir a warnings en lugar de errores
     'vuejs-accessibility/anchor-has-content': 'warn',
-    'vuejs-accessibility/label-has-for': 'warn',
+    // An explicit for/id pair is valid HTML; do not also require nesting.
+    'vuejs-accessibility/label-has-for': ['warn', { required: { some: ['nesting', 'id'] } }],
     'vuejs-accessibility/form-control-has-label': 'warn',
     'vuejs-accessibility/click-events-have-key-events': 'warn',
     'vuejs-accessibility/mouse-events-have-key-events': 'warn'
