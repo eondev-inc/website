@@ -95,6 +95,33 @@ describe('html-utils', () => {
       expect(result).not.toContain('onerror')
       expect(result).not.toContain('javascript:')
     })
+
+    it('should strip from each "<" up to the next ">" even when "<" is nested', () => {
+      // A tag opened inside another one is consumed with it; nothing is stitched
+      // back together into a new tag.
+      expect(cleanHtml('<scr<script>ipt>alert(1)')).toBe('ipt>alert(1)')
+      expect(cleanHtml('<a <b>text')).toBe('text')
+    })
+
+    it('should keep text when there is no closing ">" after a "<"', () => {
+      expect(cleanHtml('1 < 2 and no end')).toBe('1 < 2 and no end')
+      expect(cleanHtml('<p>ok</p> trailing <')).toBe('ok trailing <')
+    })
+
+    it('should strip tags that contain a ">" inside later text', () => {
+      expect(cleanHtml('a < b > c')).toBe('a  c')
+    })
+
+    it('should run in linear time on pathological input', () => {
+      // 30k unmatched "<" took ~1.7s with the previous backtracking regex.
+      const hostile = '<'.repeat(30_000)
+      const start = performance.now()
+      const result = cleanHtml(hostile)
+      const elapsed = performance.now() - start
+
+      expect(result).toBe(hostile)
+      expect(elapsed).toBeLessThan(200)
+    })
   })
 
   describe('sanitizeHtml', () => {

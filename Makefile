@@ -16,6 +16,12 @@ DEV_PORT    ?= 5173
 DEV_HOST    ?= 0.0.0.0
 DOCKER_PORT ?= 8080
 
+# SonarQube: la URL y el token NO se guardan en el repo.
+# El token se toma de $SONAR_TOKEN o, si no está definido, de SONAR_TOKEN_FILE.
+SONAR_HOST_URL      ?= http://casarobot.tail5d2953.ts.net:9000
+SONAR_TOKEN_FILE    ?= $(HOME)/.config/sonarqube/token
+SONAR_SCANNER_IMAGE ?= sonarsource/sonar-scanner-cli:latest
+
 # URL del preview de producción (base '/website/' en modo production)
 PREVIEW_URL ?= http://localhost:4173/website/
 
@@ -23,7 +29,7 @@ PREVIEW_URL ?= http://localhost:4173/website/
 .PHONY: help install setup env dev build preview test test-watch test-ci coverage \
         lint lint-fix typecheck check clean docker-build docker-up docker-down \
         docker-logs docker-shell docker-clean docker-prod-build docker-prod-up \
-        docker-prod-down verify-env
+        docker-prod-down verify-env sonar sonar-scan
 
 # --- Ayuda -------------------------------------------------------------------
 help: ## Muestra esta ayuda
@@ -100,6 +106,21 @@ coverage: verify-env ## Genera el reporte de coverage
 	$(NPM) test -- --coverage
 
 check: lint typecheck test-ci ## Check completo: lint + typecheck + tests con coverage
+
+sonar: test-ci sonar-scan ## Genera coverage y analiza el proyecto en SonarQube (docker)
+
+sonar-scan: ## Analiza en SonarQube con sonar-scanner-cli (usa coverage/lcov.info existente)
+	@command -v docker >/dev/null 2>&1 || { echo "✗ docker no encontrado"; exit 1; }
+	@[ -f coverage/lcov.info ] || { echo "✗ falta coverage/lcov.info (ejecuta 'make sonar' o 'make test-ci')"; exit 1; }
+	@TOKEN="$${SONAR_TOKEN:-$$(cat $(SONAR_TOKEN_FILE) 2>/dev/null)}"; \
+	[ -n "$$TOKEN" ] || { echo "✗ sin token: define SONAR_TOKEN o crea $(SONAR_TOKEN_FILE)"; exit 1; }; \
+	echo "→ Analizando en $(SONAR_HOST_URL)"; \
+	SONAR_TOKEN="$$TOKEN" docker run --rm \
+		--user "$$(id -u):$$(id -g)" \
+		-e SONAR_HOST_URL="$(SONAR_HOST_URL)" \
+		-e SONAR_TOKEN \
+		-v "$(CURDIR):/usr/src" \
+		$(SONAR_SCANNER_IMAGE)
 
 # --- Docker ------------------------------------------------------------------
 docker-build: ## Construye la imagen de producción (Dockerfile multi-stage → nginx)

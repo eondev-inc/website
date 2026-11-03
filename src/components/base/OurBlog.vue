@@ -22,7 +22,11 @@
           >
             <font-awesome-icon icon="search" class="text-neutral-400" />
           </div>
+          <label for="blog-search" class="sr-only">
+            {{ $t("blog.searchPlaceholder") }}
+          </label>
           <input
+            id="blog-search"
             v-model="searchQuery"
             type="text"
             :placeholder="$t('blog.searchPlaceholder')"
@@ -45,8 +49,11 @@
       <!-- Controles de vista -->
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
-          <span class="text-sm text-neutral-600">{{ $t("blog.show") }}:</span>
+          <label for="blog-items-per-page" class="text-sm text-neutral-600"
+            >{{ $t("blog.show") }}:</label
+          >
           <select
+            id="blog-items-per-page"
             v-model="itemsPerPage"
             class="px-3 py-2 bg-white border border-neutral-200 rounded-lg focus:border-primary-400 focus:ring-2 focus:ring-primary-100 text-sm"
           >

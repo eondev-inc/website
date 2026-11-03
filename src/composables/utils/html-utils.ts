@@ -24,7 +24,32 @@ export const decodeHtmlEntities = (text: string): string => {
  */
 export const cleanHtml = (html: string): string => {
   const decoded = decodeHtmlEntities(html)
-  return decoded.replace(/<[^>]*>/g, '').trim()
+  return stripTags(decoded).trim()
+}
+
+/**
+ * Removes every span from a "<" to the next ">" in a single linear pass.
+ *
+ * Equivalent to `text.replace(/<[^>]*>/g, '')`, but that regex backtracks
+ * quadratically on input with many unmatched "<" (100k chars took ~18s), so
+ * an index scan is used instead. A "<" with no later ">" is kept as text.
+ */
+const stripTags = (text: string): string => {
+  let result = ''
+  let cursor = 0
+
+  while (cursor < text.length) {
+    const open = text.indexOf('<', cursor)
+    if (open === -1) break
+
+    const close = text.indexOf('>', open + 1)
+    if (close === -1) break
+
+    result += text.slice(cursor, open)
+    cursor = close + 1
+  }
+
+  return result + text.slice(cursor)
 }
 
 /**
