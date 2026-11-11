@@ -8,20 +8,28 @@
       aria-haspopup="true"
     >
       <div class="flex items-center space-x-2">
-        <span>{{ $t('header.selectLanguage') }}</span>
+        <span>{{ $t("header.selectLanguage") }}</span>
         <svg
-          :class="['w-4 h-4 transition-transform duration-200', isDropdownOpen ? 'rotate-180' : '']"
+          :class="[
+            'w-4 h-4 transition-transform duration-200',
+            isDropdownOpen ? 'rotate-180' : '',
+          ]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
       </div>
     </button>
     <div
       v-show="isDropdownOpen"
-      class="absolute top-full mt-2 right-0 z-50 bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 border border-neutral-200"
+      class="absolute top-full mt-2 right-0 z-50 bg-white divide-y divide-neutral-100 rounded-lg shadow-lg w-44 border border-neutral-200"
     >
       <ul
         class="py-2 text-sm text-neutral-700"
@@ -40,7 +48,7 @@
                 src="../../assets/img/united-kingdom-flag-icon.svg"
                 alt="English"
                 class="w-4 h-4"
-              >
+              />
               <span>English</span>
             </div>
           </button>
@@ -57,7 +65,7 @@
                 src="../../assets/img/spain-flag-icon.png"
                 alt="Español"
                 class="w-4 h-4"
-              >
+              />
               <span>Español</span>
             </div>
           </button>
@@ -104,7 +112,10 @@ export default defineComponent({
     }
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownContainer.value && !dropdownContainer.value.contains(event.target as Node)) {
+      if (
+        dropdownContainer.value &&
+        !dropdownContainer.value.contains(event.target as Node)
+      ) {
         closeDropdown()
       }
     }

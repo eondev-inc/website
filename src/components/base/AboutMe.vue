@@ -161,7 +161,7 @@
                 :href="social.url"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="w-10 h-10 bg-white border border-neutral-200 rounded-xl flex items-center justify-center text-neutral-600 hover:text-primary-600 hover:bg-white hover:shadow-soft hover:-translate-y-0.5 transition-all duration-200"
+                class="w-11 h-11 bg-white border border-neutral-200 rounded-xl flex items-center justify-center text-neutral-600 hover:text-primary-600 hover:bg-white hover:shadow-soft hover:-translate-y-0.5 transition-all duration-200"
                 :title="social.name"
               >
                 <font-awesome-icon :icon="social.icon" class="w-4 h-4" />

@@ -75,7 +75,7 @@
             <!-- Mobile menu button elegante -->
             <button
               @click="toggleMobileNav"
-              class="lg:hidden relative w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center text-neutral-700 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200"
+              class="lg:hidden relative w-11 h-11 bg-neutral-100 rounded-full flex items-center justify-center text-neutral-700 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200"
             >
               <div
                 class="w-4 h-4 flex flex-col justify-center items-center space-y-1"
