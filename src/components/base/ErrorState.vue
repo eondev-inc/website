@@ -137,8 +137,8 @@ interface ErrorType {
   };
   unknown: {
     icon: 'fa-exclamation-triangle';
-    color: 'text-gray-500';
-    bgColor: 'bg-gray-100';
+    color: 'text-neutral-500';
+    bgColor: 'bg-neutral-100';
   };
 }
 
@@ -274,8 +274,8 @@ export default defineComponent({
       },
       unknown: {
         icon: 'fa-exclamation-triangle',
-        color: 'text-gray-500',
-        bgColor: 'bg-gray-100'
+        color: 'text-neutral-500',
+        bgColor: 'bg-neutral-100'
       }
     }
 

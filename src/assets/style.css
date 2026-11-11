@@ -1,4 +1,46 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap");
+/* Tipografía autoalojada: la CSP de producción (vercel.json) solo permite
+   `style-src`/`font-src` del propio origen, así que un @import de Google Fonts
+   nunca carga y el sitio termina pintado con la fuente del sistema. Los .woff2
+   viven en src/assets/fonts y se empaquetan con el build. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("./fonts/Inter-400-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("./fonts/Poppins-500.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("./fonts/Poppins-600.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./fonts/Poppins-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./fonts/JetBrainsMono-400.woff2") format("woff2");
+}
 
 @tailwind base;
 @tailwind components;
@@ -47,6 +89,8 @@
 
   html {
     @apply scroll-smooth antialiased;
+    scrollbar-color: theme("colors.neutral.400") theme("colors.neutral.100");
+    caret-color: theme("colors.primary.700");
   }
 
   body {
@@ -54,6 +98,28 @@
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
+  }
+
+  /* Superficies del navegador que también forman parte del sistema */
+  ::selection {
+    @apply bg-primary-200 text-neutral-900;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    @apply text-neutral-500 opacity-100;
+  }
+
+  /* Las entradas animadas no deben impedir la lectura a quien pide menos movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 
   /* Mejora de la legibilidad */

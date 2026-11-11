@@ -38,7 +38,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 :class="[
-                  'w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300',
+                  'w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300',
                   'bg-white/10 hover:bg-white/20 text-neutral-300 hover:text-white',
                   'hover:scale-110 hover:shadow-medium border border-white/10',
                 ]"

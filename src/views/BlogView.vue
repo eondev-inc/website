@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gray-100 py-8">
+  <div class="min-h-screen bg-neutral-100 py-8">
     <div class="container mx-auto px-4">
-      <our-blog :articles-number="3" />
+      <our-blog :articles-number="3" heading-tag="h1" />
     </div>
   </div>
 </template>
@@ -21,5 +21,4 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="">
-</style>
+<style lang=""></style>

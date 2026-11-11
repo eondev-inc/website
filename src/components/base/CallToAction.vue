@@ -2,11 +2,11 @@
   <div class="py-16 px-4 bg-neutral-50">
     <div class="relative max-w-4xl mx-auto">
       <div class="text-center mb-12 animate-fade-in-up">
-        <h2 class="text-4xl md:text-5xl font-bold text-primary-700 mb-4">
+        <h1 class="text-4xl md:text-5xl font-bold text-primary-700 mb-4">
           {{ $t("callToAction.title") }}
-        </h2>
+        </h1>
         <p
-          class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed"
+          class="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed"
         >
           {{ $t("callToAction.subtitle") }}
         </p>
@@ -22,11 +22,11 @@
               <div class="group">
                 <label
                   for="name"
-                  class="block text-sm font-semibold text-gray-700 mb-2 transition-colors group-focus-within:text-secondary-600"
+                  class="block text-sm font-semibold text-neutral-700 mb-2 transition-colors group-focus-within:text-primary-700"
                 >
                   <font-awesome-icon
                     icon="user"
-                    class="text-secondary-500 mr-2"
+                    class="text-neutral-400 mr-2"
                   />
                   {{ $t("callToAction.name") }}
                 </label>
@@ -38,7 +38,7 @@
                     name="name"
                     :rules="fields[0].rules"
                     type="text"
-                    class="w-full px-4 py-4 bg-white/50 border-2 border-gray-200 rounded-xl focus:border-primary-700 group-focus-within:border-primary-700 focus:bg-white focus:ring-4 focus:ring-secondary-100 transition-all duration-300 placeholder-gray-400"
+                    class="w-full px-4 py-4 bg-white border-2 border-neutral-200 rounded-xl focus:border-primary-700 group-focus-within:border-primary-700 focus:ring-4 focus:ring-primary-100 transition-all duration-300 placeholder-neutral-500"
                     :placeholder="$t('callToAction.namePlaceholder')"
                   />
                 </div>
@@ -60,11 +60,11 @@
               <div class="group">
                 <label
                   for="email"
-                  class="block text-sm font-semibold text-gray-700 mb-2 transition-colors group-focus-within:text-secondary-600"
+                  class="block text-sm font-semibold text-neutral-700 mb-2 transition-colors group-focus-within:text-primary-700"
                 >
                   <font-awesome-icon
                     icon="envelope"
-                    class="text-secondary-500 mr-2"
+                    class="text-neutral-400 mr-2"
                   />
                   {{ $t("callToAction.email") }}
                 </label>
@@ -76,7 +76,7 @@
                     name="email"
                     :rules="fields[1].rules"
                     type="email"
-                    class="w-full px-4 py-4 bg-white/50 border-2 border-gray-200 rounded-xl focus:border-primary-700 group-focus-within:border-primary-700 focus:bg-white focus:ring-4 focus:ring-secondary-100 transition-all duration-300 placeholder-gray-400"
+                    class="w-full px-4 py-4 bg-white border-2 border-neutral-200 rounded-xl focus:border-primary-700 group-focus-within:border-primary-700 focus:ring-4 focus:ring-primary-100 transition-all duration-300 placeholder-neutral-500"
                     :placeholder="$t('callToAction.emailPlaceholder')"
                   />
                 </div>
@@ -100,11 +100,11 @@
               <div class="group">
                 <label
                   for="message"
-                  class="block text-sm font-semibold text-gray-700 mb-2 transition-colors group-focus-within:text-secondary-600"
+                  class="block text-sm font-semibold text-neutral-700 mb-2 transition-colors group-focus-within:text-primary-700"
                 >
                   <font-awesome-icon
                     icon="comment-alt"
-                    class="text-secondary-500 mr-2"
+                    class="text-neutral-400 mr-2"
                   />
                   {{ $t("callToAction.message") }}
                 </label>
@@ -117,7 +117,7 @@
                     :rules="fields[2].rules"
                     as="textarea"
                     rows="6"
-                    class="w-full px-4 py-4 bg-white/50 border-2 border-gray-200 rounded-xl focus:border-primary-700 group-focus-within:border-primary-700 focus:bg-white focus:ring-4 focus:ring-secondary-100 transition-all duration-300 placeholder-gray-400 resize-none"
+                    class="w-full px-4 py-4 bg-white border-2 border-neutral-200 rounded-xl focus:border-primary-700 group-focus-within:border-primary-700 focus:ring-4 focus:ring-primary-100 transition-all duration-300 placeholder-neutral-500 resize-none"
                     :placeholder="$t('callToAction.messagePlaceholder')"
                   />
                 </div>
@@ -158,6 +158,9 @@
                 </template>
               </span>
             </button>
+            <p class="mt-3 text-sm text-neutral-600">
+              {{ $t("callToAction.mailtoHint") }}
+            </p>
           </div>
         </Form>
       </div>

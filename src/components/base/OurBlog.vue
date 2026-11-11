@@ -3,9 +3,12 @@
   <section class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
     <!-- Header de la sección -->
     <div class="text-center mb-16 animate-fade-in">
-      <h2 class="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
+      <component
+        :is="headingTag"
+        class="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4"
+      >
         {{ $t("news.title") }}
-      </h2>
+      </component>
       <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
         {{ $t("blog.subtitle") }}
       </p>
@@ -30,7 +33,7 @@
             v-model="searchQuery"
             type="text"
             :placeholder="$t('blog.searchPlaceholder')"
-            class="w-full pl-10 pr-4 py-3 bg-white border-2 border-neutral-200 rounded-xl focus:border-primary-400 focus:ring-4 focus:ring-primary-100 transition-all duration-300 placeholder-neutral-400"
+            class="w-full pl-10 pr-4 py-3 bg-white border-2 border-neutral-200 rounded-xl focus:border-primary-400 focus:ring-4 focus:ring-primary-100 transition-all duration-300 placeholder-neutral-500"
             @input="debouncedSearch"
           />
           <div
@@ -70,7 +73,7 @@
             <button
               @click="viewMode = 'grid'"
               :class="[
-                'p-2 rounded transition-all duration-200',
+                'w-11 h-11 flex items-center justify-center rounded transition-all duration-200',
                 viewMode === 'grid'
                   ? 'bg-white shadow-sm text-primary-600'
                   : 'text-neutral-500 hover:text-neutral-700',
@@ -81,7 +84,7 @@
             <button
               @click="viewMode = 'list'"
               :class="[
-                'p-2 rounded transition-all duration-200',
+                'w-11 h-11 flex items-center justify-center rounded transition-all duration-200',
                 viewMode === 'list'
                   ? 'bg-white shadow-sm text-primary-600'
                   : 'text-neutral-500 hover:text-neutral-700',
@@ -177,7 +180,7 @@
         :key="blog.id"
         :ref="`blogCard-${blog.id}`"
         :class="[
-          'group bg-white rounded-3xl shadow-soft transition-all duration-300 overflow-hidden animate-slide-up',
+          'group bg-white rounded-3xl shadow-soft transition-all duration-300 overflow-hidden animate-slide-up flex flex-col',
           viewMode === 'list'
             ? 'flex flex-col md:flex-row max-w-4xl mx-auto'
             : '',
@@ -225,7 +228,12 @@
         </div>
 
         <!-- Content -->
-        <div :class="['p-6 space-y-4', viewMode === 'list' ? 'flex-1' : '']">
+        <div
+          :class="[
+            'p-6 flex flex-col gap-4 flex-1',
+            viewMode === 'list' ? 'flex-1' : '',
+          ]"
+        >
           <!-- Category tags -->
           <div
             v-if="blog.categories && blog.categories.length > 0"
@@ -300,7 +308,7 @@
 
           <!-- Meta information -->
           <div
-            class="flex items-center justify-between pt-2 border-t border-neutral-100"
+            class="mt-auto flex items-center justify-between pt-2 border-t border-neutral-100"
           >
             <div class="flex items-center space-x-4 text-xs text-neutral-500">
               <span class="flex items-center space-x-1">
@@ -335,7 +343,7 @@
               <button
                 @click="toggleFavorite(blog.id)"
                 :class="[
-                  'w-7 h-7 rounded-full transition-all duration-300 flex items-center justify-center text-xs favorite-heart',
+                  'w-9 h-9 rounded-full transition-all duration-300 flex items-center justify-center text-xs favorite-heart',
                   favorites.includes(blog.id)
                     ? 'bg-red-500 text-white shadow-soft active'
                     : 'bg-neutral-100 text-neutral-500 hover:bg-red-50 hover:text-red-500',
@@ -527,6 +535,7 @@ import { safeExternalUrl } from '@/composables/utils/url-utils'
 
 interface Props {
   articlesNumber: number;
+  headingTag: string;
 }
 
 export default defineComponent({
@@ -535,6 +544,11 @@ export default defineComponent({
     articlesNumber: {
       type: Number,
       default: 6
+    },
+    // El título de la sección es el h1 de la página en /blog y un h2 en la home.
+    headingTag: {
+      type: String,
+      default: 'h2'
     }
   },
   setup(props: Props) {
