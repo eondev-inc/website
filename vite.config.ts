@@ -5,8 +5,11 @@ import path from 'path'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
+  // Vercel sirve desde la raíz; el resto de producción (GitHub Pages) usa /website/
+  const base = mode === 'production' && !process.env.VERCEL ? '/website/' : '/'
+
   return {
-    base: mode === 'production' ? '/website/' : '/',
+    base,
     plugins: [vue()],
     resolve: {
       alias: {
@@ -14,6 +17,7 @@ export default defineConfig(({ mode }) => {
       }
     },
     define: {
+      'process.env.APP_BASE': JSON.stringify(base),
       'process.env.VITE_API_BASE_URL': JSON.stringify(
         env.VITE_API_BASE_URL || 'https://techcrunch.com/wp-json/wp/v2'
       ),

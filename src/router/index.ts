@@ -68,7 +68,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.NODE_ENV === 'production' ? '/website/' : '/'),
+  history: createWebHistory(process.env.APP_BASE || '/'),
   routes,
   // Comportamiento de scroll personalizado
   scrollBehavior(to, _from, savedPosition) {
