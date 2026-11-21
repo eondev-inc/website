@@ -14,7 +14,7 @@ describe('MobileNav.vue', () => {
 
     expect(view.getByRole('link', { name: /inicio/i })).toHaveAttribute('href', '/')
     expect(view.getByRole('link', { name: /acerca/i })).toHaveAttribute('href', '/about')
-    expect(view.getByRole('link', { name: /noticias/i })).toHaveAttribute('href', '/blog')
+    expect(view.getByRole('link', { name: /lecturas/i })).toHaveAttribute('href', '/blog')
     expect(view.getByRole('link', { name: /contacto/i })).toHaveAttribute('href', '/contact')
   })
 
@@ -29,12 +29,12 @@ describe('MobileNav.vue', () => {
   it('moves the active highlight to the blog link when clicked', async () => {
     const view = await renderWithApp(MobileNav)
 
-    await fireEvent.click(view.getByRole('link', { name: /noticias/i }))
+    await fireEvent.click(view.getByRole('link', { name: /lecturas/i }))
     await nextTick()
 
     const activeLinks = getActiveLinks(view)
     expect(activeLinks).toHaveLength(1)
-    expect(activeLinks[0]).toHaveTextContent('Noticias')
+    expect(activeLinks[0]).toHaveTextContent('Lecturas')
     expect(activeLinks[0]).toHaveAttribute('href', '/blog')
   })
 
@@ -53,6 +53,6 @@ describe('MobileNav.vue', () => {
     const view = await renderWithApp(MobileNav, { locale: 'en' })
 
     expect(view.getByRole('link', { name: /^home$/i })).toHaveAttribute('href', '/')
-    expect(view.getByRole('link', { name: /^news$/i })).toHaveAttribute('href', '/blog')
+    expect(view.getByRole('link', { name: /^reading$/i })).toHaveAttribute('href', '/blog')
   })
 })

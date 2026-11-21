@@ -20,7 +20,7 @@ describe('HeaderView.vue', () => {
     // El header tiene nav desktop + mobile, puede haber múltiples "Inicio"
     expect(view.getAllByRole('link', { name: /inicio/i }).length).toBeGreaterThanOrEqual(1)
     expect(view.getAllByRole('link', { name: /acerca/i }).length).toBeGreaterThanOrEqual(1)
-    expect(view.getAllByRole('link', { name: /noticias/i }).length).toBeGreaterThanOrEqual(1)
+    expect(view.getAllByRole('link', { name: /lecturas/i }).length).toBeGreaterThanOrEqual(1)
     expect(view.getAllByRole('link', { name: /contacto/i }).length).toBeGreaterThanOrEqual(1)
   })
 
@@ -66,7 +66,7 @@ describe('HeaderView.vue', () => {
     await fireEvent.click(view.getByRole('menuitem', { name: /english/i }))
 
     expect(view.getAllByRole('link', { name: 'Home' }).length).toBeGreaterThanOrEqual(1)
-    expect(view.getAllByRole('link', { name: 'News' }).length).toBeGreaterThanOrEqual(1)
+    expect(view.getAllByRole('link', { name: 'Reading' }).length).toBeGreaterThanOrEqual(1)
   })
 
   it('should not apply the scrolled style at the top of the page', async () => {
@@ -87,13 +87,13 @@ describe('HeaderView.vue', () => {
     const mobileNav = view.container.querySelector('[class*="overflow-hidden"]') as HTMLElement
     expect(mobileNav.className).toContain('max-h-80')
 
-    await fireEvent.click(within(mobileNav).getByRole('link', { name: /noticias/i }))
+    await fireEvent.click(within(mobileNav).getByRole('link', { name: /lecturas/i }))
     await nextTick()
 
     // Mobile menu visibility is class-only (no aria-hidden) — same
     // justification as the MobileNav active-state assertions.
     expect(mobileNav.className).toContain('max-h-0')
-    expect(within(mobileNav).getByRole('link', { name: /noticias/i }).className).toContain('text-primary-700')
+    expect(within(mobileNav).getByRole('link', { name: /lecturas/i }).className).toContain('text-primary-700')
   })
 
   it('should highlight the clicked desktop nav link', async () => {
@@ -117,7 +117,7 @@ describe('HeaderView.vue', () => {
     const view = await renderWithApp(HeaderView, { locale: 'en' })
 
     expect(view.getAllByRole('link', { name: /^home$/i }).length).toBeGreaterThanOrEqual(1)
-    expect(view.getAllByRole('link', { name: /^news$/i }).length).toBeGreaterThanOrEqual(1)
+    expect(view.getAllByRole('link', { name: /^reading$/i }).length).toBeGreaterThanOrEqual(1)
     expect(view.getByRole('link', { name: 'View on GitHub' })).toBeInTheDocument()
   })
 })

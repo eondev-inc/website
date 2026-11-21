@@ -29,3 +29,10 @@ const ALLOWED_ORIGINS = [
 export const toOutside = (url: string): void => {
   window.open(safeExternalUrl(url, ALLOWED_ORIGINS), '_blank', 'noopener,noreferrer')
 }
+
+/**
+ * Same allowlist as `toOutside`, but returns the href so the link can be a real
+ * `<a>` (keyboard, middle-click, screen-reader "link" role). Unknown origins
+ * collapse to `'#'`.
+ */
+export const externalHref = (url: string): string => safeExternalUrl(url, ALLOWED_ORIGINS)

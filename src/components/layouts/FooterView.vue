@@ -16,7 +16,9 @@
             />
             <div class="flex flex-col">
               <span class="text-xl font-bold text-white">Y|R</span>
-              <span class="text-sm text-neutral-300">Portfolio</span>
+              <span class="text-sm text-neutral-300">{{
+                $t("header.brandTag")
+              }}</span>
             </div>
           </div>
 

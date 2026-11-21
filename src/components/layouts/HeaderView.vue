@@ -28,7 +28,9 @@
               <span class="text-lg font-bold text-neutral-800 leading-tight"
                 >Y|R</span
               >
-              <span class="text-xs text-neutral-500 -mt-1">Portfolio</span>
+              <span class="text-xs text-neutral-600 -mt-1">{{
+                $t("header.brandTag")
+              }}</span>
             </div>
           </router-link>
 

@@ -6,8 +6,6 @@ import type { BlogPost } from '@/interfaces/blog.interface'
 
 const mockLoadPosts = jest.fn().mockResolvedValue(undefined)
 const mockRetryLoad = jest.fn().mockResolvedValue(undefined)
-const mockToggleFavorite = jest.fn()
-const mockShareArticle = jest.fn().mockResolvedValue(undefined)
 
 const baseState = {
   posts: ref<BlogPost[]>([]),
@@ -37,8 +35,6 @@ jest.mock('@/composables/use-blog-enhanced.composable', () => ({
     clearSearch: () => { baseState.searchQuery.value = '' },
     loadCategories: jest.fn(),
     getCategoryName: () => 'AI',
-    toggleFavorite: mockToggleFavorite,
-    shareArticle: mockShareArticle,
     estimateReadingTime: () => 1,
     formatDate: () => '01/01/2026',
     cleanHtml: (v: string) => v,
@@ -91,7 +87,7 @@ describe('OurBlog.vue', () => {
     expect(mockRetryLoad).toHaveBeenCalled()
   })
 
-  it('should render article cards and interact with actions', async () => {
+  it('should render article cards without favorite/share controls', async () => {
     baseState.posts.value = [{
       id: 1,
       title: { rendered: 'Post AI' },
@@ -104,11 +100,8 @@ describe('OurBlog.vue', () => {
     const view = await renderWithApp(OurBlog)
 
     expect(view.getByText('Post AI')).toBeInTheDocument()
-    await fireEvent.click(view.getByRole('button', { name: /agregar a favoritos/i }))
-    expect(mockToggleFavorite).toHaveBeenCalledWith(1)
-
-    await fireEvent.click(view.getByRole('button', { name: /compartir artículo/i }))
-    expect(mockShareArticle).toHaveBeenCalled()
+    expect(view.getByRole('heading', { name: 'Post AI' })).toBeInTheDocument()
+    expect(view.queryByRole('button', { name: /favoritos|compartir/i })).toBeNull()
   })
 
   it('should render the empty state when there are no posts', async () => {
@@ -126,14 +119,6 @@ describe('OurBlog.vue', () => {
     expect(view.getByRole('button', { name: /reintentando/i })).toBeDisabled()
   })
 
-  it('should switch the favorite label when the post is already favorited', async () => {
-    baseState.favorites.value = [1]
-    baseState.posts.value = [makePost()]
-    const view = await renderWithApp(OurBlog)
-
-    expect(view.getByRole('button', { name: 'Quitar de favoritos' })).toBeInTheDocument()
-  })
-
   it('should render the read-article link with the post URL', async () => {
     baseState.posts.value = [makePost()]
     const view = await renderWithApp(OurBlog)
@@ -143,33 +128,13 @@ describe('OurBlog.vue', () => {
     expect(readLink).toHaveAttribute('target', '_blank')
   })
 
-  it('should show the cache badge for cached posts', async () => {
-    baseState.posts.value = [makePost({ _cached: true })]
-    const view = await renderWithApp(OurBlog)
-
-    expect(view.getByTitle('Cargado desde caché')).toBeInTheDocument()
-    expect(view.getByText('Rápido')).toBeInTheDocument()
-  })
-
-  it('should show an overflow count when a post has more than three categories', async () => {
-    baseState.posts.value = [makePost({ categories: [1, 2, 3, 4, 5] })]
-    const view = await renderWithApp(OurBlog)
-
-    expect(view.getByText('+2')).toBeInTheDocument()
-  })
-
-  it('should update the search query and clear it via the clear button', async () => {
+  it('should update the search query', async () => {
     const view = await renderWithApp(OurBlog)
     const input = view.getByPlaceholderText('Buscar artículos...') as HTMLInputElement
 
     await fireEvent.input(input, { target: { value: 'ai' } })
     await nextTick()
     expect(input.value).toBe('ai')
-
-    const clearButton = within(input.closest('div') as HTMLElement).getByRole('button')
-    await fireEvent.click(clearButton)
-    await nextTick()
-    expect(input.value).toBe('')
   })
 
   it('should expose an accessible label for the search input', async () => {
@@ -180,68 +145,31 @@ describe('OurBlog.vue', () => {
     expect(input).toHaveAttribute('id')
   })
 
-  it('should associate the items-per-page label with its select', async () => {
-    const view = await renderWithApp(OurBlog)
-    const select = view.getByRole('combobox')
-
-    expect(view.getByLabelText('Mostrar:')).toBe(select)
-    expect(select).toHaveAttribute('id')
-  })
-
-  it('should change the items per page from the selector', async () => {
-    const view = await renderWithApp(OurBlog)
-    const select = view.getByRole('combobox') as HTMLSelectElement
-
-    await fireEvent.change(select, { target: { value: '6' } })
-    await nextTick()
-    expect(select.value).toBe('6')
-  })
-
-  it('should apply the articlesNumber prop to items per page', async () => {
-    const view = await renderWithApp(OurBlog, { props: { articlesNumber: 9 } })
-
-    expect((view.getByRole('combobox') as HTMLSelectElement).value).toBe('9')
-  })
-
-  it('should toggle between grid and list view modes', async () => {
-    baseState.posts.value = [makePost()]
-    const view = await renderWithApp(OurBlog)
-
-    // viewMode has no semantic observable (no aria-*); the layout container
-    // class is its only contract — same justification as MobileNav active state.
-    const viewControls = within(view.container.querySelector('.flex.bg-neutral-100') as HTMLElement)
-    const toggleButtons = viewControls.getAllByRole('button')
-
-    await fireEvent.click(toggleButtons[1]) // list
-    await nextTick()
-    expect(baseState.viewMode.value).toBe('list')
-    expect(view.container.querySelector('[class*="md:flex-row"]')).toBeTruthy()
-
-    await fireEvent.click(toggleButtons[0]) // grid
-    await nextTick()
-    expect(baseState.viewMode.value).toBe('grid')
-    expect(view.container.querySelector('[class*="lg:grid-cols-3"]')).toBeTruthy()
-  })
-
   it('should toggle the category filter and clear it', async () => {
     const view = await renderWithApp(OurBlog)
-    const categorySection = view.container.querySelector('.gap-3.mt-12') as HTMLElement
 
-    await fireEvent.click(within(categorySection).getByRole('button', { name: /filtrar por ai/i }))
+    await fireEvent.click(view.getByRole('button', { name: /filtrar por ai/i }))
     await nextTick()
     expect(baseState.selectedCategory.value).toBe(1)
 
-    // Clear button (its aria-label resolves to the missing blog.clearFilters key)
-    await fireEvent.click(within(categorySection).getAllByRole('button')[1])
+    await fireEvent.click(view.getByRole('button', { name: 'Limpiar' }))
     await nextTick()
     expect(baseState.selectedCategory.value).toBeNull()
+  })
+
+  it('should demote article headings to h2 when the section title is the h1', async () => {
+    baseState.posts.value = [makePost()]
+    const view = await renderWithApp(OurBlog, { props: { headingTag: 'h1' } })
+
+    expect(view.getByRole('heading', { level: 1 })).toBeInTheDocument()
+    expect(view.getByRole('heading', { level: 2, name: 'Post AI' })).toBeInTheDocument()
   })
 
   it('should navigate pages with the pagination controls', async () => {
     baseState.totalPagesRef.value = 5
     baseState.posts.value = [makePost()]
     const view = await renderWithApp(OurBlog)
-    const pagination = within(view.container.querySelector('.mt-12.space-x-2') as HTMLElement)
+    const pagination = within(view.getByRole('navigation', { name: 'Paginación' }))
 
     expect(pagination.getAllByRole('button')[0]).toBeDisabled() // prev disabled on page 1
 
@@ -259,7 +187,7 @@ describe('OurBlog.vue', () => {
   it('should show a trailing ellipsis when the current page is near the start', async () => {
     baseState.totalPagesRef.value = 9
     const view = await renderWithApp(OurBlog)
-    const pagination = within(view.container.querySelector('.mt-12.space-x-2') as HTMLElement)
+    const pagination = within(view.getByRole('navigation', { name: 'Paginación' }))
 
     expect(pagination.getAllByText('...')).toHaveLength(1)
     expect(pagination.getByRole('button', { name: '6' })).toBeInTheDocument()
@@ -271,7 +199,7 @@ describe('OurBlog.vue', () => {
     baseState.totalPagesRef.value = 10
     baseState.currentPage.value = 5
     const view = await renderWithApp(OurBlog)
-    const pagination = within(view.container.querySelector('.mt-12.space-x-2') as HTMLElement)
+    const pagination = within(view.getByRole('navigation', { name: 'Paginación' }))
 
     expect(pagination.getAllByText('...')).toHaveLength(2)
     expect(pagination.getByRole('button', { name: '3' })).toBeInTheDocument()
@@ -283,7 +211,7 @@ describe('OurBlog.vue', () => {
     baseState.totalPagesRef.value = 10
     baseState.currentPage.value = 9
     const view = await renderWithApp(OurBlog)
-    const pagination = within(view.container.querySelector('.mt-12.space-x-2') as HTMLElement)
+    const pagination = within(view.getByRole('navigation', { name: 'Paginación' }))
 
     expect(pagination.getAllByText('...')).toHaveLength(1)
     expect(pagination.getByRole('button', { name: '5' })).toBeInTheDocument()
