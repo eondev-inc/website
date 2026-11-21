@@ -11,13 +11,10 @@ describe('AboutMe.vue', () => {
     expect(view.getByRole('heading', { name: 'Ingeniero de Software' })).toBeInTheDocument()
   })
 
-  it('shows the two most recent roles instead of an illustration', async () => {
+  it('keeps the illustration in the hero and does not duplicate the career list', async () => {
     const view = await renderWithApp(AboutMe)
 
-    expect(view.queryByRole('img')).toBeNull()
-    expect(view.getAllByRole('listitem')).toHaveLength(2)
-    expect(view.getByText('Jun. 2026 - Actualidad')).toBeInTheDocument()
-    expect(view.getByText(/Líder Técnico Advisor IA/)).toBeInTheDocument()
-    expect(view.getByRole('link', { name: /Ver trayectoria completa/i })).toHaveAttribute('href', '/about')
+    expect(view.getByRole('img', { name: /yerffrey romero desarrollando código/i })).toBeInTheDocument()
+    expect(view.queryByRole('listitem')).toBeNull()
   })
 })

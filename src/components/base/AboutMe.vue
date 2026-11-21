@@ -98,20 +98,21 @@
           </div>
         </div>
 
-        <!-- Puesto actual: evidencia en lugar de ilustración -->
-        <section
-          class="lg:ml-8 animate-slide-up rounded-lg border border-neutral-200 bg-white p-6 lg:p-8"
-          :aria-label="$t('career.title')"
+        <!-- Imagen/Visual -->
+        <div
+          class="relative lg:ml-8 animate-scale-in"
+          style="animation-delay: 0.16s"
         >
-          <career-list compact :limit="2" />
-          <router-link
-            to="/about"
-            class="mt-6 inline-flex items-center gap-2 font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:decoration-primary-700"
+          <div
+            class="relative bg-white rounded-lg border border-neutral-200 p-8"
           >
-            {{ $t("career.fullHistory") }}
-            <span aria-hidden="true">→</span>
-          </router-link>
-        </section>
+            <img
+              src="../../assets/img/Coding.png"
+              :alt="$t('home.aboutMe.imageAlt')"
+              class="w-full h-auto"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -120,7 +121,6 @@
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 import { CONTACT_EMAIL } from '@/config/contact'
-import CareerList from './CareerList.vue'
 
 const contactEmail = CONTACT_EMAIL
 
