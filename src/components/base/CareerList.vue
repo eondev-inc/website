@@ -1,7 +1,7 @@
 <template>
   <ol class="divide-y divide-neutral-200 border-y border-neutral-200">
     <li
-      v-for="job in jobs"
+      v-for="job in visibleJobs"
       :key="job.fromTo + job.employer"
       class="grid gap-x-10 gap-y-2 py-6 md:grid-cols-[12rem_1fr]"
     >
@@ -41,9 +41,11 @@ import { externalHref } from '../../composables/utils/outbound-links'
 export default defineComponent({
   name: 'CareerList',
   props: {
-    compact: { type: Boolean, default: false }
+    compact: { type: Boolean, default: false },
+    // Muestra solo los N puestos más recientes (el listado ya viene ordenado)
+    limit: { type: Number, default: 0 }
   },
-  setup() {
+  setup(props) {
     const { aboutMeResume } = useAboutMe()
     const { locale } = useI18n()
 
@@ -67,7 +69,11 @@ export default defineComponent({
       )
     )
 
-    return { jobs }
+    const visibleJobs = computed(() =>
+      props.limit > 0 ? jobs.value.slice(0, props.limit) : jobs.value
+    )
+
+    return { visibleJobs }
   }
 })
 </script>

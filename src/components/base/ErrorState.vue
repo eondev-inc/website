@@ -350,14 +350,10 @@ export default defineComponent({
   }
 }
 
-@keyframes bounce-in {
+@keyframes icon-in {
   0% {
     opacity: 0;
     transform: scale(0.3);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
   }
   100% {
     opacity: 1;
@@ -371,7 +367,7 @@ export default defineComponent({
 }
 
 .error-icon {
-  animation: bounce-in 0.6s ease-out;
+  animation: icon-in 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Focus states para accesibilidad */

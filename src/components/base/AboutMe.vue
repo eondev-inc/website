@@ -13,7 +13,7 @@
           <!-- Badge profesional -->
           <div
             class="inline-flex items-center gap-2 px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-6 animate-fade-in"
-            style="animation-delay: 0.2s"
+            style="animation-delay: 0.08s"
           >
             <div class="w-2 h-2 bg-primary-600 rounded-full"></div>
             {{ $t("home.aboutMe.availability") }}
@@ -22,7 +22,7 @@
           <!-- Título principal con énfasis plano -->
           <h1
             class="text-5xl lg:text-7xl font-display font-bold leading-tight mb-6 animate-slide-up"
-            style="animation-delay: 0.3s"
+            style="animation-delay: 0.12s"
           >
             {{ $t("home.aboutMe.greeting") }}
             <span class="text-primary-700 block mt-2">
@@ -33,7 +33,7 @@
           <!-- Subtítulo -->
           <h2
             class="text-2xl lg:text-3xl font-display font-semibold text-neutral-600 mb-6 animate-slide-up"
-            style="animation-delay: 0.4s"
+            style="animation-delay: 0.16s"
           >
             {{ $t("home.aboutMe.title") }}
           </h2>
@@ -41,7 +41,7 @@
           <!-- Descripción mejorada -->
           <p
             class="text-lg text-neutral-600 leading-relaxed mb-8 max-w-2xl animate-slide-up"
-            style="animation-delay: 0.5s"
+            style="animation-delay: 0.2s"
           >
             {{ $t("home.aboutMe.description") }}
           </p>
@@ -49,7 +49,7 @@
           <!-- Botones de acción -->
           <div
             class="flex flex-col sm:flex-row gap-4 mb-8 animate-slide-up"
-            style="animation-delay: 0.8s"
+            style="animation-delay: 0.32s"
           >
             <router-link
               to="/contact"
@@ -76,7 +76,7 @@
           <!-- Social Links mejorados -->
           <div
             class="flex items-center gap-4 animate-slide-up"
-            style="animation-delay: 0.9s"
+            style="animation-delay: 0.36s"
           >
             <span class="text-sm text-neutral-600 font-medium">{{
               $t("home.aboutMe.followMe")
@@ -98,22 +98,20 @@
           </div>
         </div>
 
-        <!-- Imagen/Visual mejorado -->
-        <div
-          class="relative lg:ml-8 animate-scale-in"
-          style="animation-delay: 0.4s"
+        <!-- Puesto actual: evidencia en lugar de ilustración -->
+        <section
+          class="lg:ml-8 animate-slide-up rounded-lg border border-neutral-200 bg-white p-6 lg:p-8"
+          :aria-label="$t('career.title')"
         >
-          <!-- Imagen principal -->
-          <div
-            class="relative bg-white rounded-lg border border-neutral-200 p-8"
+          <career-list compact :limit="2" />
+          <router-link
+            to="/about"
+            class="mt-6 inline-flex items-center gap-2 font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:decoration-primary-700"
           >
-            <img
-              src="../../assets/img/Coding.png"
-              :alt="$t('home.aboutMe.imageAlt')"
-              class="w-full h-auto"
-            />
-          </div>
-        </div>
+            {{ $t("career.fullHistory") }}
+            <span aria-hidden="true">→</span>
+          </router-link>
+        </section>
       </div>
     </div>
   </section>
@@ -122,6 +120,7 @@
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 import { CONTACT_EMAIL } from '@/config/contact'
+import CareerList from './CareerList.vue'
 
 const contactEmail = CONTACT_EMAIL
 
