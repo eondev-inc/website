@@ -133,6 +133,7 @@ const messages = {
       learnMore: '\u00bfQuieres saber m\u00e1s sobre mi experiencia t\u00e9cnica?'
     },
     callToAction: {
+      directLead: 'La forma m\u00e1s directa es escribirme a',
       orWriteDirectly: 'Si no se abre, escr\u00edbeme a',
       title: 'Trabajemos Juntos',
       subtitle: '\u00bfTienes un proyecto en mente? Me encantar\u00eda escuchar tus ideas y ayudarte a convertirlas en realidad.',
@@ -337,6 +338,7 @@ const messages = {
       learnMore: 'Want to know more about my technical experience?'
     },
     callToAction: {
+      directLead: 'The most direct way is to write to',
       orWriteDirectly: 'If it does not open, write to',
       title: "Let's Work Together",
       subtitle: "Have a project in mind? I'd love to hear your ideas and help you turn them into reality.",

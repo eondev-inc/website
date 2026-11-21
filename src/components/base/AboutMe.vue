@@ -68,44 +68,26 @@
             style="animation-delay: 0.8s"
           >
             <router-link
-              to="/about"
-              class="btn-primary inline-flex items-center justify-center gap-2 group"
-            >
-              {{ $t("home.aboutMe.cta") }}
-              <svg
-                class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                ></path>
-              </svg>
-            </router-link>
-            <router-link
               to="/contact"
-              class="btn-outline inline-flex items-center justify-center gap-2"
+              class="btn-primary inline-flex items-center justify-center gap-2"
             >
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                ></path>
-              </svg>
               {{ $t("home.aboutMe.contact") }}
             </router-link>
+            <router-link
+              to="/about"
+              class="btn-outline inline-flex items-center justify-center gap-2"
+            >
+              {{ $t("home.aboutMe.cta") }}
+            </router-link>
           </div>
+
+          <p class="mb-8 text-neutral-700">
+            <a
+              :href="`mailto:${contactEmail}`"
+              class="font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:decoration-primary-700"
+              >{{ contactEmail }}</a
+            >
+          </p>
 
           <!-- Social Links mejorados -->
           <div
@@ -122,8 +104,9 @@
                 :href="social.url"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="w-11 h-11 bg-white border border-neutral-200 rounded-xl flex items-center justify-center text-neutral-600 hover:text-primary-600 hover:bg-white hover:shadow-soft hover:-translate-y-0.5 transition-all duration-200"
+                class="w-11 h-11 bg-white border border-neutral-200 rounded-lg flex items-center justify-center text-neutral-600 hover:text-primary-700 hover:border-primary-600 transition-colors duration-200"
                 :title="social.name"
+                :aria-label="social.name"
               >
                 <font-awesome-icon :icon="social.icon" class="w-4 h-4" />
               </a>
@@ -154,6 +137,9 @@
 
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref } from 'vue'
+import { CONTACT_EMAIL } from '@/config/contact'
+
+const contactEmail = CONTACT_EMAIL
 
 const rootEl = ref<HTMLElement | null>(null)
 
