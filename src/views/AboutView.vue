@@ -11,9 +11,7 @@
             <div
               class="inline-flex items-center gap-2 px-4 py-2 bg-secondary-100 text-secondary-700 rounded-full text-sm font-medium mb-6"
             >
-              <div
-                class="w-2 h-2 bg-secondary-500 rounded-full animate-pulse"
-              ></div>
+              <div class="w-2 h-2 bg-secondary-500 rounded-full"></div>
               {{ $t("about.badge") }}
             </div>
 
@@ -38,7 +36,7 @@
                 to="/contact"
                 class="btn-primary inline-flex items-center justify-center gap-2 group"
               >
-                Trabajemos juntos
+                {{ $t("about.cta.buttonContact") }}
                 <svg
                   class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200"
                   fill="none"
@@ -75,13 +73,13 @@
           >
             <!-- Imagen principal -->
             <div
-              class="relative bg-white rounded-3xl p-8 shadow-soft hover:shadow-medium transition-all duration-500"
+              class="relative bg-white rounded-lg border border-neutral-200 p-8"
             >
               <img
                 src="../assets/img/Coding.png"
                 alt="coding"
                 title="coding-me"
-                class="w-full h-auto rounded-2xl hover:scale-105 transition-transform duration-500"
+                class="w-full h-auto"
               />
             </div>
           </div>
@@ -89,181 +87,37 @@
       </div>
     </section>
 
-    <!-- Timeline Section -->
-    <section class="py-16 lg:py-24 bg-white">
-      <div class="container-custom">
-        <!-- Header de la sección -->
-        <div class="text-center mb-16 animate-fade-in">
-          <h2 class="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
+    <!-- Trayectoria -->
+    <section class="py-16 lg:py-24 bg-white" aria-labelledby="timeline-title">
+      <div
+        class="container-custom grid gap-12 lg:grid-cols-[minmax(0,18rem)_1fr] lg:gap-16"
+      >
+        <div>
+          <h2
+            id="timeline-title"
+            class="font-display text-3xl lg:text-4xl font-bold text-neutral-900"
+          >
             {{ $t("home.aboutMe.meFirts") }}
           </h2>
-          <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
+          <p class="mt-4 max-w-sm text-neutral-600">
             {{ $t("about.timeline.intro") }}
           </p>
-          <div class="accent-bar mx-auto mt-6"></div>
         </div>
-
-        <!-- Timeline moderna -->
-        <div class="relative">
-          <!-- Línea central -->
-          <div
-            class="absolute left-4 md:left-1/2 md:transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-neutral-200"
-          ></div>
-
-          <div class="space-y-12">
-            <div
-              v-for="(about, index) in localizedAboutMe[0]"
-              :key="index"
-              class="relative animate-slide-up"
-              :style="`animation-delay: ${index * 0.2}s`"
+        <div>
+          <career-list />
+          <p class="mt-8 text-neutral-700">
+            {{ $t("about.linkedin.description") }}
+            <a
+              href="https://www.linkedin.com/in/yromeroc"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:decoration-primary-700"
+              >{{ $t("about.linkedin.button")
+              }}<span class="sr-only">
+                ({{ $t("career.opensNewTab") }})</span
+              ></a
             >
-              <!-- Punto en la línea -->
-              <div
-                class="absolute left-0 md:left-1/2 md:transform md:-translate-x-1/2 w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center shadow-soft z-10"
-              >
-                <svg
-                  class="w-4 h-4 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </div>
-
-              <!-- Card -->
-              <div class="ml-16 md:ml-0 group">
-                <div
-                  :class="
-                    index % 2 === 0
-                      ? 'md:pr-8 md:text-right md:mr-auto md:w-1/2'
-                      : 'md:pl-8 md:ml-auto md:w-1/2'
-                  "
-                >
-                  <div
-                    class="relative bg-white border border-neutral-200 rounded-3xl p-8 shadow-soft hover:shadow-medium hover:-translate-y-2 transition-all duration-500 group-hover:bg-white"
-                  >
-                    <!-- Contenido -->
-                    <div class="relative z-10">
-                      <!-- Header -->
-                      <div
-                        class="flex flex-col md:flex-row md:justify-between md:items-center mb-4 gap-2"
-                      >
-                        <h3
-                          class="text-xl font-bold text-neutral-900 group-hover:text-primary-700 transition-all duration-300"
-                        >
-                          {{ about.title }}
-                        </h3>
-                        <span
-                          class="inline-flex items-center px-3 py-1 bg-secondary-100 text-secondary-700 rounded-full text-sm font-medium"
-                        >
-                          {{ about.fromTo }}
-                        </span>
-                      </div>
-
-                      <!-- Descripción -->
-                      <p class="text-neutral-600 leading-relaxed mb-6">
-                        {{ about.description }}
-                      </p>
-
-                      <!-- Botón -->
-                      <button
-                        @click="toOutside(about.url)"
-                        class="inline-flex items-center gap-2 px-4 py-2 bg-primary-700 text-white rounded-xl hover:bg-primary-800 transition-all duration-300 shadow-soft hover:shadow-medium text-sm font-medium"
-                      >
-                        {{ $t("about.timeline.seeMore") }}
-                        <svg
-                          class="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                          ></path>
-                        </svg>
-                      </button>
-                    </div>
-
-                    <!-- Decorative elements -->
-                    <div
-                      class="absolute top-4 right-4 w-20 h-20 bg-primary-50 border border-primary-100 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- LinkedIn Card especial -->
-            <div class="relative animate-slide-up" style="animation-delay: 1s">
-              <!-- Punto en la línea -->
-              <div
-                class="absolute left-0 md:left-1/2 md:transform md:-translate-x-1/2 w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center shadow-soft z-10"
-              >
-                <font-awesome-icon
-                  icon="fa-brands fa-linkedin-in"
-                  class="w-4 h-4 text-white"
-                />
-              </div>
-
-              <!-- Card -->
-              <div class="ml-16 md:ml-0 group">
-                <div class="md:pr-8 md:text-right md:mr-auto md:w-1/2">
-                  <div
-                    class="relative bg-white border border-neutral-200 rounded-3xl p-8 shadow-soft hover:shadow-medium hover:-translate-y-2 transition-all duration-500 group-hover:bg-white"
-                  >
-                    <!-- Contenido -->
-                    <div class="relative z-10">
-                      <h3
-                        class="text-xl font-bold text-neutral-900 mb-4 group-hover:text-primary-700 transition-all duration-300"
-                      >
-                        {{ $t("about.linkedin.title") }}
-                      </h3>
-                      <p class="text-neutral-600 leading-relaxed mb-6">
-                        {{ $t("about.linkedin.description") }}
-                      </p>
-                      <button
-                        @click="
-                          toOutside('https://www.linkedin.com/in/yromeroc')
-                        "
-                        class="inline-flex items-center gap-2 px-4 py-2 bg-primary-700 text-white rounded-xl hover:bg-primary-800 transition-all duration-300 shadow-soft hover:shadow-medium text-sm font-medium"
-                      >
-                        <font-awesome-icon
-                          icon="fa-brands fa-linkedin-in"
-                          class="w-4 h-4"
-                        />
-                        {{ $t("about.linkedin.button") }}
-                        <svg
-                          class="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                          ></path>
-                        </svg>
-                      </button>
-                    </div>
-
-                    <!-- Decorative elements -->
-                    <div
-                      class="absolute top-4 right-4 w-20 h-20 bg-primary-50 border border-primary-100 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          </p>
         </div>
       </div>
     </section>
@@ -305,30 +159,11 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
-import { useI18n } from 'vue-i18n'
-import useAboutMe from '../composables/use-about.composable'
-import { toOutside } from '../composables/utils/outbound-links'
+import { defineComponent } from 'vue'
+import CareerList from '../components/base/CareerList.vue'
 
 export default defineComponent({
-  name: 'AboutMe',
-  setup() {
-    const { aboutMeResume } = useAboutMe()
-    const { locale } = useI18n()
-    const currentLocale = computed(() => locale.value)
-
-    const localizedAboutMe = computed(() => {
-      return aboutMeResume.map((about) => {
-        return about[currentLocale.value]
-      })
-    })
-
-    return {
-      localizedAboutMe,
-      toOutside
-    }
-  }
+  name: 'AboutView',
+  components: { CareerList }
 })
 </script>
-
-<style lang=""></style>

@@ -16,7 +16,9 @@
             />
             <div class="flex flex-col">
               <span class="text-xl font-bold text-white">Y|R</span>
-              <span class="text-sm text-neutral-300">Portfolio</span>
+              <span class="text-sm text-neutral-300">{{
+                $t("header.brandTag")
+              }}</span>
             </div>
           </div>
 
@@ -129,7 +131,7 @@
 
           <!-- Status indicator -->
           <div class="flex items-center space-x-2">
-            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            <div class="w-2 h-2 bg-green-400 rounded-full" />
             <span class="text-neutral-300 text-sm">{{
               $t("footer.availableForProjects")
             }}</span>

@@ -2,14 +2,15 @@ const messages = {
   es: {
     header: {
       headerHome: 'Inicio',
+      brandTag: 'Portafolio',
       headerAbout: 'Acerca',
-      headerNews: 'Noticias',
+      headerNews: 'Lecturas',
       headerCTA: 'Contacto',
       selectLanguage: 'Idioma',
       viewOnGithub: 'Ver en GitHub'
     },
     footer: {
-      mainMessage: 'Es una iniciativa personal con el proposito de crear una marca que permita impulsar el desarrollo de aplicaciones web enfocadas en las necesidades de los usuarios',
+      mainMessage: 'Es una iniciativa personal con el prop\u00f3sito de crear una marca que permita impulsar el desarrollo de aplicaciones web enfocadas en las necesidades de los usuarios',
       followMe: 'S\u00edgueme en',
       navigation: 'Navegaci\u00f3n',
       technologies: 'Tecnolog\u00edas',
@@ -40,7 +41,7 @@ const messages = {
     home: {
       aboutMe: {
         meFirts: 'Experiencia laboral',
-        meTitle: 'Hola! Soy yerffrey Romero',
+        meTitle: '\u00a1Hola! Soy Yerffrey Romero',
         meSubs: 'Desarrollador Fullstack',
         meDescription: 'Ingeniero en Computaci\u00f3n, con 9+ a\u00f1os de experiencia, trabajando en empresas como Starken, Izit, Tu Clase, tu pa\u00eds e I-Med. centrado en el desarrollo de aplicaciones Web con stack tecnol\u00f3gico NodeJS',
         meButton: 'Saber m\u00e1s',
@@ -78,10 +79,10 @@ const messages = {
       }
     },
     news: {
-      title: 'Noticias'
+      title: 'Lecturas'
     },
     blog: {
-      title: 'Noticias',
+      title: 'Lecturas',
       subtitle: 'Art\u00edculos y reflexiones sobre desarrollo web, tecnolog\u00eda y mejores pr\u00e1cticas',
       searchPlaceholder: 'Buscar art\u00edculos...',
       loadingArticles: 'Cargando art\u00edculos...',
@@ -110,7 +111,21 @@ const messages = {
       readArticle: 'Leer art\u00edculo',
       shareArticle: 'Compartir art\u00edculo',
       share: 'Compartir',
-      clear: 'Limpiar'
+      clear: 'Limpiar',
+      sourceNote: 'Selecci\u00f3n de lecturas de TechCrunch. Los art\u00edculos son de sus autores; aqu\u00ed solo enlazo.'
+    },
+    pageTitle: {
+      home: 'Yerffrey Romero · Desarrollador fullstack y l\u00edder t\u00e9cnico',
+      about: 'Trayectoria · Yerffrey Romero',
+      blog: 'Lecturas · Yerffrey Romero',
+      contact: 'Contacto · Yerffrey Romero',
+      NotFound: 'P\u00e1gina no encontrada · Yerffrey Romero'
+    },
+    career: {
+      title: 'Trayectoria',
+      opensNewTab: 'se abre en una pesta\u00f1a nueva',
+      fullHistory: 'Ver trayectoria completa',
+      stackTitle: 'Con qu\u00e9 trabajo'
     },
     experience: {
       title: 'Experiencia T\u00e9cnica',
@@ -118,6 +133,7 @@ const messages = {
       learnMore: '\u00bfQuieres saber m\u00e1s sobre mi experiencia t\u00e9cnica?'
     },
     callToAction: {
+      orWriteDirectly: 'Si no se abre, escr\u00edbeme a',
       title: 'Trabajemos Juntos',
       subtitle: '\u00bfTienes un proyecto en mente? Me encantar\u00eda escuchar tus ideas y ayudarte a convertirlas en realidad.',
       name: 'Nombre',
@@ -190,8 +206,9 @@ const messages = {
   en: {
     header: {
       headerHome: 'Home',
+      brandTag: 'Portfolio',
       headerAbout: 'About',
-      headerNews: 'News',
+      headerNews: 'Reading',
       headerCTA: 'Contact',
       selectLanguage: 'Language',
       viewOnGithub: 'View on GitHub'
@@ -298,7 +315,21 @@ const messages = {
       readArticle: 'Read article',
       shareArticle: 'Share article',
       share: 'Share',
-      clear: 'Clear'
+      clear: 'Clear',
+      sourceNote: 'A selection of reads from TechCrunch. The articles belong to their authors; I only link to them.'
+    },
+    pageTitle: {
+      home: 'Yerffrey Romero · Fullstack developer and technical lead',
+      about: 'Career · Yerffrey Romero',
+      blog: 'Reading · Yerffrey Romero',
+      contact: 'Contact · Yerffrey Romero',
+      NotFound: 'Page not found · Yerffrey Romero'
+    },
+    career: {
+      title: 'Career',
+      opensNewTab: 'opens in a new tab',
+      fullHistory: 'See full career',
+      stackTitle: 'What I work with'
     },
     experience: {
       title: 'Technical Experience',
@@ -306,6 +337,7 @@ const messages = {
       learnMore: 'Want to know more about my technical experience?'
     },
     callToAction: {
+      orWriteDirectly: 'If it does not open, write to',
       title: "Let's Work Together",
       subtitle: "Have a project in mind? I'd love to hear your ideas and help you turn them into reality.",
       name: 'Name',

@@ -14,7 +14,7 @@
           <!-- Logo elegante y simple -->
           <router-link
             to="/"
-            class="flex items-center space-x-3 group transition-all duration-300 hover:scale-105"
+            class="flex items-center space-x-3 group"
             @click="setActiveMenu('home')"
           >
             <div class="relative">
@@ -28,7 +28,9 @@
               <span class="text-lg font-bold text-neutral-800 leading-tight"
                 >Y|R</span
               >
-              <span class="text-xs text-neutral-500 -mt-1">Portfolio</span>
+              <span class="text-xs text-neutral-600 -mt-1">{{
+                $t("header.brandTag")
+              }}</span>
             </div>
           </router-link>
 
