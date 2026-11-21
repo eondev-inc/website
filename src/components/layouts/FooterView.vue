@@ -131,7 +131,7 @@
 
           <!-- Status indicator -->
           <div class="flex items-center space-x-2">
-            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            <div class="w-2 h-2 bg-green-400 rounded-full" />
             <span class="text-neutral-300 text-sm">{{
               $t("footer.availableForProjects")
             }}</span>

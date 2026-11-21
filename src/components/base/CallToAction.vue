@@ -160,6 +160,12 @@
             </button>
             <p class="mt-3 text-sm text-neutral-600">
               {{ $t("callToAction.mailtoHint") }}
+              {{ $t("callToAction.orWriteDirectly") }}
+              <a
+                href="mailto:hola@eondev.site"
+                class="font-semibold text-primary-700 underline underline-offset-4"
+                >hola@eondev.site</a
+              >
             </p>
           </div>
         </Form>

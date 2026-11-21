@@ -6,7 +6,7 @@
   >
     <div class="container-custom relative z-10">
       <div
-        class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen py-20"
+        class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center py-16 lg:py-24"
       >
         <!-- Contenido Principal -->
         <div class="lg:pr-8 animate-slide-up">
@@ -15,9 +15,7 @@
             class="inline-flex items-center gap-2 px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-6 animate-fade-in"
             style="animation-delay: 0.2s"
           >
-            <div
-              class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"
-            ></div>
+            <div class="w-2 h-2 bg-primary-600 rounded-full"></div>
             {{ $t("home.aboutMe.availability") }}
           </div>
 
@@ -48,46 +46,9 @@
             {{ $t("home.aboutMe.description") }}
           </p>
 
-          <!-- Estadísticas destacadas -->
-          <div
-            class="grid grid-cols-3 gap-6 mb-8 animate-slide-up"
-            style="animation-delay: 0.6s"
-          >
-            <div class="text-center">
-              <div
-                class="text-3xl font-display font-bold text-primary-700 mb-1"
-              >
-                9+
-              </div>
-              <div class="text-sm text-neutral-500 font-medium">
-                {{ $t("home.aboutMe.yearsExp") }}
-              </div>
-            </div>
-            <div class="text-center">
-              <div
-                class="text-3xl font-display font-bold text-primary-700 mb-1"
-              >
-                10+
-              </div>
-              <div class="text-sm text-neutral-500 font-medium">
-                {{ $t("home.aboutMe.projects") }}
-              </div>
-            </div>
-            <div class="text-center">
-              <div
-                class="text-3xl font-display font-bold text-primary-700 mb-1"
-              >
-                10+
-              </div>
-              <div class="text-sm text-neutral-500 font-medium">
-                {{ $t("home.aboutMe.technologies") }}
-              </div>
-            </div>
-          </div>
-
           <!-- Stack de tecnologías -->
           <div class="mb-8 animate-slide-up" style="animation-delay: 0.7s">
-            <p class="text-sm text-neutral-500 font-medium mb-3">
+            <p class="text-sm text-neutral-600 font-medium mb-3">
               {{ $t("home.aboutMe.techStack") }}
             </p>
             <div class="flex flex-wrap gap-2">
@@ -151,7 +112,7 @@
             class="flex items-center gap-4 animate-slide-up"
             style="animation-delay: 0.9s"
           >
-            <span class="text-sm text-neutral-500 font-medium">{{
+            <span class="text-sm text-neutral-600 font-medium">{{
               $t("home.aboutMe.followMe")
             }}</span>
             <div class="flex gap-3">
@@ -184,46 +145,8 @@
               :alt="$t('home.aboutMe.imageAlt')"
               class="w-full h-auto rounded-2xl hover:scale-105 transition-transform duration-500"
             />
-
-            <!-- Badge flotante -->
-            <div
-              class="absolute -bottom-4 -right-4 bg-white rounded-2xl p-4 shadow-soft border border-neutral-200 animate-bounce-soft"
-            >
-              <div class="flex items-center gap-3">
-                <div
-                  class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center"
-                >
-                  <font-awesome-icon
-                    icon="fa-solid fa-code"
-                    class="text-primary-600 text-lg"
-                  />
-                </div>
-                <div>
-                  <div class="text-sm font-semibold text-neutral-900">
-                    {{ $t("home.aboutMe.status") }}
-                  </div>
-                  <div class="text-xs text-neutral-500">
-                    {{ $t("home.aboutMe.statusDetail") }}
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Indicador de scroll -->
-    <div
-      class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
-    >
-      <div
-        class="w-10 h-10 bg-white border border-neutral-200 rounded-full flex items-center justify-center shadow-soft hover:shadow-medium transition-all duration-300"
-      >
-        <font-awesome-icon
-          icon="chevron-down"
-          class="text-neutral-600 text-lg"
-        />
       </div>
     </div>
   </section>

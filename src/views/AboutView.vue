@@ -11,9 +11,7 @@
             <div
               class="inline-flex items-center gap-2 px-4 py-2 bg-secondary-100 text-secondary-700 rounded-full text-sm font-medium mb-6"
             >
-              <div
-                class="w-2 h-2 bg-secondary-500 rounded-full animate-pulse"
-              ></div>
+              <div class="w-2 h-2 bg-secondary-500 rounded-full"></div>
               {{ $t("about.badge") }}
             </div>
 
