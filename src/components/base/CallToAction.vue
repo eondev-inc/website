@@ -14,6 +14,15 @@
         </p>
       </div>
 
+      <p class="mb-8 text-lg text-neutral-800">
+        {{ $t("callToAction.directLead") }}
+        <a
+          :href="`mailto:${contactEmail}`"
+          class="font-bold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:decoration-primary-700"
+          >{{ contactEmail }}</a
+        >
+      </p>
+
       <div
         class="bg-white rounded-lg border border-neutral-200 p-8 md:p-12 animate-slide-up"
       >
@@ -177,6 +186,7 @@
 </template>
 
 <script lang="ts">
+import { CONTACT_EMAIL } from '@/config/contact'
 import { defineComponent, ref } from 'vue'
 import { Field, Form, ErrorMessage } from 'vee-validate'
 import { useI18n } from 'vue-i18n'
@@ -271,8 +281,7 @@ export default defineComponent({
         loading.value = true
 
         // Configuración del destinatario
-        const recipientEmail =
-          process.env.VITE_CONTACT_EMAIL || 'fallback@example.com'
+        const recipientEmail = CONTACT_EMAIL
 
         // Construir el asunto del correo
         const subject = encodeURIComponent(
@@ -329,6 +338,7 @@ export default defineComponent({
     }
 
     return {
+      contactEmail: CONTACT_EMAIL,
       onSubmit,
       fields,
       loading
