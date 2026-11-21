@@ -30,19 +30,31 @@
       <h2 class="font-display text-2xl font-bold text-neutral-900">
         {{ $t("career.stackTitle") }}
       </h2>
-      <dl class="mt-8 grid gap-10 md:grid-cols-3">
-        <div v-for="item in stack" :key="item.key">
-          <dt class="font-bold text-neutral-900">
+      <ul class="mt-8 grid gap-10 md:grid-cols-3">
+        <li v-for="item in stack" :key="item.key">
+          <div
+            class="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-primary-100 bg-primary-50 text-primary-700"
+            aria-hidden="true"
+          >
+            <font-awesome-icon :icon="item.icon" class="h-5 w-5" />
+          </div>
+          <h3 class="mt-4 font-bold text-neutral-900">
             {{ $t(`experiences.${item.key}.title`) }}
-          </dt>
-          <dd class="mt-2 text-sm leading-relaxed text-neutral-700">
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-neutral-700">
             {{ $t(`experiences.${item.key}.description`) }}
-          </dd>
-          <dd class="mt-3 text-sm font-medium text-primary-700">
-            {{ item.technologies.join(" · ") }}
-          </dd>
-        </div>
-      </dl>
+          </p>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            <li
+              v-for="tech in item.technologies"
+              :key="tech"
+              class="rounded-full bg-primary-100 px-3 py-1 text-xs font-medium text-primary-700"
+            >
+              {{ tech }}
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
@@ -59,14 +71,17 @@ export default defineComponent({
       stack: [
         {
           key: 'node',
+          icon: ['fas', 'fa-code'],
           technologies: ['Express', 'NestJS', 'Fastify', 'Socket.io']
         },
         {
           key: 'database',
+          icon: ['fas', 'fa-database'],
           technologies: ['MySQL', 'MongoDB', 'PostgreSQL', 'Redis']
         },
         {
           key: 'webdevelopment',
+          icon: ['fas', 'fa-code'],
           technologies: ['Vue.js', 'React', 'Angular', 'TypeScript']
         }
       ]

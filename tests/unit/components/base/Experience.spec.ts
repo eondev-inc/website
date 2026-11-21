@@ -1,3 +1,4 @@
+import { within } from '@testing-library/vue'
 import Experience from '@/components/base/Experience.vue'
 import { renderWithApp } from '../../../helpers'
 
@@ -12,7 +13,7 @@ describe('Experience.vue', () => {
   it('lists every role with its dates, employer link and no hover-only content', async () => {
     const view = await renderWithApp(Experience)
 
-    expect(view.getAllByRole('listitem')).toHaveLength(7)
+    expect(within(view.getAllByRole('list')[0]).getAllByRole('listitem')).toHaveLength(7)
     expect(view.getByText('Jun. 2026 - Actualidad')).toBeInTheDocument()
     expect(view.getAllByRole('link', { name: /Imed SA/ }).length).toBeGreaterThan(0)
   })
@@ -23,7 +24,9 @@ describe('Experience.vue', () => {
     expect(view.getByText('NodeJS')).toBeInTheDocument()
     expect(view.getByText('Base de datos')).toBeInTheDocument()
     expect(view.getByText('Desarrollo Web')).toBeInTheDocument()
-    expect(view.getByText('Express · NestJS · Fastify · Socket.io')).toBeInTheDocument()
+    ;['Express', 'NestJS', 'Fastify', 'Socket.io', 'MySQL', 'Redis', 'Vue.js', 'TypeScript'].forEach((tech) => {
+      expect(view.getByText(tech)).toBeInTheDocument()
+    })
   })
 
   it('renders English translations when locale is en', async () => {
