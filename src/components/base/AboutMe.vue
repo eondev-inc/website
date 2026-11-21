@@ -46,6 +46,22 @@
             {{ $t("home.aboutMe.description") }}
           </p>
 
+          <!-- Stack de tecnologías -->
+          <div class="mb-8 animate-slide-up" style="animation-delay: 0.7s">
+            <p class="text-sm text-neutral-500 font-medium mb-3">
+              {{ $t("home.aboutMe.techStack") }}
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span
+                v-for="tech in techStack"
+                :key="tech"
+                class="px-3 py-1 bg-white border border-neutral-200 rounded-full text-sm font-medium text-neutral-700 hover:bg-white hover:shadow-soft transition-all duration-200"
+              >
+                {{ tech }}
+              </span>
+            </div>
+          </div>
+
           <!-- Botones de acción -->
           <div
             class="flex flex-col sm:flex-row gap-4 mb-8 animate-slide-up"
@@ -98,20 +114,45 @@
           </div>
         </div>
 
-        <!-- Puesto actual: evidencia en lugar de ilustración -->
-        <section
-          class="lg:ml-8 animate-slide-up rounded-lg border border-neutral-200 bg-white p-6 lg:p-8"
-          :aria-label="$t('career.title')"
+        <!-- Imagen/Visual -->
+        <div
+          class="relative lg:ml-8 animate-scale-in"
+          style="animation-delay: 0.16s"
         >
-          <career-list compact :limit="2" />
-          <router-link
-            to="/about"
-            class="mt-6 inline-flex items-center gap-2 font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:decoration-primary-700"
+          <div
+            class="relative bg-white rounded-lg border border-neutral-200 p-8"
           >
-            {{ $t("career.fullHistory") }}
-            <span aria-hidden="true">→</span>
-          </router-link>
-        </section>
+            <img
+              src="../../assets/img/Coding.png"
+              :alt="$t('home.aboutMe.imageAlt')"
+              class="w-full h-auto"
+            />
+
+            <!-- Badge flotante -->
+            <div
+              class="absolute -bottom-4 -right-4 bg-white rounded-2xl p-4 shadow-soft border border-neutral-200 animate-bounce-soft"
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center"
+                >
+                  <font-awesome-icon
+                    icon="fa-solid fa-code"
+                    class="text-primary-600 text-lg"
+                  />
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-neutral-900">
+                    {{ $t("home.aboutMe.status") }}
+                  </div>
+                  <div class="text-xs text-neutral-600">
+                    {{ $t("home.aboutMe.statusDetail") }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -120,11 +161,22 @@
 <script lang="ts" setup>
 import { onMounted, onUnmounted, ref } from 'vue'
 import { CONTACT_EMAIL } from '@/config/contact'
-import CareerList from './CareerList.vue'
 
 const contactEmail = CONTACT_EMAIL
 
 const rootEl = ref<HTMLElement | null>(null)
+
+// Datos del stack tecnológico
+const techStack = [
+  'Vue.js',
+  'Node.js',
+  'TypeScript',
+  'TailwindCSS',
+  'MongoDB',
+  'MySQL',
+  'NestJS',
+  'Express'
+]
 
 // Enlaces sociales
 const socialLinks = [
