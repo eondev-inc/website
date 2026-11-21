@@ -42,14 +42,14 @@
                   {{ $t("callToAction.name") }}
                 </label>
                 <div
-                  class="relative rounded-xl transition-shadow duration-300 group-focus-within:ring-2 group-focus-within:ring-primary-700/20"
+                  class="relative rounded-lg transition-shadow duration-300 group-focus-within:ring-2 group-focus-within:ring-primary-700/20"
                 >
                   <Field
                     id="name"
                     name="name"
                     :rules="fields[0].rules"
                     type="text"
-                    class="w-full px-4 py-4 bg-white border-2 border-neutral-200 rounded-xl focus:border-primary-700 group-focus-within:border-primary-700 focus:ring-4 focus:ring-primary-100 transition-all duration-300 placeholder-neutral-500"
+                    class="w-full px-4 py-4 bg-white border border-neutral-300 rounded-lg focus:border-primary-700 group-focus-within:border-primary-700 focus:ring-4 focus:ring-primary-100 transition-all duration-300 placeholder-neutral-500"
                     :placeholder="$t('callToAction.namePlaceholder')"
                   />
                 </div>
@@ -80,14 +80,14 @@
                   {{ $t("callToAction.email") }}
                 </label>
                 <div
-                  class="relative rounded-xl transition-shadow duration-300 group-focus-within:ring-2 group-focus-within:ring-primary-700/20"
+                  class="relative rounded-lg transition-shadow duration-300 group-focus-within:ring-2 group-focus-within:ring-primary-700/20"
                 >
                   <Field
                     id="email"
                     name="email"
                     :rules="fields[1].rules"
                     type="email"
-                    class="w-full px-4 py-4 bg-white border-2 border-neutral-200 rounded-xl focus:border-primary-700 group-focus-within:border-primary-700 focus:ring-4 focus:ring-primary-100 transition-all duration-300 placeholder-neutral-500"
+                    class="w-full px-4 py-4 bg-white border border-neutral-300 rounded-lg focus:border-primary-700 group-focus-within:border-primary-700 focus:ring-4 focus:ring-primary-100 transition-all duration-300 placeholder-neutral-500"
                     :placeholder="$t('callToAction.emailPlaceholder')"
                   />
                 </div>
@@ -120,7 +120,7 @@
                   {{ $t("callToAction.message") }}
                 </label>
                 <div
-                  class="relative rounded-xl transition-shadow duration-300 group-focus-within:ring-2 group-focus-within:ring-primary-700/20"
+                  class="relative rounded-lg transition-shadow duration-300 group-focus-within:ring-2 group-focus-within:ring-primary-700/20"
                 >
                   <Field
                     id="message"
@@ -128,7 +128,7 @@
                     :rules="fields[2].rules"
                     as="textarea"
                     rows="6"
-                    class="w-full px-4 py-4 bg-white border-2 border-neutral-200 rounded-xl focus:border-primary-700 group-focus-within:border-primary-700 focus:ring-4 focus:ring-primary-100 transition-all duration-300 placeholder-neutral-500 resize-none"
+                    class="w-full px-4 py-4 bg-white border border-neutral-300 rounded-lg focus:border-primary-700 group-focus-within:border-primary-700 focus:ring-4 focus:ring-primary-100 transition-all duration-300 placeholder-neutral-500 resize-none"
                     :placeholder="$t('callToAction.messagePlaceholder')"
                   />
                 </div>

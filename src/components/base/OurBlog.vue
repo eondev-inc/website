@@ -19,7 +19,7 @@
         </p>
       </div>
 
-      <div class="relative w-full lg:max-w-sm">
+      <div v-if="showControls" class="relative w-full lg:max-w-sm">
         <label for="blog-search" class="sr-only">
           {{ $t("blog.searchPlaceholder") }}
         </label>
@@ -38,7 +38,10 @@
     </div>
 
     <!-- Filtro por categoría -->
-    <div v-if="categories.length" class="mb-10 flex flex-wrap gap-2">
+    <div
+      v-if="showControls && categories.length"
+      class="mb-10 flex flex-wrap gap-2"
+    >
       <button
         v-for="category in categories"
         :key="category.id"
@@ -173,7 +176,7 @@
             target="_blank"
             rel="noopener noreferrer"
             class="mt-auto inline-flex items-center gap-2 pt-2 text-sm font-semibold text-primary-700 underline decoration-primary-300 underline-offset-4 hover:decoration-primary-700"
-            :aria-label="`Leer artículo: ${cleanHtml(blog.title.rendered)}`"
+            :aria-label="`${$t('blog.readArticle')}: ${cleanHtml(blog.title.rendered)}`"
           >
             {{ $t("blog.readArticle") }}
             <span aria-hidden="true">↗</span>
@@ -186,12 +189,12 @@
     <nav
       v-if="totalPages > 1"
       class="flex justify-center items-center mt-12 gap-2"
-      aria-label="Paginación"
+      :aria-label="$t('blog.pagination')"
     >
       <button
         :disabled="currentPage === 1"
         class="px-4 py-2 rounded-lg bg-white border border-neutral-300 text-neutral-700 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-50"
-        aria-label="Anterior"
+        :aria-label="$t('blog.previous')"
         @click="currentPage = Math.max(1, currentPage - 1)"
       >
         <font-awesome-icon icon="chevron-left" aria-hidden="true" />
@@ -217,7 +220,7 @@
       <button
         :disabled="currentPage === totalPages"
         class="px-4 py-2 rounded-lg bg-white border border-neutral-300 text-neutral-700 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-50"
-        aria-label="Siguiente"
+        :aria-label="$t('blog.next')"
         @click="currentPage = Math.min(totalPages, currentPage + 1)"
       >
         <font-awesome-icon icon="chevron-right" aria-hidden="true" />
@@ -245,6 +248,7 @@ import { safeExternalUrl } from '@/composables/utils/url-utils'
 interface Props {
   articlesNumber: number;
   headingTag: string;
+  showControls: boolean;
 }
 
 export default defineComponent({
@@ -258,6 +262,11 @@ export default defineComponent({
     headingTag: {
       type: String,
       default: 'h2'
+    },
+    // La vista previa de Home solo muestra artículos; búsqueda y filtros viven en /blog.
+    showControls: {
+      type: Boolean,
+      default: true
     }
   },
   setup(props: Props) {

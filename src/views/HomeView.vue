@@ -2,7 +2,7 @@
   <div>
     <about-me />
     <experience />
-    <our-blog :articles-number="3"/>
+    <our-blog :articles-number="3" :show-controls="false" />
   </div>
 </template>
 
