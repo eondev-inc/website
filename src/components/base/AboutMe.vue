@@ -46,22 +46,6 @@
             {{ $t("home.aboutMe.description") }}
           </p>
 
-          <!-- Stack de tecnologías -->
-          <div class="mb-8 animate-slide-up" style="animation-delay: 0.7s">
-            <p class="text-sm text-neutral-600 font-medium mb-3">
-              {{ $t("home.aboutMe.techStack") }}
-            </p>
-            <div class="flex flex-wrap gap-2">
-              <span
-                v-for="tech in techStack"
-                :key="tech"
-                class="px-3 py-1 bg-white border border-neutral-200 rounded-full text-sm font-medium text-neutral-700 hover:bg-white hover:shadow-soft transition-all duration-200"
-              >
-                {{ tech }}
-              </span>
-            </div>
-          </div>
-
           <!-- Botones de acción -->
           <div
             class="flex flex-col sm:flex-row gap-4 mb-8 animate-slide-up"
@@ -142,18 +126,6 @@ import { CONTACT_EMAIL } from '@/config/contact'
 const contactEmail = CONTACT_EMAIL
 
 const rootEl = ref<HTMLElement | null>(null)
-
-// Datos del stack tecnológico
-const techStack = [
-  'Vue.js',
-  'Node.js',
-  'TypeScript',
-  'TailwindCSS',
-  'MongoDB',
-  'MySQL',
-  'NestJS',
-  'Express'
-]
 
 // Enlaces sociales
 const socialLinks = [

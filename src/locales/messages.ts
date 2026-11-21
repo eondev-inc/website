@@ -112,6 +112,10 @@ const messages = {
       shareArticle: 'Compartir art\u00edculo',
       share: 'Compartir',
       clear: 'Limpiar',
+      pagination: 'Paginaci\u00f3n',
+      previous: 'Anterior',
+      next: 'Siguiente',
+      minutesShort: 'min',
       sourceNote: 'Selecci\u00f3n de lecturas de TechCrunch. Los art\u00edculos son de sus autores; aqu\u00ed solo enlazo.'
     },
     pageTitle: {
@@ -317,6 +321,10 @@ const messages = {
       shareArticle: 'Share article',
       share: 'Share',
       clear: 'Clear',
+      pagination: 'Pagination',
+      previous: 'Previous',
+      next: 'Next',
+      minutesShort: 'min',
       sourceNote: 'A selection of reads from TechCrunch. The articles belong to their authors; I only link to them.'
     },
     pageTitle: {

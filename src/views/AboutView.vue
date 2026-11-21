@@ -77,8 +77,7 @@
             >
               <img
                 src="../assets/img/Coding.png"
-                alt="coding"
-                title="coding-me"
+                :alt="$t('home.aboutMe.imageAlt')"
                 class="w-full h-auto"
               />
             </div>
@@ -125,14 +124,14 @@
     <!-- CTA Section -->
     <section class="py-16 lg:py-24 bg-neutral-50 relative overflow-hidden">
       <div class="container-custom relative z-10">
-        <div class="text-center max-w-3xl mx-auto animate-fade-in">
+        <div class="max-w-3xl animate-fade-in">
           <h2 class="text-3xl lg:text-4xl font-bold mb-6">
             <span class="text-primary-700">{{ $t("about.cta.title") }}</span>
           </h2>
           <p class="text-lg text-neutral-600 mb-8 leading-relaxed">
             {{ $t("about.cta.description") }}
           </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <div class="flex flex-col sm:flex-row gap-4">
             <router-link
               to="/contact"
               class="btn-primary inline-flex items-center justify-center gap-2 group"

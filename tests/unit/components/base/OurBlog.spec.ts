@@ -218,4 +218,13 @@ describe('OurBlog.vue', () => {
     expect(pagination.getByRole('button', { name: '10' })).toBeInTheDocument()
     expect(pagination.queryByRole('button', { name: '4' })).toBeNull()
   })
+
+  it('should hide search and category filters when showControls is false', async () => {
+    baseState.posts.value = [makePost()]
+    const view = await renderWithApp(OurBlog, { props: { showControls: false } })
+
+    expect(view.queryByPlaceholderText('Buscar artículos...')).toBeNull()
+    expect(view.queryByRole('button', { name: /filtrar por ai/i })).toBeNull()
+    expect(view.getByRole('heading', { name: 'Post AI' })).toBeInTheDocument()
+  })
 })
