@@ -128,7 +128,10 @@
           <h2 class="text-3xl lg:text-4xl font-bold mb-6">
             <span class="text-primary-700">{{ $t("about.cta.title") }}</span>
           </h2>
-          <p class="text-lg text-neutral-600 mb-8 leading-relaxed">
+          <p
+            class="text-lg text-neutral-600 mb-8 leading-relaxed"
+            style="text-wrap: pretty"
+          >
             {{ $t("about.cta.description") }}
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
