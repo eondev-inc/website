@@ -1,19 +1,21 @@
 <template>
   <div class="py-16 px-4 bg-neutral-50">
     <div class="relative max-w-4xl mx-auto">
-      <div class="text-center mb-12 animate-fade-in-up">
-        <h1 class="text-4xl md:text-5xl font-bold text-primary-700 mb-4">
+      <div class="mb-12 animate-fade-in-up">
+        <h1
+          class="font-display text-4xl md:text-5xl font-bold text-neutral-900 mb-4"
+        >
           {{ $t("callToAction.title") }}
         </h1>
         <p
-          class="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed"
+          class="text-lg md:text-xl text-neutral-700 max-w-2xl leading-relaxed"
         >
           {{ $t("callToAction.subtitle") }}
         </p>
       </div>
 
       <div
-        class="bg-white rounded-3xl border border-neutral-200 shadow-soft p-8 md:p-12 animate-slide-up"
+        class="bg-white rounded-lg border border-neutral-200 p-8 md:p-12 animate-slide-up"
       >
         <Form class="space-y-8" @submit="onSubmit">
           <div class="grid md:grid-cols-2 gap-6">
@@ -44,7 +46,7 @@
                 </div>
                 <ErrorMessage
                   name="name"
-                  class="text-red-500 text-sm mt-1 flex items-center"
+                  class="text-red-700 text-sm mt-1 flex items-center"
                 >
                   <template #default="{ message }">
                     <font-awesome-icon
@@ -82,7 +84,7 @@
                 </div>
                 <ErrorMessage
                   name="email"
-                  class="text-red-500 text-sm mt-1 flex items-center"
+                  class="text-red-700 text-sm mt-1 flex items-center"
                 >
                   <template #default="{ message }">
                     <font-awesome-icon
@@ -123,7 +125,7 @@
                 </div>
                 <ErrorMessage
                   name="message"
-                  class="text-red-500 text-sm mt-1 flex items-center"
+                  class="text-red-700 text-sm mt-1 flex items-center"
                 >
                   <template #default="{ message }">
                     <font-awesome-icon

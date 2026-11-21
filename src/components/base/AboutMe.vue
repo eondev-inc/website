@@ -138,12 +138,12 @@
         >
           <!-- Imagen principal -->
           <div
-            class="relative bg-white rounded-3xl p-8 shadow-soft hover:shadow-medium transition-all duration-500"
+            class="relative bg-white rounded-lg border border-neutral-200 p-8"
           >
             <img
               src="../../assets/img/Coding.png"
               :alt="$t('home.aboutMe.imageAlt')"
-              class="w-full h-auto rounded-2xl hover:scale-105 transition-transform duration-500"
+              class="w-full h-auto"
             />
           </div>
         </div>

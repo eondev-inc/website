@@ -14,7 +14,7 @@
           <!-- Logo elegante y simple -->
           <router-link
             to="/"
-            class="flex items-center space-x-3 group transition-all duration-300 hover:scale-105"
+            class="flex items-center space-x-3 group"
             @click="setActiveMenu('home')"
           >
             <div class="relative">
