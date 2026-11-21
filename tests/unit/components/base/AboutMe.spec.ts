@@ -16,5 +16,7 @@ describe('AboutMe.vue', () => {
 
     expect(view.getByRole('img', { name: /yerffrey romero desarrollando código/i })).toBeInTheDocument()
     expect(view.queryByRole('listitem')).toBeNull()
+    expect(view.getByText('NestJS')).toBeInTheDocument()
+    expect(view.getByText('Trabajando en nuevos proyectos')).toBeInTheDocument()
   })
 })
